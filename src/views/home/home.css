@@ -1,19 +1,39 @@
-.div-container {
+.content-wrap {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.category-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  margin: 2rem 0;
 }
 
-.landing {
-  cursor: pointer;
-  border: 1px solid red;
-  padding: 10px;
+.category-label-container {
+  width: 100%;
+  padding: 0 20px;
 }
 
-.greeting {
+.category-label {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0 15px;
+}
+
+.category {
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.product {
+  width: 25%;
   cursor: pointer;
-  border: 1px solid blue;
-  padding: 10px;
-  margin-left: 3rem;
+  padding: 15px;
+}
+
+.btn-go-category {
+  margin: 1rem 0;
 }
