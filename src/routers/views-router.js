@@ -16,6 +16,11 @@ viewsRouter.use('/product/add', serveStatic('admin/product_sell'));
 viewsRouter.use('/account', serveStatic('account'));
 viewsRouter.use('/category/:id', serveStatic('category'));
 viewsRouter.use('/product/:id', serveStatic('product'));
+viewsRouter.use('/orders', serveStatic('account/orders'));
+viewsRouter.use('/security', serveStatic('account/security'));
+viewsRouter.use('/signout', serveStatic('account/signout'));
+viewsRouter.use('/orders', serveStatic('admin/orders'));
+viewsRouter.use('/users', serveStatic('admin/security'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
