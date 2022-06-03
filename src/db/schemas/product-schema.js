@@ -19,10 +19,11 @@ const ProductSchema = new Schema(
       ref: 'category',
       required: true,
     },
-    //  picture: { // 상품이미지
-    //    type: String,
-    //    required: true,
-    //  },
+    image: {
+      // 상품이미지
+      type: String,
+      required: true,
+    },
     inform: {
       // 상품정보
       type: String,
