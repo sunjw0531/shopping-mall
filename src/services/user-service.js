@@ -73,6 +73,15 @@ class UserService {
 
     return { token };
   }
+  // Email로 유저 찾기 기능
+  async getUserByEmail() {
+    const user = await this.userModel.findByEmail();
+  }
+  
+  // Id로 유저 찾기 기능
+  async getUserById() {
+    const user = await this.userModel.findById();
+  }
 
   // 사용자 목록을 받음.
   async getUsers() {
