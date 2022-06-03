@@ -62,11 +62,6 @@ userRouter.post('/login', async function (req, res, next) {
   }
 });
 
-// userRouter.get('/user', (req, res) => {
-  
-// })
-
-
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get('/userlist', adminConfirm, async function (req, res, next) {
