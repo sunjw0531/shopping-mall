@@ -69,7 +69,10 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
     // 2개 프로퍼티를 jwt 토큰에 담음
-    const token = jwt.sign({ userId: user._id, isAdmin: user.admin }, secretKey);
+    const token = jwt.sign(
+      { userId: user._id, isAdmin: user.admin },
+      secretKey
+    );
 
     return { token };
   }
@@ -77,7 +80,7 @@ class UserService {
   async getUserByEmail() {
     const user = await this.userModel.findByEmail();
   }
-  
+
   // Id로 유저 찾기 기능
   async getUserById() {
     const user = await this.userModel.findById();
@@ -168,7 +171,6 @@ class UserService {
 //     user = await this.userModel.delete(userId);
 //   }
 // }
-
 
 const userService = new UserService(userModel);
 
