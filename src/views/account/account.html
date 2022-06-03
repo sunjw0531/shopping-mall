@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
-    <!-- 아이콘 -->
+    <title>쇼핑몰</title>
+        <!-- 아이콘 -->
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
       href="/elice-rabbit-favicon.png"
     />
-    <!-- bulma css -->
+    <!-- bulma css 관련 -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
@@ -23,8 +23,8 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="home.css" />
-    <script src="home.js" type="module" defer></script>
+    <link rel="stylesheet" href="account.css" />
+    <script src="login.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -51,9 +51,7 @@
 
           <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
             <ul id="navbar">
-              <li><a href="/account">계정관리</a></li>
-              <li><a href="/login">로그인</a></li>
-              <li><a href="/register">회원가입</a></li>
+              <li><a href="#">로그아웃</a></li>
               <li>
                 <a href="#cart" aria-current="page">
                   <span class="icon">
@@ -67,11 +65,33 @@
         </div>
       </div>
     </nav>
-
-    <!-- 메인 컨텐츠 -->
-    <div class="content-wrap">
-      <div class="content-container"></div>
+    <!-- 계정관리 목록-->
+    <section class="section">
+    <div class="container">
+      <div class="account-header">
+        <h1 class="title">계정관리</h1>
+      </div>
+      <div class="menu-container">
+        <a class="account-menu" href="/account/orders">
+          <div class="menu-body">
+            <p class="menu-title">주문조회</p>
+            <p class="menu-subtitle">주문 내역을 확인, 취소할 수 있습니다.</p>
+          </div>
+        </a>
+        <a class="account-menu" href="/account/security">
+          <div class="menu-body">
+            <p class="menu-title">회원정보 관리</p>
+            <p class="menu-subtitle">회원 정보를 확인, 수정할 수 있습니다.</p>
+          </div>
+        </a>
+        <a class="account-menu" href="/account/signout">
+          <div class="menu-body">
+            <p class="menu-title">회원 탈퇴</p>
+            <p class="menu-subtitle">회원 정보를 삭제하고 탈퇴할 수 있습니다.</p>
+          </div>
+        </a>
+      </div>
     </div>
-    
+    </section>
   </body>
 </html>

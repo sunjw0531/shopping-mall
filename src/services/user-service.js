@@ -69,7 +69,7 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
     // 2개 프로퍼티를 jwt 토큰에 담음
-    const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
+    const token = jwt.sign({ userId: user._id, isAdmin: user.admin }, secretKey);
 
     return { token };
   }
@@ -126,7 +126,40 @@ class UserService {
 
     return user;
   }
+  // 유저 삭제 기능 최소화, 추후 front API 형태에 맞춰 기능 추가할 예정임.
+  async deleteUser(userId) {
+    await this.userModel.delete(userId);
+  }
 }
+
+//   async deleteUser(userId) {
+
+//     // 우선 해당 id의 유저가 db에 있는지 확인
+//     const user = await this.userModel.findById(userId);
+
+//     // db에서 찾지 못한 경우, 에러 메시지 반환
+//     if (!user) {
+//       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+//     }
+
+//     // 비밀번호 일치 여부 확인
+//     const correctPasswordHash = user.password;
+//     const isPasswordCorrect = await bcrypt.compare(
+//       currentPassword,
+//       correctPasswordHash
+//     );
+
+//     if (!isPasswordCorrect) {
+//       throw new Error(
+//         '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+//       );
+//     }
+
+//     // 회원탈퇴
+//     user = await this.userModel.delete(userId);
+//   }
+// }
+
 
 const userService = new UserService(userModel);
 

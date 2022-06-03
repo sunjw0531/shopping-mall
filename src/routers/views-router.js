@@ -9,6 +9,7 @@ const viewsRouter = express.Router();
 viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/account', serveStatic('account'));
 viewsRouter.use('/category/:id', serveStatic('category'));
 viewsRouter.use('/product/:id', serveStatic('product'));
 

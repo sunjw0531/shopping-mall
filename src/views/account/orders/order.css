@@ -1,0 +1,28 @@
+.order-header {
+	border-bottom: 1px solid #ddd;
+	display: block;
+	padding-bottom: 0.7rem;
+}
+
+.colums {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	border-bottom: 1px solid #bbb;
+}
+
+.order-info {
+	background-color: #eff5fb;
+	color: #296fa8;
+}
+.container.orders-container {
+	margin-top: 4rem;
+}
+
+.modal .buttons {
+	justify-content: center;
+}
+
+.modal .box {
+	text-align: center;
+}
