@@ -22,6 +22,11 @@
       src="https://kit.fontawesome.com/7630448495.js"
       crossorigin="anonymous"
     ></script>
+    <!-- 다음 주소 api -->
+    <script
+      defer
+      src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
+    </script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="buy.css" />
     <script src="buy.js" type="module" defer></script>
@@ -33,7 +38,7 @@
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
             <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-n팀</span>
+            <span class="has-text-link">Cheshire Mall</span>
           </a>
 
           <a
@@ -81,32 +86,32 @@
             <div class="buy-form-field field">
               <div class="buy-form-field-label">이름</div>
               <div class="buy-form-address-wrap">
-                <input class="input" type="text" placeholder="엘리스">
+                <input class="input-name input" type="text" placeholder="엘리스">
               </div>
             </div>
             <div class="buy-form-field field">
               <div class="buy-form-field-label">연락처</div>
               <div class="buy-form-address-wrap">
-                <input class="input" type="text" placeholder="010-1234-5678">
+                <input class="input-phone input" type="text" placeholder="010-1234-5678">
               </div>
             </div>
             <div class="buy-form-field field">
               <div class="buy-form-field-label">주소</div>
               <div class="buy-form-address-wrap">
-                <input class="input" type="text" maxlength="5" placeholder="12345" disabled>
-                <button class="button">우편번호 검색</button>
+                <input class="input-post-code input" type="text" maxlength="5" placeholder="12345" disabled>
+                <button class="btn-daum-api button">우편번호 검색</button>
               </div>
             </div>
             <div class="buy-form-field field">
               <div class="buy-form-field-label"></div>
               <div class="buy-form-address-wrap">
-                <input class="input" type="text" placeholder="대전광역시 유성구 문지로 193" disabled>
+                <input class="input-road-address input" type="text" placeholder="대전광역시 유성구 문지로 193" disabled>
               </div>
             </div>
             <div class="buy-form-field field">
               <div class="buy-form-field-label"></div>
               <div class="buy-form-address-wrap">
-                <input class="input" type="text" placeholder="KAIST 캠퍼스 진리관 T 201호">
+                <input class="input-jibun-address input" type="text" placeholder="KAIST 캠퍼스 진리관 T 201호">
               </div>
             </div>
             <div class="buy-form-field field">
@@ -123,15 +128,28 @@
                 </select>
               </div>
             </div>
-            <div class="buy-form-field field">
+            <div class="buy-form-field request-field field no-showing">
               <div class="buy-form-field-label"></div>
               <div class="buy-form-address-wrap">
-                <input class="input" type="text" placeholder="요청사항을 입력해주세요.">
+                <input class="input-request input" type="text" placeholder="요청사항을 입력해주세요.">
               </div>
             </div>
           </div>
           <div class="buy-content product box">
-            
+            <h2 class="buy-content label">결제 정보</h2>
+            <div class="product-wrap">
+              <div class="order-info-wrap"></div>
+              <div class="delivery-price-wrap">
+                <span class="delivery-price-label">배송비</span>
+                <span class="delivery-price">0원</span>
+              </div>
+              <p class="delivery-price-help">*총 결제 금액이 50,000원 이상인 경우 무료로 배송됩니다.</p>
+              <div class="total-price-wrap">
+                <span class="total-price-label">총 결제 금액</span>
+                <span class="total-price">0원</span>
+              </div>
+            </div>
+            <button class="btn-payment button is-info is-large">결제하기</button>
           </div>
         </div>
       </div>
