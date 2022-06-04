@@ -1,16 +1,76 @@
 import * as Api from '/api.js';
 
-// 요소(element), input 혹은 상수
-const landingDiv = document.querySelector('#landingDiv');
-const greetingDiv = document.querySelector('#greetingDiv');
+// 테스트용 데이터
+const categoryWithProducts = [
+  {
+    id: 1,
+    name: 'Men',
+    products: [
+      {
+        id: 1,
+        name: '예쁜 남자 상의',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 39000,
+      },
+      {
+        id: 2,
+        name: '예쁜 남자 하의',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 72000,
+      },
+      {
+        id: 3,
+        name: '예쁜 남자 아우터',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 172000,
+      },
+      {
+        id: 7,
+        name: '멋진 남자 아우터',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 250000,
+      },
+      {
+        id: 9,
+        name: '귀여운 남자 아우터',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 57000,
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Women',
+    products: [
+      {
+        id: 4,
+        name: '예쁜 여자 상의',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 43000,
+      },
+      {
+        id: 5,
+        name: '예쁜 여자 하의',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 65000,
+      },
+      {
+        id: 6,
+        name: '예쁜 여자 아우터',
+        image: 'https://bulma.io/images/placeholders/480x640.png',
+        price: 195000,
+      },
+    ],
+  },
+];
 
+// 요소(element), input 혹은 상수
 addAllElements();
 addAllEvents();
 
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() {
-  insertTextToLanding();
-  insertTextToGreeting();
+  insertCategoryContents();
 }
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
