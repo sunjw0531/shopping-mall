@@ -62,6 +62,33 @@ userRouter.post('/login', async function (req, res, next) {
 	}
 });
 
+// Email 주소를 사용해 유저 정보 가져옴
+// 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
+
+userRouter.get('/email/:email', loginRequired, async function (req, res, next) {
+	try {
+		// content-type 을 application/json 로 프론트에서
+		// 설정 안 하고 요청하면, body가 비어 있게 됨.
+		if (is.emptyObject(req.body)) {
+			throw new Error(
+				'headers의 Content-Type을 application/json으로 설정해주세요',
+			);
+		}
+
+		// params로부터 id를 가져옴
+		const email = req.params.email;
+
+		// email을 통해 사용자 정보를 얻음
+		const user = await userService.getUserByEmail(email);
+
+		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
+		res.status(200).json(user);
+	} catch (error) {
+		next(error);
+	}
+
+});
+
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get('/userlist', adminConfirm, async function (req, res, next) {
