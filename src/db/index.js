@@ -1,17 +1,18 @@
 import mongoose from 'mongoose';
 
 const DB_URL =
-  'mongodb+srv://baechanghyeon:1234@cluster0.hebzm.mongodb.net/projectDB?appName=mongosh+1.4.2';
+	process.env.MONGODB_URL ||
+	'mongodb+srv://Hakseong:1q2w3e4r@cluster0.hebzm.mongodb.net/test';
 
 mongoose.connect(DB_URL);
 const db = mongoose.connection;
 
 db.on('connected', () =>
-  console.log('정상적으로 MongoDB 서버에 연결되었습니다.  ' + DB_URL)
+	console.log('정상적으로 MongoDB 서버에 연결되었습니다.  ' + DB_URL),
 );
 
 db.on('error', (error) =>
-  console.error('\nMongoDB 연결에 실패하였습니다...\n' + DB_URL + '\n' + error)
+	console.error('\nMongoDB 연결에 실패하였습니다...\n' + DB_URL + '\n' + error),
 );
 
 // user-model.js 에서 export { ~~ } 한 모듈을 그대로 다시 export해 줌
