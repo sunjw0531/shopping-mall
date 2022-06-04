@@ -15,7 +15,7 @@ function loginRequired(req, res, next) {
 
     return;
   }
-
+  
   // 해당 token 이 정상적인 token인지 확인
   try {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
@@ -25,7 +25,6 @@ function loginRequired(req, res, next) {
 
     // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
     req.currentUserId = userId;
-
     next();
   } catch (error) {
     // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.

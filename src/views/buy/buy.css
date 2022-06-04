@@ -1,0 +1,58 @@
+.content-wrap {
+  width: 70%;
+  max-width: 1344px;
+  margin: 0 auto;
+}
+
+.buy-header {
+  margin: 2rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.buy-container {
+  display: flex;
+}
+
+.buy-container > .user {
+  width: 60%;
+  margin-right: 1rem;
+}
+
+.buy-container > .product {
+  width: 40%;
+}
+
+.buy-content > h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0 1rem;
+}
+
+.buy-form-field {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.buy-form-field-label {
+  width: 20%;
+}
+
+.buy-form-address-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.buy-form-address-wrap > button {
+  margin-left: 0.5rem;
+}
+
+.buy-form-address-wrap select {
+  width: 100%;
+}
+
+.buy-form-address-wrap select > option {
+  min-height: 1.2rem;
+}

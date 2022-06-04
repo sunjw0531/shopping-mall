@@ -31,10 +31,15 @@ const UserSchema = new Schema(
       ),
       required: false,
     },
-    role: {
-      type: String,
+    admin: { // true : admin , false : basic-user
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    loginTypeCode: { // 0 : signup user , 1 : kakao user
+      type: Number,
       required: false,
-      default: 'basic-user',
+      default: 0,
     },
   },
   {

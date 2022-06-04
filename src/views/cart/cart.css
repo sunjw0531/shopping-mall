@@ -1,0 +1,81 @@
+.cart-header {
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.cart-products {
+  height: 100%;
+}
+
+.cart-products-container {
+  width: 100%;
+}
+
+.cart-products-header {
+  border-bottom: 1px solid #555;
+  display: flex;
+  margin-bottom: 0.5rem;
+  padding-top: 0.75rem;
+  width: 100%;
+}
+
+.cart-products-header label {
+  border-radius: 100%;
+  display: inline-block;
+  line-height: .5rem;
+}
+
+.cart-products-header input {
+  height: 0.9rem;
+  width: 0.9rem;
+}
+
+.cart-products-header .help {
+  display: inline-block;
+  font-size: .9rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.cart-products-header .seperator {
+  line-height: .8rem;
+}
+
+.cart-products-header .delete-part {
+  cursor: pointer;
+  line-height: 1rem;
+}
+
+/* 선택한 상품 총 요약 css */
+
+.tile-order-summary {
+  height: 100%;
+  position: sticky;
+  top: 0.5rem;
+}
+
+.order-summary {
+  background-color: #f0f5f7;
+  width: 100%;
+}
+
+.order-summary .header {
+  font-size: 1.4rem;
+}
+
+.order-info, .order-summary .header {
+  border-bottom: 1px solid #555;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.8rem;
+}
+
+.purchase {
+  margin-top: 3rem;
+  padding: 0.2rem 0;
+}
+
