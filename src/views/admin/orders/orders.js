@@ -1,11 +1,3 @@
-//products list
-const inputData = document.querySelector('#inputData');
-const orderCancerBtn = document.getElementsByClassName('order-cancer');
-// top_cotainer 
-const element = document.getElementsByTagName('p');
-
-
-//테스트용 데이터
 const testList = [
   {
     "id":1,
@@ -49,56 +41,56 @@ const testList = [
   },
 ]
 
+//products list
+const inputData = document.querySelector('#inputData');
+const orderCancerBtn = document.getElementsByClassName('order-cancer');
+// top_cotainer 
+const element = document.getElementsByTagName('p');
+
+// 총주문 수 
+element[0].innerText = testList.length
 inputItem(); 
+// 상풍 준비중 / 상품 배송중 / 배송 완료
+productCnt();
+
 // json 데이터 주문 리스트에 추가
 function inputItem() {
   const tbody = document.createElement('tbody');
+  inputData.appendChild(tbody);
   for(let i =0; i < testList.length; i++){
-    tbody.innerHTML += `
+    tbody.insertAdjacentHTML('beforeend', `
     <tr id="item${testList[i].id}">
       <td> ${testList[i].date}</td>
       <td> ${testList[i].order_info}</td>
       <td> ${testList[i].order_price.toLocaleString('ko-KR')} 원</td>
       <td>
-        <select class="select-product-state" onchange="ProductCntChange()">
+        <select class="select-product-state" id ="sel${testList[i].id}" onchange="productCntChange(this)">
           <option value="0" ${testList[i].order_status == 0 ? `selected` :``}> 상품 준비중 </option>
           <option value="1" ${testList[i].order_status == 1 ? `selected` :``}> 상품 배송중 </option>
           <option value="2" ${testList[i].order_status == 2 ? `selected` :``}> 배송 완료 </option>
         </select>
       </td>
-      <td> <button class="order-cancer">주문 취소</button>
+      <td> <button class="order-cancer" id="btn${testList[i].id}" onclick ="deleteItem(this.id)">주문 취소</button>
     </tr>
-    `;
+    `);
   }//json 데이터 기반으로 selected 설정
-    inputData.appendChild(tbody);
+  console.log("Data Input Ok!");
 }
 
-function deleteItem(){
-  // 삭제 버튼 클릭 시 이벤트 
-  for (let i=0; i<orderCancerBtn.length; i++) {
-    orderCancerBtn[i].addEventListener('click', () => {
-      document.getElementById(`item${i+1}`).remove();
-      //parentElement는 td를 의미, 그 다음 td의 parentElement는 tr을 의미
-      if(testList[i].order_status == 0) {
-        element[1].innerText -= 1;
-      }else if(testList[i].order_status == 1){
-        element[2].innerText -= 1;
-      }else if(testList[i].order_status == 2){
-        element[3].innerText -= 1;
-      }
-      // delete 클릭 시 총 총주문 수 감소
-      element[0].innerText -= 1;
-    })
+function deleteItem(btnId){
+  const parent = document.querySelector(`#${btnId}`).parentElement.parentElement;
+  parent.remove();
+  const sel = Number(parent.childNodes[7].childNodes[1].value);
+  if(sel == 0) {
+    element[1].innerText--;
+  }else if(sel == 1) {
+    element[2].innerText--;
+  }else if(sel == 2) {
+    element[3].innerText--;
   }
-  
+  element[0].innerText--;
 }
 
-
-// 총주문 수 
-element[0].innerText = testList.length
-deleteItem();
-// 상풍 준비중 / 상품 배송중 / 배송 완료
-productCnt();
 // 처음 화면 시 value 값 표시
 function productCnt() {
   let ready_cnt = 0
@@ -115,27 +107,18 @@ function productCnt() {
     }
   }
   element[1].innerText = ready_cnt;
-  element[2].innerHTML = going_cnt;
-  element[3].innerHTML = success_cnt;
+  element[2].innerText = going_cnt;
+  element[3].innerText = success_cnt;
 }
 
 //select - option 변경 시 카운트 값이 바뀌도록 함수 설정
-function productCntChange () {
-  let readyCnt = 0
-  let goingCnt = 0
-  let successCnt = 0
-  let status = document.getElementsByClassName('select-product-state')
-  for(let i =0; i<testList.length; i++){
-    if(status[i].selectedIndex == 0) {
-      readyCnt++;
-    }else if(status[i].selectedIndex == 1) {
-      goingCnt++;
-    }else if(status[i].selectedIndex == 2) {
-      successCnt++;
-    }
+function productCntChange (sel) {
+  const selectOption = Number(sel.value);
+  if(selectOption == 0) {
+    element[1].innerText++;
+  }else if(selectOption == 1) {
+    element[2].innerText++;
+  }else if(selectOption == 2) {
+    element[3].innerText++;
   }
-  element[1].innerText = readyCnt;
-  element[2].innerHTML = goingCnt;
-  element[3].innerHTML = successCnt;
 }
-

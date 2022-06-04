@@ -119,3 +119,6 @@ async function del(endpoint, params = '', data = {}) {
 
 // 아래처럼 export하면, import * as Api 로 할 시 Api.get, Api.post 등으로 쓸 수 있음.
 export { get, post, patch, del as delete };
+// get 읽어오기 post 보내기 patch 수정 delete 삭제
+//받아온 데이터를 고려해서 비동기
+

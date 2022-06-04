@@ -15,7 +15,7 @@ function loginRequired(req, res, next) {
 
     return;
   }
-
+  
   // 해당 token 이 정상적인 token인지 확인
   try {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';

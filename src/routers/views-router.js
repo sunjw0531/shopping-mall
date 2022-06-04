@@ -54,4 +54,20 @@ function adminServeStatic(resource) {
   return express.static(resourcePath, option);
 }
 
+function accountServeStatic(resource) {
+  const resourcePath = path.join(__dirname, `../views/account/${resource}`);
+  const option = { index: `${resource}.html` };
+
+  // express.static 은 express 가 기본으로 제공하는 함수임
+  return express.static(resourcePath, option);
+}
+
+function adminServeStatic(resource) {
+  const resourcePath = path.join(__dirname, `../views/admin/${resource}`);
+  const option = { index: `${resource}.html` };
+
+  // express.static 은 express 가 기본으로 제공하는 함수임
+  return express.static(resourcePath, option);
+}
+
 export { viewsRouter };
