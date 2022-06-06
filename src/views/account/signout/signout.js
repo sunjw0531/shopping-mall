@@ -45,11 +45,12 @@ async function handleSubmit() {
 
 	// 회원 삭제 API 요청
 	try {
-		const result = await Api.delete('/api/user/:userId', password);
-		const token = result.token;
+		const data = await Api.delete(
+			`/api/users/${sessionStorage.getItem('userId')}`,
+		);
 
 		// 토큰을 세션 스토리지에 삭제
-		sessionStorage.deleteItem('token', token);
+		sessionStorage.clear();
 		alert(`회원정보가 안전하게 삭제되었습니다.`);
 
 		// 탈퇴 성공시 기본 페이지로 이동
