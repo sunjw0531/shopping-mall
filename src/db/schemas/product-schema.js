@@ -24,7 +24,7 @@ const ProductSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		inform: {
+		information: {
 			// 상품정보
 			type: String,
 			required: true,
@@ -40,7 +40,7 @@ const ProductSchema = new Schema(
 			required: true,
 		},
 		date: {
-			// 출시날짜
+			// 제품 출시날짜
 			type: Date,
 			required: true,
 		},

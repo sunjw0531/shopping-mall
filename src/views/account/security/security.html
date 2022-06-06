@@ -13,6 +13,8 @@
   <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
   <!-- 커스텀 css, js -->
   <link rel="stylesheet" href="security.css" />
+  <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
+  </script>
   <script src="security.js" type="module" defer></script>
 </head>
 
@@ -61,7 +63,7 @@
       <div>
         <div class="my-info-box id-box display-grid">
           <span>이름</span>
-          <div class="my-info-id" id="currentId">이학성</div>
+          <div class="my-info-id" id="currentId"></div>
           <button type="button" class="button" id="idChangeBtn">이름 변경</button>
         </div>
         <!-- 이름 변경 -->
@@ -103,7 +105,7 @@
       <div>
         <div class="my-info-box address-box display-grid">
           <span>주소</span>
-          <div class="my-info-address" id="currentAddress">부산광역시 해운대구 달맞이길 LCT 101동 2901호</div>
+          <div class="my-info-address" id="currentAddress"></div>
           <button type="button" class="button" id="addressChangeBtn">주소 변경</button>
         </div>
         <!-- 주소 변경 -->
@@ -111,10 +113,11 @@
           <span>주소</span>
           <div class="new-address-box">
             <div class="search-Address-box">
-              <input type="text" class="input" id="newAdressInput" />
+              <input type="text" class="input" id="postal" />
               <button type="button" class="button" id="searchAdressBtn">주소 검색</button>
             </div>
-            <input type="text" class="input" id="newAdressMore" placeholder="상세 주소를 입력하세요." />
+            <input type="text" class="input" id="address1" />
+            <input type="text" class="input" id="address2" placeholder="상세 주소를 입력하세요." />
             <div>
               <button type="button" class="button" id="addressCompleteBtn">주소 변경</button>
               <button type="button" class="button is-primary" id="addressCencelBtn">취소</button>
@@ -126,7 +129,7 @@
       <div>
         <div class="my-info-box phone-box display-grid">
           <span>전화번호</span>
-          <div class="my-info-phone" id="currentPhone">010-****-**78</div>
+          <div class="my-info-phone" id="currentPhone"></div>
           <button type="button" class="button" id="phoneChangeBtn">전화번호 변경</button>
         </div>
         <!-- 전화번호 변경 -->
