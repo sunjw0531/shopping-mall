@@ -13,7 +13,7 @@ export class UserModel {
   async findById(userId) {
     const user = await User.findOne({ _id: userId });
     return user;
-  }
+  } 
   // 유저 생성 기능
   async create(userInfo) {
     const createdNewUser = await User.create(userInfo);
@@ -35,7 +35,6 @@ export class UserModel {
   // 유저 삭제 기능 구현
   async delete(userId) {
       await User.findOneAndDelete({ _id: userId });
-
   }
 }
 

@@ -12,7 +12,7 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
     },
     phoneNumber: {
       type: String,
@@ -36,9 +36,9 @@ const UserSchema = new Schema(
       required: true,
       default: false,
     },
-    loginTypeCode: { // 0 : signup user , 1 : kakao user
+    loginTypeCode: { // 0 : signup user , 1 :  kakao user
       type: Number,
-      required: false,
+      required: true,
       default: 0,
     },
   },

@@ -35,6 +35,34 @@ class UserService {
     return createdNewUser;
   }
 
+  async addKakaoUser(userInfo) {
+    // 객체 destructuring
+    const { fullName, email, loginTypeCode } = userInfo;
+    
+    // email 중복 확인
+    const user = await this.userModel.findByEmail(email);
+    // email 이 없으면 회원 가입을 한다.
+    if (!user) {
+      // db에 저장
+      const createdNewUser = await this.userModel.create(userInfo);
+      // 토큰 생성
+      const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+      const token = jwt.sign(
+      { fullName, email, loginTypeCode, userInfoRequired: createdNewUser._id, isAdmin: createdNewUser.admin },
+      secretKey
+    );
+    return { token , createdNewUser };
+    } 
+    // email이 존재하면 db의 정보를 통해 토큰 생성
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const token = jwt.sign(
+      { fullName, email, loginTypeCode, userInfoRequired: user._id, isAdmin: user.admin },
+      secretKey
+    );
+    return { token , user };
+
+  }
+
   // 로그인
   async getUserToken(loginInfo) {
     // 객체 destructuring

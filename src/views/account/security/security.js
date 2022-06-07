@@ -67,6 +67,7 @@ async function getInfo() {
 		const data = await Api.get(
 			`/api/users/${sessionStorage.getItem('userId')}`,
 		);
+		console.log(sessionStorage);
 		id = data._id;
 		const currentFullName = data.fullName,
 			currentPhoneNumber = data.phoneNumber,

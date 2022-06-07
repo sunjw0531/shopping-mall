@@ -51,32 +51,63 @@
           </ul>
         </div>
       </div>
+    </nav>
+
+    <!-- 로그인 폼(Form) -->
+    <div class="login-form-container">
+      <form class="box login-form-box" id="loginForm">
+        <p class="title is-5 has-text-info">어서오세요!</p>
+        <div class="field">
+          <label class="label" for="emailInput">이메일</label>
+          <div class="control">
+            <input
+              class="input"
+              id="emailInput"
+              type="email"
+              placeholder="abc@example.com"
+              autocomplete="on"
+            />
+          </div>
+        </div>
+
+        <div class="field mb-5">
+          <label class="label" for="passwordInput">비밀번호</label>
+          <div class="control">
+            <input
+              class="input"
+              id="passwordInput"
+              type="password"
+              placeholder="********"
+              autocomplete="on"
+            />
+          </div>
+        </div>
+        
+        <button class="button is-info is-fullwidth" id="submitButton">
+          로그인하기
+        </button>
+        <!-- 카카오 로그인 버튼 -->
+        <ul>
+          <li id="kakaoLogin">
+              <a id="custom-login-btn" href="javascript:void(0)">
+                <img
+                  src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+                  width="222"
+                  alt="카카오 로그인 버튼"
+                />
+              </a>
+          </li>
+          <li id="kakaoLogout">
+              <a href="javascript:void(0)">
+                  <span>카카오 로그아웃</span>
+              </a>
+          </li>
+        </ul>
+        <!-- 카카오 스크립트 -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+      </form>
     </div>
   </nav>
-
-  <!-- 로그인 폼(Form) -->
-  <div class="login-form-container">
-    <form class="box login-form-box" id="loginForm">
-      <p class="title is-5 has-text-info">어서오세요!</p>
-      <div class="field">
-        <label class="label" for="emailInput">이메일</label>
-        <div class="control">
-          <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" />
-        </div>
-      </div>
-
-      <div class="field mb-5">
-        <label class="label" for="passwordInput">비밀번호</label>
-        <div class="control">
-          <input class="input" id="passwordInput" type="password" placeholder="********" autocomplete="on" />
-        </div>
-      </div>
-
-      <button class="button is-info is-fullwidth" id="submitButton">
-        로그인하기
-      </button>
-    </form>
-  </div>
 </body>
 
 </html>
