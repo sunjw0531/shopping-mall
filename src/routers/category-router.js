@@ -20,14 +20,19 @@ categoryRouter.post('/add', adminConfirm, async (req, res, next) => {
 });
 
 // 카테고리 삭제
-categoryRouter.delete('/delete', adminConfirm, async (req, res, next) => {
+categoryRouter.patch('/delete', adminConfirm, async (req, res, next) => {
 	try {
 		const { name } = req.body;
 		if (!(await categoryModel.findOne({ name }))) {
 			throw new Error('존재하지 않는 카테고리입니다.');
 		}
-		const addCategory = await categoryModel.deleteOne({ name });
-		res.status(200).json(addCategory);
+
+		// deleteFlag 를 1으로 해서 사용하지 않는 데이터로 처리
+		const deleteCategory = await categoryModel.findOneAndUpdate(
+			{ name },
+			{ deleteFlag: 1 },
+		);
+		res.status(200).json(deleteCategory);
 	} catch (err) {
 		next(err);
 	}

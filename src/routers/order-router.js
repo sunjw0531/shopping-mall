@@ -1,22 +1,25 @@
 import express from 'express';
 const orderRouter = express.Router();
 import { orderModel, orderedProductModel } from '../db/models/order-model';
-
+import { productModel } from '../db';
 import { loginRequired, adminConfirm } from '../middlewares';
 
 // 주문 생성
 orderRouter.post('/', adminConfirm, async (req, res, next) => {
 	const userId = req.currentUserId;
-	const { receiver, phone, address, orderRequest, orderList } = req.body;
+	const { receiver, phone, address, orderRequest, orderList, totalPrice } =
+		req.body;
 
-	const createOrder = orderModel.create({
+	const createOrder = await orderModel.create({
 		userId,
 		receiver,
 		phone,
 		address,
 		orderRequest,
+		totalPrice,
 	});
 
+	// 생성된 order모델의 orderList를 채워주는 코드
 	let newOrder;
 	for (let i = 0; i < orderList.length; i++) {
 		let orderLists = req.body.orderList;
@@ -24,16 +27,21 @@ orderRouter.post('/', adminConfirm, async (req, res, next) => {
 		let orderList = await orderedProductModel.create(data);
 
 		newOrder = await orderModel
-			.findOneAndUpdate(
-				{ userId },
+			.findByIdAndUpdate(
+				createOrder._id,
 				{ $push: { orderList: orderList } },
 				{ new: true },
 			)
-			.populate('orderList')
 			.populate({
 				path: 'orderList',
 				populate: 'productId',
 			});
+		// product 모델에서 storage 값을 주문량만큼 차감
+		const productStorage = await productModel.findById(data.productId);
+		const newStorage = productStorage.storage - data.volume;
+		await productModel.findByIdAndUpdate(data.productId, {
+			storage: newStorage,
+		});
 	}
 	res.status(201).json(newOrder);
 });
@@ -51,9 +59,10 @@ orderRouter.get('/ownList', adminConfirm, async (req, res, next) => {
 
 // 관리자용 주문 내역 조회
 orderRouter.get('/list', adminConfirm, async (req, res, next) => {
-	const findAllOrder = await orderModel
-		.find({ deleteFlag: 0 })
-		.populate('orderList');
+	const findAllOrder = await orderModel.find({ deleteFlag: 0 }).populate({
+		path: 'orderList',
+		populate: 'productId',
+	});
 	res.status(200).json(findAllOrder);
 });
 
@@ -72,9 +81,9 @@ orderRouter.patch('/delivery', adminConfirm, async (req, res, next) => {
 
 // 주문 삭제
 orderRouter.patch('/deleteFlag', adminConfirm, async (req, res, next) => {
-	const { _id, deleteFlag } = req.body;
+	const { _id } = req.body;
 	const changedeleteFlag = await orderModel
-		.findOneAndUpdate({ _id: _id }, { deleteFlag }, { new: true })
+		.findOneAndUpdate({ _id: _id }, { deleteFlag: 1 }, { new: true })
 		.populate('orderList');
 	res.status(200).json(changedeleteFlag);
 });

@@ -31,7 +31,9 @@ productRouter.get('/list', async (req, res, next) => {
 		// /product/list/?category=1238asdsad7612983
 		const { category } = req.query;
 		// 상품 전체 검색
-		const products = await productModel.find({ category }).populate('category');
+		const products = await productModel
+			.find({ category, deleteFlag: 0 })
+			.populate('category');
 
 		// 상품들 정보를 프론트에 전달
 		res.status(200).json(products);
@@ -122,7 +124,7 @@ productRouter.post(
 );
 
 // 상품 삭제
-productRouter.delete(
+productRouter.patch(
 	'/detail/:product_id',
 	adminConfirm,
 	async (req, res, next) => {
@@ -130,17 +132,26 @@ productRouter.delete(
 			// product/detail/26
 			const product_id = req.params.product_id;
 
-			const oldModel = await productModel.findOne({ product_id });
-			const oldModelCategoryId = oldModel.category;
-			await categoryModel.updateOne(
-				{ _id: oldModelCategoryId },
-				{ $pull: { products: oldModel._id } },
-			);
+			///////////////////////////////////////////////////////////
+			// 실제 데이터를 삭제하는 코드
+			// const oldModel = await productModel.findOne({ product_id });
+			// const oldModelCategoryId = oldModel.category;
+			// await categoryModel.updateOne(
+			// 	{ _id: oldModelCategoryId },
+			// 	{ $pull: { products: oldModel._id } },
+			// );
 
-			// 해당 상품 name을 가진 상품 데이터를 삭제
-			const deleteProduct = await productModel
-				.deleteOne({ product_id })
-				.populate('category');
+			// // 해당 상품 name을 가진 상품 데이터를 삭제
+			// const deleteProduct = await productModel
+			// 	.deleteOne({ product_id })
+			// 	.populate('category');
+			///////////////////////////////////////////////////////////
+
+			// deleteFlag 를 1으로 해서 사용하지 않는 데이터로 처리
+			const deleteProduct = await productModel.findOneAndUpdate(
+				{ product_id },
+				{ deleteFlag: 1 },
+			);
 
 			res.status(200).json(deleteProduct);
 		} catch (err) {
@@ -151,7 +162,7 @@ productRouter.delete(
 
 // 상품 정보 수정
 // req.body 데이터 전부 보내기
-productRouter.post(
+productRouter.patch(
 	'/update_product/:product_id',
 	adminConfirm,
 	upload.single('image'),

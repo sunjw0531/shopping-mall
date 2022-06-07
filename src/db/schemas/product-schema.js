@@ -58,6 +58,11 @@ const ProductSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		// 0 : 사용중인 데이터 , 1 : 사용하지 않는 데이터
+		deleteFlag: {
+			type: Number,
+			default: 0,
+		},
 	},
 	{
 		collection: 'products',
