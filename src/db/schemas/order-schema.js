@@ -43,9 +43,6 @@ const orderSchema = new Schema(
 				_id: false,
 			},
 		],
-		orderDate: {
-			type: String,
-		},
 		// 0 : 상품 준비중, 1 : 상품 배송중, 2: 배송 완료
 		status: {
 			type: Number,
@@ -83,12 +80,5 @@ const orderedProductSchema = new Schema(
 		collection: 'orderedProduct',
 	},
 );
-
-orderSchema.pre('save', function (next) {
-	if (!this.orderDate) {
-		this.orderDate = new Date();
-	}
-	next();
-});
 
 export { orderSchema, orderedProductSchema };
