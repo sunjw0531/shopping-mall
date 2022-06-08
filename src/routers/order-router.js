@@ -68,7 +68,7 @@ orderRouter.get('/list', adminConfirm, async (req, res, next) => {
 
 // 주문 관리
 orderRouter.patch('/delivery', adminConfirm, async (req, res, next) => {
-	// api/order/change/?orderId=as2s2asd
+	// api/order/delivery/?orderId=as2s2asd
 	const { orderId } = req.query;
 	const { status } = req.body;
 
@@ -80,8 +80,8 @@ orderRouter.patch('/delivery', adminConfirm, async (req, res, next) => {
 });
 
 // 주문 삭제
-orderRouter.patch('/deleteFlag', adminConfirm, async (req, res, next) => {
-	const { _id } = req.body;
+orderRouter.patch('/deleteFlag/:_id', adminConfirm, async (req, res, next) => {
+	const _id = req.params._id;
 	const changedeleteFlag = await orderModel
 		.findOneAndUpdate({ _id: _id }, { deleteFlag: 1 }, { new: true })
 		.populate('orderList');

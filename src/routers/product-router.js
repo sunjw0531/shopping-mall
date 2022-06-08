@@ -9,7 +9,7 @@ import { categoryModel } from '../db/models/category-model.js';
 
 import multer from 'multer';
 //multer 의 diskStorage를 정의
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
 	//경로 설정
 	destination: function (req, file, cb) {
 		cb(null, 'uploads/');
@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
 	},
 });
 
-var upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 // 상품 전체 보기 (카테고리별)
 
@@ -49,7 +49,7 @@ productRouter.get('/detail/:product_id', async (req, res, next) => {
 		const product_id = req.params.product_id;
 		// product_id로 상품 하나 찾기
 		const product = await productModel
-			.find({ product_id })
+			.findOne({ product_id })
 			.populate('category');
 
 		// 상품 데이터 프론트에 전달
@@ -59,9 +59,22 @@ productRouter.get('/detail/:product_id', async (req, res, next) => {
 	}
 });
 
+// // 여러 상품 정보 전달
+// productRouter.get('/information', async (req, res, next) => {
+// 	try {
+// 		const { orderProducts } = req.body;
+// 		// 상품 이름, 가격, 재고 전달
+// 		for (let i = 0; i < orderProducts.length; i++) {
+// 			const productId = orderProducts[i];
+// 		}
+// 	} catch (err) {
+// 		next(err);
+// 	}
+// });
+
 // 상품 추가
 productRouter.post(
-	'/add',
+	'/',
 	adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
@@ -124,7 +137,7 @@ productRouter.post(
 );
 
 // 상품 삭제
-productRouter.patch(
+productRouter.delete(
 	'/detail/:product_id',
 	adminConfirm,
 	async (req, res, next) => {
@@ -132,26 +145,24 @@ productRouter.patch(
 			// product/detail/26
 			const product_id = req.params.product_id;
 
-			///////////////////////////////////////////////////////////
 			// 실제 데이터를 삭제하는 코드
-			// const oldModel = await productModel.findOne({ product_id });
-			// const oldModelCategoryId = oldModel.category;
-			// await categoryModel.updateOne(
-			// 	{ _id: oldModelCategoryId },
-			// 	{ $pull: { products: oldModel._id } },
-			// );
-
-			// // 해당 상품 name을 가진 상품 데이터를 삭제
-			// const deleteProduct = await productModel
-			// 	.deleteOne({ product_id })
-			// 	.populate('category');
-			///////////////////////////////////////////////////////////
-
-			// deleteFlag 를 1으로 해서 사용하지 않는 데이터로 처리
-			const deleteProduct = await productModel.findOneAndUpdate(
-				{ product_id },
-				{ deleteFlag: 1 },
+			const oldModel = await productModel.findOne({ product_id });
+			const oldModelCategoryId = oldModel.category;
+			await categoryModel.updateOne(
+				{ _id: oldModelCategoryId },
+				{ $pull: { products: oldModel._id } },
 			);
+
+			// 해당 상품 name을 가진 상품 데이터를 삭제
+			const deleteProduct = await productModel
+				.deleteOne({ product_id })
+				.populate('category');
+
+			// // deleteFlag 를 1으로 해서 사용하지 않는 데이터로 처리
+			// const deleteProduct = await productModel.findOneAndUpdate(
+			// 	{ product_id },
+			// 	{ deleteFlag: 1 },
+			// );
 
 			res.status(200).json(deleteProduct);
 		} catch (err) {
@@ -161,7 +172,7 @@ productRouter.patch(
 );
 
 // 상품 정보 수정
-// req.body 데이터 전부 보내기
+
 productRouter.patch(
 	'/update_product/:product_id',
 	adminConfirm,
