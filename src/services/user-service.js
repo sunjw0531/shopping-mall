@@ -52,7 +52,8 @@ class UserService {
       secretKey
     );
       // Admin인지 아닌지 반환
-      const userId = createdNewUse._id;
+      const userId = createdNewUser._id;
+      console.log(userId);
       const isAdmin = createdNewUser.isAdmin;
       return { token, isAdmin, userId };
       } 
@@ -64,6 +65,7 @@ class UserService {
     );
       // Admin인지 아닌지 반환
     const userId = user._id
+    console.log(userId);
     const isAdmin = user.isAdmin;
     return { token , isAdmin, userId };
 
@@ -76,7 +78,6 @@ class UserService {
     
     // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(email);
-    console.log(user);
     if (!user) {
       throw new Error(
         '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.'
@@ -104,13 +105,14 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
     // 2개 프로퍼티를 jwt 토큰에 담음
+    const userId = user._id;
     const isAdmin = user.isAdmin;
     const token = jwt.sign(
       { userId: user._id, isAdmin: user.isAdmin },
       secretKey
     );
 
-    return { token, isAdmin };
+    return { token, isAdmin, userId };
   }
   // Email로 유저 찾기 기능
   async getUserByEmail(email) {

@@ -8,6 +8,14 @@ import { productModel } from '../db/models/product-model.js';
 import { categoryModel } from '../db/models/category-model.js';
 
 import multer from 'multer';
+const fs = require('fs'); // 왜 import가 안되는지 알아보기.
+// uploads 폴더 생성
+try {
+    fs.accessSync('uploads');
+} catch (error) {
+    fs.mkdirSync('uploads');
+}
+
 //multer 의 diskStorage를 정의
 const storage = multer.diskStorage({
 	//경로 설정
@@ -80,7 +88,7 @@ productRouter.get('/information', async (req, res, next) => {
 // 상품 추가
 productRouter.post(
 	'/',
-	adminConfirm,
+	// adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
 		try {
