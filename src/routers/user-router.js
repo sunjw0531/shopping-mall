@@ -50,11 +50,13 @@ userRouter.post('/kakao', async function (req, res, next) {
 		const fullName = req.body.fullName;
 		const email = req.body.email;
 		const loginTypeCode = 1;
+		const isAdmin = req.body.isAdmin;
 		// 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
 		const userToken = await userService.addKakaoUser({ 
 			fullName,
 			email,
 			loginTypeCode,
+			isAdmin,
 		});
 		// jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
 		res.status(200).json(userToken);
@@ -73,14 +75,12 @@ userRouter.post('/login', async function (req, res, next) {
 				'headers의 Content-Type을 application/json으로 설정해주세요',
 			);
 		}
-		
 		// req (request) 에서 데이터 가져오기
 		const email = req.body.email;
 		const password = req.body.password;
-
+		
 		// 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
 		const userToken = await userService.getUserToken({ email, password });
-
 		// jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
 		res.status(200).json(userToken);
 	} catch (error) {
@@ -94,12 +94,11 @@ userRouter.post('/login', async function (req, res, next) {
 
 userRouter.get('/email/:email', loginRequired, async function (req, res, next) {
 	try {
-		// params로부터 id를 가져옴
+		// params로부터 email를 가져옴
 		const email = req.params.email;
 
 		// email을 통해 사용자 정보를 얻음
 		const user = await userService.getUserByEmail(email);
-
 		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
 		res.status(200).json(user);
 	} catch (error) {
@@ -114,10 +113,8 @@ userRouter.get('/users/:userId', loginRequired, async function (req, res, next) 
 	try {
 		// params로부터 id를 가져옴
 		const userId = req.params.userId;
-
 		// email을 통해 사용자 정보를 얻음
 		const user = await userService.getUserById(userId);
-
 		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
 		res.status(200).json(user);
 	} catch (error) {
@@ -132,7 +129,6 @@ userRouter.get('/userlist', adminConfirm, async function (req, res, next) {
 	try {
 		// 전체 사용자 목록을 얻음
 		const users = await userService.getUsers();
-
 		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
 		res.status(200).json(users);
 	} catch (error) {

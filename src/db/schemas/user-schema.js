@@ -31,7 +31,7 @@ const UserSchema = new Schema(
       ),
       required: false,
     },
-    admin: { // true : admin , false : basic-user
+    isAdmin: { // true : admin , false : basic-user
       type: Boolean,
       required: true,
       default: false,
