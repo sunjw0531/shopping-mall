@@ -20,7 +20,7 @@ categoryRouter.post('/', adminConfirm, async (req, res, next) => {
 });
 
 // 카테고리 수정
-categoryRouter.patch('/:name', async (req, res, next) => {
+categoryRouter.patch('/:name', adminConfirm, async (req, res, next) => {
 	const name = req.params.name;
 	const newName = req.body;
 	const changeCategory = await categoryModel

@@ -59,18 +59,21 @@ productRouter.get('/detail/:product_id', async (req, res, next) => {
 	}
 });
 
-// // 여러 상품 정보 전달
-// productRouter.get('/information', async (req, res, next) => {
-// 	try {
-// 		const { orderProducts } = req.body;
-// 		// 상품 이름, 가격, 재고 전달
-// 		for (let i = 0; i < orderProducts.length; i++) {
-// 			const productId = orderProducts[i];
-// 		}
-// 	} catch (err) {
-// 		next(err);
-// 	}
-// });
+// 여러 상품 정보 전달
+productRouter.get('/information', async (req, res, next) => {
+	try {
+		// 주문할 상품들의 ID를 배열로 body에서 가져옴
+		const { orderProducts } = req.body;
+
+		const productsInfo = await productModel.find(
+			{ product_id: { $in: orderProducts } },
+			{ name: true, price: true, storage: true },
+		);
+		res.status(200).json(productsInfo);
+	} catch (err) {
+		next(err);
+	}
+});
 
 // 상품 추가
 productRouter.post(
