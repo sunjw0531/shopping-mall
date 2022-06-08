@@ -52,8 +52,9 @@ class UserService {
       secretKey
     );
       // Admin인지 아닌지 반환
+      const userId = createdNewUse._id;
       const isAdmin = createdNewUser.isAdmin;
-      return { token, isAdmin };
+      return { token, isAdmin, userId };
       } 
     // email이 존재하면 db의 정보를 통해 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
@@ -62,8 +63,9 @@ class UserService {
       secretKey
     );
       // Admin인지 아닌지 반환
+    const userId = user._id
     const isAdmin = user.isAdmin;
-    return { token , isAdmin };
+    return { token , isAdmin, userId };
 
   }
 

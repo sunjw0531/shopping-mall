@@ -76,6 +76,7 @@ productRouter.get('/information', async (req, res, next) => {
 	}
 });
 
+
 // 상품 추가
 productRouter.post(
 	'/',
@@ -86,7 +87,7 @@ productRouter.post(
 			const { name, category, information, price, storage, date, company } =
 				req.body;
 			const image = req.file.path;
-			//////////////////// 입력값 빠졌는지 검사 //////////////////////////
+			////////////////// 입력값 빠졌는지 검사 //////////////////////////
 			if (name == '') {
 				throw new Error('상품 이름을 입력해주세요!');
 			}
