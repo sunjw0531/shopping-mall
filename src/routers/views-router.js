@@ -16,8 +16,8 @@ viewsRouter.use('/buy', serveStatic('buy'));
 viewsRouter.use('/admin', serveStatic('admin'));
 
 viewsRouter.use('/account/orders', accountServeStatic('orders'));
-viewsRouter.use('/account/security', accountServeStatic('security'));
-viewsRouter.use('/account/signout', accountServeStatic('signout'));
+viewsRouter.use('/account/management', accountServeStatic('management'));
+viewsRouter.use('/account/withdrawal', accountServeStatic('withdrawal'));
 
 viewsRouter.use('/admin/orders', adminServeStatic('orders'));
 viewsRouter.use('/category/add', adminServeStatic('category'));
