@@ -5,7 +5,7 @@ import { loginRequired, adminConfirm } from '../middlewares';
 import { categoryModel } from '../db/models/category-model.js';
 
 // 카테고리 추가
-categoryRouter.post('/', async (req, res, next) => {
+categoryRouter.post('/', adminConfirm, async (req, res, next) => {
 	try {
 		const { name } = req.body;
 

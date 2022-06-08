@@ -12,7 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password, } = userInfo;
+    const { email, fullName, password } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -48,7 +48,7 @@ class UserService {
       // 토큰 생성
       const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
       const token = jwt.sign(
-      { fullName, email, loginTypeCode, userId: createdNewUser._id, isAdmin: createdNewUser.isAdmin },
+      {  userId: createdNewUser._id, isAdmin: createdNewUser.isAdmin },
       secretKey
     );
       // Admin인지 아닌지 반환
@@ -60,7 +60,7 @@ class UserService {
     // email이 존재하면 db의 정보를 통해 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const token = jwt.sign(
-      { fullName, email, loginTypeCode, userId: user._id, isAdmin: user.isAdmin },
+      {  userId: user._id, isAdmin: user.isAdmin },
       secretKey
     );
       // Admin인지 아닌지 반환
@@ -180,8 +180,13 @@ class UserService {
   }
   // 유저 삭제 기능 최소화, 추후 front API 형태에 맞춰 기능 추가할 예정임.
   async deleteUser(userId) {
+    const user = await this.userModel.findById(userId);
+    
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
     await this.userModel.delete(userId);
-    return;
   }
 }
 
@@ -191,9 +196,7 @@ class UserService {
 //     const user = await this.userModel.findById(userId);
 
 //     // db에서 찾지 못한 경우, 에러 메시지 반환
-//     if (!user) {
-//       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
-//     }
+
 
 //     // 비밀번호 일치 여부 확인
 //     const correctPasswordHash = user.password;

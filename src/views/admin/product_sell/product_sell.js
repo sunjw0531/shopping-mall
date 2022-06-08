@@ -59,6 +59,9 @@ async function handleSubmit(e) {
      
     fetch('/api/product/', {
         method: 'POST',
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
         body: formData
     })
     .then((response) => response.json())
@@ -66,7 +69,7 @@ async function handleSubmit(e) {
         console.log(data);
     }).catch(err=>console.log(err));
 
-    location.reload();
+    // location.reload();
 
 }
 

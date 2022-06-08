@@ -88,7 +88,7 @@ productRouter.get('/information', async (req, res, next) => {
 // 상품 추가
 productRouter.post(
 	'/',
-	// adminConfirm,
+	adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
 		try {
