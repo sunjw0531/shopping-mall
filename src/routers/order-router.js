@@ -47,12 +47,14 @@ orderRouter.post('/', adminConfirm, async (req, res, next) => {
 });
 
 // 주문 내역 조회
-// req.query로 실험 먼저 해보기
 orderRouter.get('/ownList', adminConfirm, async (req, res, next) => {
 	const userId = req.currentUserId;
 	const findOrder = await orderModel
-		.find({ userId, deleteFlag: 0 })
-		.populate('orderList');
+		.find({ userId }, { deleteFlag: 0 })
+		.populate({
+			path: 'orderList',
+			populate: 'productId',
+		});
 
 	res.status(200).json(findOrder);
 });
