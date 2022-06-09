@@ -4,6 +4,7 @@ class CategoryService {
 	constructor(categoryModel) {
 		this.categoryModel = categoryModel;
 	}
+	// 카테고리 추가
 	async addCategory(name) {
 		if (name == '') {
 			throw new Error('추가하실 카테고리 이름을 입력해주세요.');
@@ -15,6 +16,7 @@ class CategoryService {
 		return addCategory;
 	}
 
+	// 카테고리 수정
 	async changeCategory(name, newName) {
 		if (newName == '') {
 			throw new Error('수정하실 카테고리 이름을 입력해주세요.');
@@ -23,6 +25,7 @@ class CategoryService {
 		return changeCategory;
 	}
 
+	// 카테고리 삭제
 	async deleteCategory(name) {
 		if (name == '') {
 			throw new Error('삭제하실 카테고리 이름을 입력해주세요.');
@@ -36,9 +39,16 @@ class CategoryService {
 		return deleteCategory;
 	}
 
+	// 카테고리 전체 받기
 	async getAllCategories() {
 		const getAllCategories = await this.categoryModel.findAll();
 		return getAllCategories;
+	}
+
+	// 카테고리 이름 받기
+	async getCategoryName(id) {
+		const getCategoryName = await this.categoryModel.findName(id);
+		return getCategoryName;
 	}
 }
 
