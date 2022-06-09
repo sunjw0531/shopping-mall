@@ -118,7 +118,6 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
 // 주문 내역 조회
 orderRouter.get('/ownList', loginRequired, async (req, res, next) => {
 	const userId = req.currentUserId;
-
 	const findOrder = await orderService.getOwnList(userId);
 
 	res.status(200).json(findOrder);

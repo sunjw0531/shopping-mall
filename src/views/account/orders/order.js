@@ -17,7 +17,7 @@ nav();
 async function userInfo() {
 	try {
 		const data = await Api.get('/api/order/ownList');
-		console.log(data)
+		console.log(data);
 		return data;
 	} catch (err) {
 		console.error(err.stack);

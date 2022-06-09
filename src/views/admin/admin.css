@@ -1,0 +1,11 @@
+* {
+    background-image: linear-gradient(rgba(27, 18, 0, 0.6),rgba(15, 10, 0, 0.9)), url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt2ad2cdb59464bb81/60ee10b591d9e12c4837c1e1/piltover-eclipticvaults.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: black;
+    scroll-behavior: auto;
+    border: 0;
+    font-family: Rix Gothic, sans-serif;
+    color: #947c52;
+    text-shadow:0.7px 0 0px #b19d7f;
+}

@@ -52,6 +52,7 @@ async function handleSubmit(e) {
 		sessionStorage.setItem('isAdmin', result.isAdmin);
 		sessionStorage.setItem('userId', result.userId);
 		sessionStorage.setItem('profileImg', result.profileImg);
+		sessionStorage.setItem('fullName', result.fullName);
 		console.log(sessionStorage);
 		alert(`정상적으로 로그인되었습니다.`);
 		// 로그인 성공

@@ -110,12 +110,13 @@ class UserService {
     const userId = user._id;
     const isAdmin = user.isAdmin;
     const profileImg = user.profileImg
+    const fullName = user.fullName;
     const token = jwt.sign(
       { userId: user._id, isAdmin: user.isAdmin },
       secretKey
     );
 
-    return { token, isAdmin, userId, profileImg  };
+    return { token, isAdmin, userId, profileImg, fullName };
   }
   // Email로 유저 찾기 기능
   async getUserByEmail(email) {
