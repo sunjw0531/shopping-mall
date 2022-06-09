@@ -112,7 +112,7 @@ categoryRouter.delete('/', adminConfirm, async (req, res, next) => {
 categoryRouter.get('/list', async (req, res, next) => {
 	try {
 		const list = await categoryService.getAllCategories();
-
+		
 		res.status(200).json(list);
 	} catch (err) {
 		next(err);
@@ -123,8 +123,9 @@ categoryRouter.get('/list', async (req, res, next) => {
 categoryRouter.get('/:id', async (req, res, next) => {
 	try {
 		const id = req.params.id;
-
+		
 		const categoryName = await categoryService.getCategoryName(id);
+		
 		res.status(200).json(categoryName);
 	} catch (err) {
 		next(err);

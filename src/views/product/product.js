@@ -43,13 +43,14 @@ function getProductId() {
 async function insertProductContent() {
 	const productId = getProductId();
 	const productData = await Api.get(`/api/product/detail/${productId}`);
+	console.log(productData.image);
 
 	if (productData) {
 		// 상품 이미지
 		const productImage = document.createElement('img');
 		productImage.src = productData.image;
 		producImageWrap.append(productImage);
-
+		
 		// 상품명
 		productName.textContent = `${productData.name}`;
 

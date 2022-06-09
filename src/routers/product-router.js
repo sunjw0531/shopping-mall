@@ -270,7 +270,7 @@ const upload = multer({ storage: storage });
 // 상품 추가
 productRouter.post(
 	'/',
-	adminConfirm,
+	// adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
 		try {
@@ -345,7 +345,7 @@ productRouter.get('/list', async (req, res, next) => {
 		const { category } = req.query;
 		// 상품 전체 검색
 		const products = await productService.findAllByCategory(category);
-
+		
 		// 상품들 정보를 프론트에 전달
 		res.status(200).json(products);
 	} catch (err) {

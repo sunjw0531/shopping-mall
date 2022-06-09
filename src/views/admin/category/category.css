@@ -5,3 +5,12 @@
   font-weight: bold;
 
 }
+
+* {
+	border: 0;
+	font-size: 1rem;
+	font-family: Rix Gothic, sans-serif;
+	color: #8b7755;
+	text-shadow:0.7px 0 0px #b19d7f;
+  }
+  
