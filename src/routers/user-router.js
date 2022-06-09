@@ -167,6 +167,7 @@ userRouter.patch(
 			const address = req.body.address;
 			const phoneNumber = req.body.phoneNumber;
 			const admin = req.body.admin;
+			const profileImg = req.body.profileImg;
 
 			// // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
 			// const currentPassword = req.body.currentPassword;
@@ -186,6 +187,7 @@ userRouter.patch(
 				...(address && { address }),
 				...(phoneNumber && { phoneNumber }),
 				...(admin && { admin }),
+				...(profileImg && { profileImg }),
 			};
 
 			// 사용자 정보를 업데이트함.
@@ -201,6 +203,7 @@ userRouter.patch(
 		}
 	},
 );
+
 
 // 사용자 정보 삭제 기능
 userRouter.delete(

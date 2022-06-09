@@ -12,7 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+    const { email, fullName, password, profileImg  } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -27,7 +27,10 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    // 프로필 사진, 등급 사진을 지정한다.
+
+
+    const newUserInfo = { fullName, email, password: hashedPassword, profileImg };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -37,7 +40,7 @@ class UserService {
 
   async addKakaoUser(userInfo) {
     // 객체 destructuring
-    const { fullName, email, loginTypeCode } = userInfo;
+    const { fullName, email, loginTypeCode, profileImg } = userInfo;
     
     // email 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -53,7 +56,6 @@ class UserService {
     );
       // Admin인지 아닌지 반환
       const userId = createdNewUser._id;
-      console.log(userId);
       const isAdmin = createdNewUser.isAdmin;
       return { token, isAdmin, userId };
       } 
@@ -107,12 +109,13 @@ class UserService {
     // 2개 프로퍼티를 jwt 토큰에 담음
     const userId = user._id;
     const isAdmin = user.isAdmin;
+    const profileImg = user.profileImg
     const token = jwt.sign(
       { userId: user._id, isAdmin: user.isAdmin },
       secretKey
     );
 
-    return { token, isAdmin, userId };
+    return { token, isAdmin, userId, profileImg  };
   }
   // Email로 유저 찾기 기능
   async getUserByEmail(email) {

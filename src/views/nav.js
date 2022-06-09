@@ -1,7 +1,7 @@
 // import jwt from 'jsonwebtoken';
 // const jwt = require('jsonwebtoken');
 function nav() {
-	//네비게이션
+	//네비게이션\
 	const navbar = document.querySelector('#navbar');
 	const register = '<li><a href="/register">회원가입</a></li>',
 		login = '<li><a href="/login">로그인</a></li>',
@@ -10,7 +10,8 @@ function nav() {
 		admin = '<li><a href="/admin" ">페이지 관리</a></li>',
 		cart =
 			'<li><a href="#cart" aria-current="page"><span class="icon"><i class="fas fa-cart-shopping"></i></span><span>카트</span></a></li>';
-
+	// css (navbar 동적 생성으로 인해 피치못한 css 적용을 하고있습니다.)
+	document.body.style.backgroundColor = '#012';
 	// 어드민 인지 확인
 	// try {
 	// 	const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';

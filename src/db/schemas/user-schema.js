@@ -41,6 +41,9 @@ const UserSchema = new Schema(
       required: true,
       default: 0,
     },
+    profileImg: { // 프로필사진
+      type: String,
+    },
   },
   {
     collection: 'users',
