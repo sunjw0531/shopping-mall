@@ -67,6 +67,7 @@ class ProductService {
 		const oldModelCategoryId = oldModel.category;
 		const deleteProductFromCategory = await this.categoryModel.deleteProduct(
 			oldModelCategoryId,
+			oldModel,
 		);
 
 		// 상품 데이터 삭제
