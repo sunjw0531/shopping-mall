@@ -23,8 +23,8 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="product.css" />
-    <script src="product.js" type="module" defer></script>
+    <link rel="stylesheet" href="complete.css" />
+    <script src="complete.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -70,28 +70,18 @@
     <!-- 메인 컨텐츠 -->
     <div class="content-wrap">
       <div class="content-container">
-        <div class="product-container">
-          <div class="product-image-wrap"></div>
-          <div class="product">
-            <div class="product-wrap">
-              <h1 class="product-name"></h1>
-              <span class="product-price"></span>
-              <p class="product-content"></p>
-            </div>
-            <div class="product-count">
-              <h2 class="product-count-label">구매 개수</h2>
-              <button class="btn-count-decrease button">
-                <i class="fa-solid fa-angle-left"></i>
-              </button>
-              <input class="input-product-count input" type="number" min="1" max="10" value="1" readonly>
-              <button class="btn-count-increase button">
-                <i class="fa-solid fa-angle-right"></i>
-              </button>
-            </div>
-            <div class="buttons">
-              <button class="btn-cart button is-warning">장바구니 추가하기</button>
-              <button class="btn-buy button is-info">바로 구매하기</button>
-            </div>
+        <div class="buy-header">
+          <span class="subtitle">장바구니 ></span>
+          <span class="subtitle">주문결제 ></span>
+          <span class="title">주문완료</span>
+        </div>
+        <div class="buy-complete-container">
+          <div class="buy-complete box">
+            <h2 class="buy-complete-label">
+              <i class="fa-solid fa-circle-check" style="color: #735626;"></i> 주문이 완료되었습니다.
+            </h2>
+            <button class="btn-order-list button">주문내역 보기</button>
+            <button class="btn-shopping-continue button">쇼핑 계속하기</button>
           </div>
         </div>
       </div>

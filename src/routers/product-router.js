@@ -251,7 +251,6 @@ try {
 } catch (error) {
 	fs.mkdirSync('uploads');
 }
-
 //multer 의 diskStorage를 정의
 const storage = multer.diskStorage({
 	//경로 설정
@@ -271,7 +270,7 @@ const upload = multer({ storage: storage });
 // 상품 추가
 productRouter.post(
 	'/',
-	adminConfirm,
+	// adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
 		try {

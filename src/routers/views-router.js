@@ -13,6 +13,8 @@ viewsRouter.use('/account', serveStatic('account'));
 viewsRouter.use('/category/:id', serveStatic('category'));
 viewsRouter.use('/product/:id', serveStatic('product'));
 viewsRouter.use('/buy', serveStatic('buy'));
+viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/buy/complete', serveStatic('complete'));
 viewsRouter.use('/admin', serveStatic('admin'));
 
 viewsRouter.use('/account/orders', accountServeStatic('orders'));

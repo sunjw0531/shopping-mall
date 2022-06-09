@@ -111,6 +111,7 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
 		totalPrice,
 		orderList,
 	});
+
 	res.status(201).json(newOrder);
 });
 
@@ -132,7 +133,7 @@ orderRouter.get('/list', adminConfirm, async (req, res, next) => {
 
 // 주문 관리
 orderRouter.patch('/delivery', adminConfirm, async (req, res, next) => {
-	// api/order/delivery/?orderId=as2s2asd
+	// api/order/change/?orderId=as2s2asd
 	const { orderId } = req.query;
 	const { status } = req.body;
 

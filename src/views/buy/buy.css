@@ -16,11 +16,13 @@
 
 .buy-container > .user {
 	width: 60%;
+	height: 100%;
 	margin-right: 2rem;
 }
 
 .buy-container > .product {
 	width: 40%;
+	height: 100%;
 }
 
 .buy-content > h2 {
