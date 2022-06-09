@@ -4,13 +4,21 @@
 // const productModel = model('products', ProductSchema);
 
 // export { productModel };
-// /////////////////////////////////////////////////////////////
+// ///////////////////////////////////////
 import { model } from 'mongoose';
 import { ProductSchema } from '../schemas/product-schema';
 
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
+	// 상품 전체 검색 (카테고리 기준)
+	async findAllByCategory(category) {
+		const products = await Product.find({ category: category }).populate(
+			'category',
+		);
+		return products;
+	}
+
 	// 상품 pagination (카테고리 기준)
 	async pagination(category, page, perPage) {
 		const products = await Product.find({ category: category })
@@ -29,7 +37,7 @@ export class ProductModel {
 
 	// 상품 하나 찾기 (product_id로 상세)
 	async findDetailById(product_id) {
-		const product = await Product.findOne({ _id: product_id }).populate(
+		const product = await Product.findOne({ product_id: product_id }).populate(
 			'category',
 		);
 		return product;
