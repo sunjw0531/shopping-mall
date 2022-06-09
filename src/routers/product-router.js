@@ -270,7 +270,7 @@ const upload = multer({ storage: storage });
 // 상품 추가
 productRouter.post(
 	'/',
-	// adminConfirm,
+	adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
 		try {
@@ -312,7 +312,7 @@ productRouter.delete(
 
 productRouter.patch(
 	'/update_product/:product_id',
-	// adminConfirm,
+	adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
 		try {
@@ -337,17 +337,28 @@ productRouter.patch(
 	},
 );
 
-// 상품 전체 보기 (카테고리별)
+// 상품 전체 보기, pagination (카테고리별)
 
 productRouter.get('/list', async (req, res, next) => {
 	try {
 		// api/product/list/?category=1238asdsad7612983
 		const { category } = req.query;
-		// 상품 전체 검색
-		const products = await productService.findAllByCategory(category);
+		const page = Number(req.query.page || 1);
+		const perPage = Number(req.query.perPage || 10);
 
+		// 총 페이지 수 확인
+		const totalPage = await productService.totalPage(perPage);
+
+		// 상품 검색
+		const products = await productService.findPaginationProducts(
+			category,
+			page,
+			perPage,
+		);
+
+		const data = [totalPage, products];
 		// 상품들 정보를 프론트에 전달
-		res.status(200).json(products);
+		res.status(200).json(data);
 	} catch (err) {
 		next(err);
 	}

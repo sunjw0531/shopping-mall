@@ -138,11 +138,22 @@ class ProductService {
 	}
 
 	// 상품 전체 보기 (카테고리별)
-	async findAllByCategory(category) {
+	async findPaginationProducts(category, page, perPage) {
 		// const category = category;
-		const products = await this.productModel.findAllByCategory(category);
+		const products = await this.productModel.pagination(
+			category,
+			page,
+			perPage,
+		);
 
 		return products;
+	}
+
+	// pagination 총 페이지 수 확인
+	async totalPage(perPage) {
+		const totalProductCount = await this.productModel.count();
+		const totalPageCount = Math.ceil(totalProductCount / perPage);
+		return totalPageCount;
 	}
 
 	// 상품 상세 보기

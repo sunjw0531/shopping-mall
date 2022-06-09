@@ -11,13 +11,22 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
-	// 상품 전체 검색 (카테고리 기준)
-	async findAllByCategory(category) {
-		const products = await Product.find({ category: category }).populate(
-			'category',
-		);
+	// 상품 pagination (카테고리 기준)
+	async pagination(category, page, perPage) {
+		const products = await Product.find({ category: category })
+			.sort({ createdAt: -1 })
+			.skip(perPage * (page - 1))
+			.limit(perPage)
+			.populate('category');
 		return products;
 	}
+
+	// 상품 총 개수
+	async count() {
+		const countProduct = await Product.countDocuments({});
+		return countProduct;
+	}
+
 	// 상품 하나 찾기 (product_id로 상세)
 	async findDetailById(product_id) {
 		const product = await Product.findOne({ _id: product_id }).populate(
