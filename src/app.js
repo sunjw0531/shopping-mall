@@ -2,11 +2,11 @@ import cors from 'cors';
 import express from 'express';
 
 import {
-	viewsRouter,
-	userRouter,
-	productRouter,
-	categoryRouter,
-	orderRouter,
+  viewsRouter,
+  userRouter,
+  productRouter,
+  categoryRouter,
+  orderRouter,
 } from './routers';
 
 import { errorHandler } from './middlewares';

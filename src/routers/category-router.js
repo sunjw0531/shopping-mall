@@ -125,7 +125,6 @@ categoryRouter.get('/:id', async (req, res, next) => {
     const id = req.params.id;
 
     const categoryName = await categoryService.getCategoryName(id);
-
     res.status(200).json(categoryName);
   } catch (err) {
     next(err);

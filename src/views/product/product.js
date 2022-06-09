@@ -43,7 +43,6 @@ function getProductId() {
 async function insertProductContent() {
   const productId = getProductId();
   const productData = await Api.get(`/api/product/detail/${productId}`);
-  console.log(productData.image);
 
   if (productData) {
     // 상품 이미지

@@ -23,7 +23,7 @@
 .cart-products-header label {
   border-radius: 100%;
   display: inline-block;
-  line-height: .5rem;
+  line-height: 0.5rem;
 }
 
 .cart-products-header input {
@@ -33,13 +33,13 @@
 
 .cart-products-header .help {
   display: inline-block;
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
   margin-top: 0;
 }
 
 .cart-products-header .seperator {
-  line-height: .8rem;
+  line-height: 0.8rem;
 }
 
 .cart-products-header .delete-part {
@@ -64,7 +64,8 @@
   font-size: 1.4rem;
 }
 
-.order-info, .order-summary .header {
+.order-info,
+.order-summary .header {
   border-bottom: 1px solid #555;
 }
 
@@ -78,4 +79,3 @@
   margin-top: 3rem;
   padding: 0.2rem 0;
 }
-
