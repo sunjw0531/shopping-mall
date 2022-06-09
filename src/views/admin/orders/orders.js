@@ -1,124 +1,147 @@
-const testList = [
-  {
-    "id":1,
-    "date":"2022-05-10",
-    "order_info":"아이보리 니트",
-    "order_cnt": 1,
-    "order_price":22000,
-    "order_status":0,
-  },
-  {
-    "id":2,
-    "date":"2022-05-12",
-    "order_info":"남성 정장",
-    "order_cnt": 1,
-    "order_price":180000,
-    "order_status":2,
-  },
-  {
-    "id":3,
-    "date":"2022-05-12",
-    "order_info":"캐주얼 반팔 코디 남성",
-    "order_cnt": 1,
-    "order_price":13000,
-    "order_status":1,
-  },
-  {
-    "id":4,
-    "date":"2022-05-13",
-    "order_info":"봄, 가을 남자 느낌 물씬 코디",
-    "order_cnt": 1,
-    "order_price":28900,
-    "order_status":1,
-  },
-  {
-    "id":5,
-    "date":"2022-05-13",
-    "order_info":"아이보리 니트",
-    "order_cnt": 1,
-    "order_price":19000,
-    "order_status":0,
-  },
-]
+import * as Api from '../../api.js';
 
-//products list
-const inputData = document.querySelector('#inputData');
-const orderCancerBtn = document.getElementsByClassName('order-cancer');
-// top_cotainer 
-const element = document.getElementsByTagName('p');
+// top_cotainer
+const showCnt = document.getElementsByTagName('p');
 
-// 총주문 수 
-element[0].innerText = testList.length
-inputItem(); 
-// 상풍 준비중 / 상품 배송중 / 배송 완료
-productCnt();
+//modal 변수 선언
+const modal = document.querySelector('.modal'),
+	modalBg = document.querySelector('.modal-background'),
+	modalbtn = document.querySelector('.modal-close'),
+	delCancelBtn = document.querySelector('#delCancelBtn'),
+	delCompleteBtn = document.querySelector('#delCompleteBtn');
 
-// json 데이터 주문 리스트에 추가
-function inputItem() {
-  const tbody = document.createElement('tbody');
-  inputData.appendChild(tbody);
-  for(let i =0; i < testList.length; i++){
-    tbody.insertAdjacentHTML('beforeend', `
-    <tr id="item${testList[i].id}">
-      <td> ${testList[i].date}</td>
-      <td> ${testList[i].order_info}</td>
-      <td> ${testList[i].order_price.toLocaleString('ko-KR')} 원</td>
+getOrderInfo();
+// orders 목록 받아오기 api 요청
+async function getOrderInfo() {
+	try {
+		const orderInfo = await Api.get('/api/order/list');
+		inputOrders(orderInfo);
+		orderCnt(orderInfo);
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+//날짜 포맷 설정 함수 (YYYY-MM-DD)
+function dateFormat(dateValue) {
+	const date = new Date(dateValue);
+	const year = date.getFullYear();
+	const month = ('0' + (1 + date.getMonth())).slice(-2);
+	const day = ('0' + date.getDate()).slice(-2);
+	return `${year}-${month}-${day}`;
+}
+
+// 데이터 주문 리스트에 추가
+async function inputOrders(item) {
+	const tbody = document.querySelector('#tbody');
+	item.forEach((data) => {
+		tbody.insertAdjacentHTML(
+			'afterend',
+			`
+    <tr id="order${data._id}">
+      <td> ${dateFormat(data.createdAt)}</td>
+			<td> ${data.receiver}</td>
+      <td id ="productList"></td>
+      <td id ="productTotalPrice"></td>
       <td>
-        <select class="select-product-state" id ="sel${testList[i].id}" onchange="productCntChange(this)">
-          <option value="0" ${testList[i].order_status == 0 ? `selected` :``}> 상품 준비중 </option>
-          <option value="1" ${testList[i].order_status == 1 ? `selected` :``}> 상품 배송중 </option>
-          <option value="2" ${testList[i].order_status == 2 ? `selected` :``}> 배송 완료 </option>
+        <select class="select-product-state" id ="select${data._id}">
+          <option value="0" ${
+						data.status == 0 ? `selected` : ``
+					}> 상품 준비중 </option>
+          <option value="1" ${
+						data.status == 1 ? `selected` : ``
+					}> 상품 배송중 </option>
+          <option value="2" ${
+						data.status == 2 ? `selected` : ``
+					}> 배송 완료 </option>
         </select>
       </td>
-      <td> <button class="order-cancer" id="btn${testList[i].id}" onclick ="deleteItem(this.id)">주문 취소</button>
+      <td> <button class="deleteOrderBtn" id="btn${data._id}">주문 취소</button>
     </tr>
-    `);
-  }//json 데이터 기반으로 selected 설정
-  console.log("Data Input Ok!");
+    `,
+		);
+		//삭제 버튼
+		const deleteOrderBtn = document.querySelector('.deleteOrderBtn');
+		deleteOrderBtn.addEventListener('click', () => openModal(data._id));
+		// 주문 정보, 주문 총액
+		const inputOrderData = document.querySelector('#productList');
+		const productTotalPrice = document.querySelector('#productTotalPrice');
+		let totalPrice = 0;
+		for (let i = 0; i < data.orderList.length; i++) {
+			inputOrderData.innerHTML += `${data.orderList[i].productId.name} / ${data.orderList[i].volume}개 <br>`;
+			totalPrice += Number(
+				data.orderList[i].productId.price * data.orderList[i].volume,
+			);
+		}
+
+		productTotalPrice.innerText = `${totalPrice.toLocaleString('ko-KR')}원`;
+
+		const selectChangeOption = document.querySelector('.select-product-state');
+		selectChangeOption.addEventListener('change', () =>
+			setOption(
+				data._id,
+				selectChangeOption.options[selectChangeOption.selectedIndex].value,
+			),
+		);
+	});
 }
 
-function deleteItem(btnId){
-  const parent = document.querySelector(`#${btnId}`).parentElement.parentElement;
-  parent.remove();
-  const sel = Number(parent.childNodes[7].childNodes[1].value);
-  if(sel == 0) {
-    element[1].innerText--;
-  }else if(sel == 1) {
-    element[2].innerText--;
-  }else if(sel == 2) {
-    element[3].innerText--;
-  }
-  element[0].innerText--;
+async function openModal(id) {
+	modal.classList.add('is-active');
+	delCompleteBtn.addEventListener('click', () => setDelete(id));
 }
 
-// 처음 화면 시 value 값 표시
-function productCnt() {
-  let ready_cnt = 0
-  let going_cnt = 0
-  let success_cnt = 0
-  let status = document.getElementsByClassName('select-product-state')
-  for(let i =0; i<testList.length; i++){
-    if(status[i].selectedIndex == 0) {
-      ready_cnt++;
-    }else if(status[i].selectedIndex == 1) {
-      going_cnt++;
-    }else if(status[i].selectedIndex == 2) {
-      success_cnt++;
-    }
-  }
-  element[1].innerText = ready_cnt;
-  element[2].innerText = going_cnt;
-  element[3].innerText = success_cnt;
+async function setDelete(_id) {
+	await Api.patch('/api/order/deleteFlag', _id);
+	const parent = document.querySelector(`#order${_id}`);
+	parent.remove();
+	const selectOption = parent.childNodes[9].childNodes[1].value;
+	if (selectOption == 0) {
+		showCnt[1].innerText--;
+	} else if (selectOption == 1) {
+		showCnt[2].innerText--;
+	} else if (selectOption == 2) {
+		showCnt[3].innerText--;
+	}
+	showCnt[0].innerText--;
+	closeModal();
 }
 
-//select - option 변경 시 카운트 값이 바뀌도록 함수 설정
-function productCntChange (sel) {
-  const selectOption = Number(sel.value);
-  if(selectOption == 0) {
-    element[1].innerText++;
-  }else if(selectOption == 1) {
-    element[2].innerText++;
-  }else if(selectOption == 2) {
-    element[3].innerText++;
-  }
+async function setOption(id, option) {
+	try {
+		await Api.patch(`/api/order/delivery`, `?orderId=${id}`, {
+			status: option,
+		});
+		location.reload();
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+async function orderCnt(item) {
+	let readyCnt = 0;
+	let goingCnt = 0;
+	let successCnt = 0;
+	item.forEach((data) => {
+		if (data.status == 0) {
+			readyCnt++;
+		} else if (data.status == 1) {
+			goingCnt++;
+		} else if (data.status == 2) {
+			successCnt++;
+		}
+	});
+	showCnt[0].innerText = item.length;
+	showCnt[1].innerText = readyCnt;
+	showCnt[2].innerText = goingCnt;
+	showCnt[3].innerText = successCnt;
+}
+
+//modal btn event
+modalBg.addEventListener('click', closeModal);
+modalbtn.addEventListener('click', closeModal);
+delCancelBtn.addEventListener('click', closeModal);
+
+function closeModal() {
+	modal.classList.remove('is-active');
 }

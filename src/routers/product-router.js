@@ -244,7 +244,7 @@ import { loginRequired, adminConfirm } from '../middlewares';
 import { productService } from '../services/product-service';
 
 import multer from 'multer';
-const fs = require('fs'); // 왜 import가 안되는지 알아보기.
+const fs = require('fs');
 // uploads 폴더 생성
 try {
 	fs.accessSync('uploads');
@@ -313,7 +313,7 @@ productRouter.delete(
 
 productRouter.patch(
 	'/update_product/:product_id',
-	adminConfirm,
+	// adminConfirm,
 	upload.single('image'),
 	async (req, res, next) => {
 		try {

@@ -13,42 +13,11 @@ delCencelBtn.addEventListener('click', closeModal);
 
 //네비게이션 바 생성
 nav();
-//테스트 데이터
-const userData = [
-	{
-		_id: 1,
-		createAt: '2022-05-30',
-		summary: '아이보리 니트',
-		amount: 1,
-		state: '상품 준비중',
-	},
-	{
-		_id: 2,
-		createAt: '2022-05-29',
-		summary: '남성 정장',
-		amount: 1,
-		state: '출고중',
-	},
-	{
-		_id: 3,
-		createAt: '2022-05-28',
-		summary: '봄, 가을 남자 느낌 물씬 코디',
-		amount: 2,
-		state: '상품 준비중',
-	},
-	{
-		_id: 4,
-		createAt: '2022-05-30',
-		summary: '캐주얼 반팔 코디',
-		amount: 3,
-		state: '배송 완료',
-	},
-];
-
 // const data = userInfo();
 async function userInfo() {
 	try {
-		data = await Api.get('/api/order');
+		const data = await Api.get('/api/order/ownList');
+		console.log(data)
 		return data;
 	} catch (err) {
 		console.error(err.stack);
@@ -71,7 +40,7 @@ function showData() {
   <div class="column is-2">
 	<button class="button" id="delBtn${data._id}">주문 취소</button>
 	</div>
- 	</div>`,
+	</div>`,
 		);
 		// 주문취소 버튼 클릭시 이벤트
 		const cancelBtn = document.querySelector('.button');

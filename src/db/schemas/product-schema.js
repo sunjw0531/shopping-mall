@@ -22,7 +22,7 @@ const ProductSchema = new Schema(
 		image: {
 			// 상품이미지
 			type: String,
-			required: true,
+			// required: true,
 		},
 		information: {
 			// 상품정보

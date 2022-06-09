@@ -54,10 +54,10 @@ async function handleSubmit(e) {
 
 		alert(`정상적으로 회원가입되었습니다.`);
 
-		// 로그인 페이지 이동
-		window.location.href = '/login';
-	} catch (err) {
-		console.log(err);
-		alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-	}
+    // 로그인 페이지 이동
+    window.location.href = '/login';
+  } catch (err) {
+    console.log(err);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
 }
