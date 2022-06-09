@@ -37,116 +37,178 @@
 
       <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
         <ul id="navbar">
-          <li><a href="/account">계정관리</a></li>
-          <li><a href="#">로그아웃</a></li>
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-              <span>카트</span>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
     </div>
   </nav>
-  <!-- 회원정보 박스 -->
-  <section class="section">
-    <div class="container">
-      <div class="security-header">
-        <h1 class="title">회원정보 조회</h1>
-        <span id="email"></span>
+  <!-- 모달 -->
+  <div class="modal-profile">
+    <div class="modal-profile-info">
+      <div class="modal-profile-img">
+        <img id="userImg" src="/elice-rabbit.png" alt="profile-img">
       </div>
-      <!-- Id 박스 -->
-      <div>
-        <div class="my-info-box id-box display-grid">
-          <span>이름</span>
-          <div class="my-info-id" id="currentId"></div>
-          <button type="button" class="button" id="idChangeBtn">이름 변경</button>
+      <P id="userName">이학성</P>
+      <p id="userEmail">hi@elice.com</p>
+    </div>
+    <div class="modal-link">
+      <a href="/account">계정 관리</a>
+      <a href="#" id="logout">로그아웃</a>
+    </div>
+  </div>
+  <!-- 마이 프로필 -->
+  <div class="container my-profile">
+    <div class="profile-box">
+      <div class="profile-info">
+        <div class="profile-img">
+          <img src="/elice-rabbit.png" alt="profile-img">
         </div>
-        <!-- 이름 변경 -->
-        <div class="my-info-box id-chenge-box display-none">
-          <span>이름</span>
-          <div class="new-id-box">
-            <span>신규 이름</span>
-            <input type="text" class="input" id="newIdInput" placeholder="신규 이름을 입력해주세요!" />
-            <div>
-              <button type="button" class="button" id="idCompleteBtn">이름 변경</button>
-              <button type="button" class="button is-primary" id="idCencelBtn">취소</button>
-            </div>
+        <P class="user-name"></P>
+        <p class="user-email"></p>
+        <p class="current-tier-text"></p>
+      </div>
+      <div class="tier-box">
+        <div class="tier">
+          <div class="bronze">
+            <img src="/ranked-emblems/emblem_Bronze.png" alt="tier-img">
+          </div>
+          <div class="silver">
+            <img src="/ranked-emblems/emblem_Silver.png" alt="tier-img">
+          </div>
+          <div class="gold">
+            <img src="/ranked-emblems/emblem_Gold.png" alt="tier-img">
+          </div>
+          <div class="platinum">
+            <img src="/ranked-emblems/emblem_Platinum.png" alt="tier-img">
+          </div>
+          <div class="diamond">
+            <img src="/ranked-emblems/emblem_Diamond.png" alt="tier-img">
+          </div>
+          <div class="challenger">
+            <img src="/ranked-emblems/emblem_Challenger.png" alt="tier-img">
           </div>
         </div>
-      </div>
-      <!-- 비밀번호 박스 -->
-      <div>
-        <div class="my-info-box password-box display-grid">
-          <span>비밀번호</span>
-          <div class="my-info-password" id="currentPassword"></div>
-          <button type="button" class="button" id="pwChangeBtn">비밀번호 변경</button>
-        </div>
-        <!-- 비밀번호 변경 -->
-        <div class="my-info-box password-chenge-box display-none">
-          <span>비밀번호</span>
-          <div class="new-password-box">
-            <span>신규 비밀번호</span>
-            <input type="password" class="input" id="newPwInput" />
-            <span>신규 비밀번호 재입력</span>
-            <input type="password" class="input" id="newPwConfirm" />
-            <div>
-              <button type="button" class="button" id="pwCompleteBtn">비밀번호 변경</button>
-              <button type="button" class="button is-primary" id="pwCencelBtn">취소</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- 주소 박스 -->
-      <div>
-        <div class="my-info-box address-box display-grid">
-          <span>주소</span>
-          <div class="my-info-address" id="currentAddress"></div>
-          <button type="button" class="button" id="addressChangeBtn">주소 변경</button>
-        </div>
-        <!-- 주소 변경 -->
-        <div class="my-info-box address-chenge-box display-none">
-          <span>주소</span>
-          <div class="new-address-box">
-            <div class="search-Address-box">
-              <input type="text" class="input" id="postal" />
-              <button type="button" class="button" id="searchAdressBtn">주소 검색</button>
-            </div>
-            <input type="text" class="input" id="address1" />
-            <input type="text" class="input" id="address2" placeholder="상세 주소를 입력하세요." />
-            <div>
-              <button type="button" class="button" id="addressCompleteBtn">주소 변경</button>
-              <button type="button" class="button is-primary" id="addressCencelBtn">취소</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- 전화번호 박스 -->
-      <div>
-        <div class="my-info-box phone-box display-grid">
-          <span>전화번호</span>
-          <div class="my-info-phone" id="currentPhone"></div>
-          <button type="button" class="button" id="phoneChangeBtn">전화번호 변경</button>
-        </div>
-        <!-- 전화번호 변경 -->
-        <div class="my-info-box phone-chenge-box display-none">
-          <span>전화번호</span>
-          <div class="new-phone-box">
-            <span>신규 전화번호</span>
-            <input type="tel" class="input" id="newPhoneInput" placeholder="- 없이 숫자만 입력해주세요." />
-            <div>
-              <button type="button" class="button" id="phoneCompleteBtn">전화번호 변경</button>
-              <button type="button" class="button is-primary" id="phoneCencelBtn">취소</button>
-            </div>
-          </div>
+        <div class="tier-info">
+          <p class="tier-info"></p>
         </div>
       </div>
     </div>
-  </section>
+    <!-- 계정관리 목록-->
+    <section class="section">
+      <div class="container">
+        <div class="menu-container">
+          <a class="account-menu" href="/account/orders">
+            <div class="menu-body">
+              <p class="menu-title">주문조회</p>
+              <p class="menu-subtitle">주문 내역을 확인, 취소할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/management">
+            <div class="menu-body">
+              <p class="menu-title">회원정보 관리</p>
+              <p class="menu-subtitle">회원 정보를 확인, 수정할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/withdrawal">
+            <div class="menu-body">
+              <p class="menu-title">회원 탈퇴</p>
+              <p class="menu-subtitle">회원 정보를 삭제하고 탈퇴할 수 있습니다.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- 회원정보 박스 -->
+    <section class="section">
+      <div class="container">
+        <!-- Id 박스 -->
+        <div>
+          <div class="my-info-box id-box display-grid">
+            <span>이름</span>
+            <div class="my-info-id" id="currentId"></div>
+            <button type="button" class="button" id="idChangeBtn">이름 변경</button>
+          </div>
+          <!-- 이름 변경 -->
+          <div class="my-info-box id-chenge-box display-none">
+            <span>이름</span>
+            <div class="new-id-box">
+              <span>신규 이름</span>
+              <input type="text" class="input" id="newIdInput" placeholder="신규 이름을 입력해주세요!" />
+              <div>
+                <button type="button" class="button" id="idCompleteBtn">이름 변경</button>
+                <button type="button" class="button is-primary" id="idCencelBtn">취소</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 비밀번호 박스 -->
+        <div>
+          <div class="my-info-box password-box display-grid">
+            <span>비밀번호</span>
+            <div class="my-info-password" id="currentPassword"></div>
+            <button type="button" class="button" id="pwChangeBtn">비밀번호 변경</button>
+          </div>
+          <!-- 비밀번호 변경 -->
+          <div class="my-info-box password-chenge-box display-none">
+            <span>비밀번호</span>
+            <div class="new-password-box">
+              <span>신규 비밀번호</span>
+              <input type="password" class="input" id="newPwInput" />
+              <span>신규 비밀번호 재입력</span>
+              <input type="password" class="input" id="newPwConfirm" />
+              <div>
+                <button type="button" class="button" id="pwCompleteBtn">비밀번호 변경</button>
+                <button type="button" class="button is-primary" id="pwCencelBtn">취소</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 주소 박스 -->
+        <div>
+          <div class="my-info-box address-box display-grid">
+            <span>주소</span>
+            <div class="my-info-address" id="currentAddress"></div>
+            <button type="button" class="button" id="addressChangeBtn">주소 변경</button>
+          </div>
+          <!-- 주소 변경 -->
+          <div class="my-info-box address-chenge-box display-none">
+            <span>주소</span>
+            <div class="new-address-box">
+              <div class="search-Address-box">
+                <input type="text" class="input" id="postal" />
+                <button type="button" class="button" id="searchAdressBtn">주소 검색</button>
+              </div>
+              <input type="text" class="input" id="address1" />
+              <input type="text" class="input" id="address2" placeholder="상세 주소를 입력하세요." />
+              <div>
+                <button type="button" class="button" id="addressCompleteBtn">주소 변경</button>
+                <button type="button" class="button is-primary" id="addressCencelBtn">취소</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 전화번호 박스 -->
+        <div>
+          <div class="my-info-box phone-box display-grid">
+            <span>전화번호</span>
+            <div class="my-info-phone" id="currentPhone"></div>
+            <button type="button" class="button" id="phoneChangeBtn">전화번호 변경</button>
+          </div>
+          <!-- 전화번호 변경 -->
+          <div class="my-info-box phone-chenge-box display-none">
+            <span>전화번호</span>
+            <div class="new-phone-box">
+              <span>신규 전화번호</span>
+              <input type="tel" class="input" id="newPhoneInput" placeholder="- 없이 숫자만 입력해주세요." />
+              <div>
+                <button type="button" class="button" id="phoneCompleteBtn">전화번호 변경</button>
+                <button type="button" class="button is-primary" id="phoneCencelBtn">취소</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 </body>
 
 </html>

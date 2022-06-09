@@ -33,51 +33,118 @@
           <span aria-hidden="true"></span>
         </a>
       </div>
-
       <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
         <ul id="navbar">
-          <li><a href="/account">계정관리</a></li>
-          <li><a href="#">로그아웃</a></li>
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-              <span>카트</span>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
     </div>
   </nav>
-  <!-- 회원 정보 삭제 -->
-  <div class="user-form-container">
-    <form class="box user-form-box" id="userForm">
-      <p class="title is-5 has-text-primary">회원 정보 삭제</p>
-      <div class="field mb-5">
-        <label class="label" for="passwordInput">현재 비밀번호</label>
-        <div class="control">
-          <input class="input" id="passwordInput" type="password" placeholder="현재 비밀번호를 입력하세요." autocomplete="off">
-        </div>
+  <!-- 모달 -->
+  <div class="modal-profile">
+    <div class="modal-profile-info">
+      <div class="modal-profile-img">
+        <img id="userImg" src="/elice-rabbit.png" alt="profile-img">
       </div>
-      <button class="button is-primary is-fullwidth" id="submitBtn" type="button"> 회원정보 안전하게 삭제하기</button>
-      <!-- 모달 -->
-      <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="box">
-            <p class="mb-3">회원정보 삭제시 복구할 수 없습니다. 삭제 하시겠습니까?</p>
-            <div class="buttons">
-              <button class="button mt-5" id="delCompletBtn" aria-label="close">네</button>
-              <button class="button is-primary mt-5" id="delcencelBtn" aria-label="close">아니요</button>
-            </div>
+      <P id="userName">이학성</P>
+      <p id="userEmail">hi@elice.com</p>
+    </div>
+    <div class="modal-link">
+      <a href="/account">계정 관리</a>
+      <a href="#" id="logout">로그아웃</a>
+    </div>
+  </div>
+  <!-- 마이 프로필 -->
+  <div class="container my-profile">
+    <div class="profile-box">
+      <div class="profile-info">
+        <div class="profile-img">
+          <img src="/elice-rabbit.png" alt="profile-img">
+        </div>
+        <P class="user-name"></P>
+        <p class="user-email"></p>
+        <p class="current-tier-text"></p>
+      </div>
+      <div class="tier-box">
+        <div class="tier">
+          <div class="bronze">
+            <img src="/ranked-emblems/emblem_Bronze.png" alt="tier-img">
+          </div>
+          <div class="silver">
+            <img src="/ranked-emblems/emblem_Silver.png" alt="tier-img">
+          </div>
+          <div class="gold">
+            <img src="/ranked-emblems/emblem_Gold.png" alt="tier-img">
+          </div>
+          <div class="platinum">
+            <img src="/ranked-emblems/emblem_Platinum.png" alt="tier-img">
+          </div>
+          <div class="diamond">
+            <img src="/ranked-emblems/emblem_Diamond.png" alt="tier-img">
+          </div>
+          <div class="challenger">
+            <img src="/ranked-emblems/emblem_Challenger.png" alt="tier-img">
           </div>
         </div>
-        <button class="modal-close is-large" aria-label="close"></button>
+        <div class="tier-info">
+          <p class="tier-info"></p>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+    <!-- 계정관리 목록-->
+    <section class="section">
+      <div class="container">
+        <div class="menu-container">
+          <a class="account-menu" href="/account/orders">
+            <div class="menu-body">
+              <p class="menu-title">주문조회</p>
+              <p class="menu-subtitle">주문 내역을 확인, 취소할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/management">
+            <div class="menu-body">
+              <p class="menu-title">회원정보 관리</p>
+              <p class="menu-subtitle">회원 정보를 확인, 수정할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/withdrawal">
+            <div class="menu-body">
+              <p class="menu-title">회원 탈퇴</p>
+              <p class="menu-subtitle">회원 정보를 삭제하고 탈퇴할 수 있습니다.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- 회원 정보 삭제 -->
+    <section class="section">
+      <div class="user-form-container">
+        <form class="box user-form-box" id="userForm">
+          <p class="title is-5 has-text-primary">회원 정보 삭제</p>
+          <div class="field mb-5">
+            <label class="label" for="passwordInput">현재 비밀번호</label>
+            <div class="control">
+              <input class="input" id="passwordInput" type="password" placeholder="현재 비밀번호를 입력하세요." autocomplete="off">
+            </div>
+          </div>
+          <button class="button is-primary is-fullwidth" id="submitBtn" type="button"> 회원정보 안전하게 삭제하기</button>
+          <!-- 모달 -->
+          <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                <p class="mb-3">회원정보 삭제시 복구할 수 없습니다. 삭제 하시겠습니까?</p>
+                <div class="buttons">
+                  <button class="button mt-5" id="delCompletBtn" aria-label="close">네</button>
+                  <button class="button is-primary mt-5" id="delcencelBtn" aria-label="close">아니요</button>
+                </div>
+              </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+          </div>
+        </form>
+      </div>
+    </section>
 </body>
 
 </html>

@@ -1,4 +1,7 @@
 import * as Api from '../../api.js';
+import { userTier } from '../account.js';
+//네비게이션 바 생성
+userTier();
 // elements, input 변수 선언
 const idChangeBtn = document.querySelector('#idChangeBtn'),
 	pwChangeBtn = document.querySelector('#pwChangeBtn'),
@@ -26,7 +29,6 @@ const idChangeBtn = document.querySelector('#idChangeBtn'),
 	phoneDisplay = document.querySelector('#currentPhone');
 
 let id;
-email.textContent = `(${sessionStorage.getItem('email')})`;
 //유저 정보 받아오기
 async function getInfo() {
 	try {
@@ -92,6 +94,7 @@ async function setName(e) {
 		await Api.patch('/api/users', id, data);
 		cencleSwitch(e);
 		nameDisplay.textContent = fullName;
+		location.reload();
 	} catch (err) {
 		console.error(err.stack);
 		alert(`${err.message}`);

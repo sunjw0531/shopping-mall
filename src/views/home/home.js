@@ -1,6 +1,5 @@
 import * as Api from '/api.js';
-import { nav } from '/nav.js';
-
+import { nav } from '/component.js';
 //네비게이션 바 생성
 nav();
 
