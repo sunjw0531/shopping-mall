@@ -12,13 +12,13 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password, profileImg  } = userInfo;
+    const { email, fullName, password, profileImg } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
     if (user) {
       throw new Error(
-        '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.'
+        '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.',
       );
     }
 
@@ -29,8 +29,12 @@ class UserService {
 
     // 프로필 사진, 등급 사진을 지정한다.
 
-
-    const newUserInfo = { fullName, email, password: hashedPassword, profileImg };
+    const newUserInfo = {
+      fullName,
+      email,
+      password: hashedPassword,
+      profileImg,
+    };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -41,7 +45,7 @@ class UserService {
   async addKakaoUser(userInfo) {
     // 객체 destructuring
     const { fullName, email, loginTypeCode, profileImg } = userInfo;
-    
+
     // email 중복 확인
     const user = await this.userModel.findByEmail(email);
     // email 이 없으면 회원 가입을 한다.
@@ -51,38 +55,37 @@ class UserService {
       // 토큰 생성
       const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
       const token = jwt.sign(
-      {  userId: createdNewUser._id, isAdmin: createdNewUser.isAdmin },
-      secretKey
-    );
+        { userId: createdNewUser._id, isAdmin: createdNewUser.isAdmin },
+        secretKey,
+      );
       // Admin인지 아닌지 반환
       const userId = createdNewUser._id;
       const isAdmin = createdNewUser.isAdmin;
       return { token, isAdmin, userId };
-      } 
+    }
     // email이 존재하면 db의 정보를 통해 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const token = jwt.sign(
-      {  userId: user._id, isAdmin: user.isAdmin },
-      secretKey
+      { userId: user._id, isAdmin: user.isAdmin },
+      secretKey,
     );
-      // Admin인지 아닌지 반환
-    const userId = user._id
+    // Admin인지 아닌지 반환
+    const userId = user._id;
     console.log(userId);
     const isAdmin = user.isAdmin;
-    return { token , isAdmin, userId };
-
+    return { token, isAdmin, userId };
   }
 
   // 로그인
   async getUserToken(loginInfo) {
     // 객체 destructuring
     const { email, password } = loginInfo;
-    
+
     // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(email);
     if (!user) {
       throw new Error(
-        '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.'
+        '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
       );
     }
 
@@ -94,12 +97,12 @@ class UserService {
     // 매개변수의 순서 중요 (1번째는 프론트가 보내온 비밀번호, 2번쨰는 db에 있떤 암호화된 비밀번호)
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      correctPasswordHash
+      correctPasswordHash,
     );
 
     if (!isPasswordCorrect) {
       throw new Error(
-        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
       );
     }
 
@@ -109,11 +112,11 @@ class UserService {
     // 2개 프로퍼티를 jwt 토큰에 담음
     const userId = user._id;
     const isAdmin = user.isAdmin;
-    const profileImg = user.profileImg
+    const profileImg = user.profileImg;
     const fullName = user.fullName;
     const token = jwt.sign(
       { userId: user._id, isAdmin: user.isAdmin },
-      secretKey
+      secretKey,
     );
 
     return { token, isAdmin, userId, profileImg, fullName };
@@ -185,7 +188,7 @@ class UserService {
   // 유저 삭제 기능 최소화, 추후 front API 형태에 맞춰 기능 추가할 예정임.
   async deleteUser(userId) {
     const user = await this.userModel.findById(userId);
-    
+
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
@@ -200,7 +203,6 @@ class UserService {
 //     const user = await this.userModel.findById(userId);
 
 //     // db에서 찾지 못한 경우, 에러 메시지 반환
-
 
 //     // 비밀번호 일치 여부 확인
 //     const correctPasswordHash = user.password;
@@ -218,7 +220,7 @@ class UserService {
 //     // 회원탈퇴
 //     user = await this.userModel.delete(userId);
 //   }
-// 
+//
 
 const userService = new UserService(userModel);
 

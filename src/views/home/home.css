@@ -1,164 +1,164 @@
 * {
-	border: 0;
-	font-size: 1rem;
-	font-family: Rix Gothic, sans-serif;
-	color: #8b7755;
-	text-shadow:0.7px 0 0px #b19d7f;
-  }
-  
-  .navbar {
-	background-color: #012532;
-	border-bottom: 1px solid #8b7755;
-  }
-  .breadcrumb a {
-	align-items: center;
-	color: #8b7755;
-	display: flex;
-	justify-content: center;
-	padding: 0 0.75em;
-  }
-  
-  .content-wrap {
-	margin: 0 auto;
-	background-image: linear-gradient(rgba(2, 0, 27, 0.5),rgba(1, 0, 15, 0.9)), url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt96b7d18c55000dc0/60ee0bbd39cbdb45e8c47fe4/bilgewater-high-and-dry.jpg');
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: 100vw 100vh;
-	background-color: black;
-	scroll-behavior: auto;
-  }
-  
-  .category-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 0;
-  
-  }
-  
-  .category-label-container {
-	  width: 100%;
-	  padding: 0 20px;
-  }
-  
-  .category-label {
-	  font-size: 2rem;
-	  font-weight: bold;
-	  padding: 2rem 1rem 2rem 1rem;
-	text-align: center;
-  }
-  
-  .category {
-	  display: flex;
-	  width: 100%;
-	  padding: 0 20px;
-	justify-content: center;
-  }
-  
-  .category-nodata {
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  width: 100%;
-	  height: 300px;
-	  margin: 2rem 0;
-	  padding: 1rem;
-	  border: 1px solid lightgray;
-	  font-size: 1.5rem;
-	  font-weight: bold;
-  }
-  
-  .product {
-	width: 15%;
-	cursor: pointer;
-	padding: 15px 5px 5px 5px;
-	text-align: center;
-	border-top: 1px dashed #8b7755;
-	border-bottom: 1px dashed #8b7755;
-  }
-  
-  .product:first-child {
-	  border-left: 1px dashed #8b7755;
-	}
-  
-	.product:last-child {
-	  border-right: 1px dashed #8b7755;
-	}
-  
-  .product img {
-	  border: 1px solid #8b7755;
-	max-width: 30%;
-	}
-  
-  .button {
-	background-color: #092334;
-	border-color: #8b7755;
-	color: #bfaf83;
-	text-shadow: 0.7px 0 0px #8f8371;
-  
-  }
-  
-  .btn-go-category {
-	  margin: 2rem 0 1rem 0;
-  }
+  border: 0;
+  font-size: 1rem;
+  font-family: Rix Gothic, sans-serif;
+  color: #8b7755;
+  text-shadow: 0.7px 0 0px #b19d7f;
+}
+
+.navbar {
+  background-color: #012532;
+  border-bottom: 1px solid #8b7755;
+}
+.breadcrumb a {
+  align-items: center;
+  color: #8b7755;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75em;
+}
+
+.content-wrap {
+  margin: 0 auto;
+  background-image: linear-gradient(rgba(2, 0, 27, 0.5), rgba(1, 0, 15, 0.9)),
+    url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt96b7d18c55000dc0/60ee0bbd39cbdb45e8c47fe4/bilgewater-high-and-dry.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-color: black;
+  scroll-behavior: auto;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.category-label-container {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.category-label {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 2rem 1rem 2rem 1rem;
+  text-align: center;
+}
+
+.category {
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+  justify-content: center;
+}
+
+.category-nodata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid lightgray;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.product {
+  width: 15%;
+  cursor: pointer;
+  padding: 15px 5px 5px 5px;
+  text-align: center;
+  border-top: 1px dashed #8b7755;
+  border-bottom: 1px dashed #8b7755;
+}
+
+.product:first-child {
+  border-left: 1px dashed #8b7755;
+}
+
+.product:last-child {
+  border-right: 1px dashed #8b7755;
+}
+
+.product img {
+  border: 1px solid #8b7755;
+  max-width: 30%;
+}
+
+.button {
+  background-color: #092334;
+  border-color: #8b7755;
+  color: #bfaf83;
+  text-shadow: 0.7px 0 0px #8f8371;
+}
+
+.btn-go-category {
+  margin: 2rem 0 1rem 0;
+}
 
 /* 모달 */
 .modal-profile-info {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .modal-profile {
-	width: 17rem;
-    border: 1px solid rgb(139 119 85);
-	border-radius: 2px;
-	box-shadow: rgb(0 0 0 / 12%) 0px 4px 8px 0px;
-    background-color: rgb(1 37 50);
-	padding: 3rem 1rem 3rem 1rem;
-	position: fixed;
-	top: 4.4rem;
-	right: 2rem;
-	display: none;
-	flex-direction: column;
-	gap: 2rem;
+  width: 17rem;
+  border: 1px solid rgb(139 119 85);
+  border-radius: 2px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 8px 0px;
+  background-color: rgb(1 37 50);
+  padding: 3rem 1rem 3rem 1rem;
+  position: fixed;
+  top: 4.4rem;
+  right: 2rem;
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
 }
 .active {
-	display: flex !important;
+  display: flex !important;
 }
 .modal-profile-img {
-	width: 6rem;
-	padding-bottom: 1rem;
+  width: 6rem;
+  padding-bottom: 1rem;
 }
 .modal-link {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 .profile-btn:hover {
-	background-color: rgb(223, 222, 222);
-	cursor: pointer;
+  background-color: rgb(223, 222, 222);
+  cursor: pointer;
 }
 .profile-btn {
-	width: 3rem;
+  width: 3rem;
 }
 
 #userImg {
-	border: 5px solid #8b7755;
-	border-radius: 100%;
-	width: 80%;
-	margin-left: 1rem;
+  border: 5px solid #8b7755;
+  border-radius: 100%;
+  width: 80%;
+  margin-left: 1rem;
 }
 
 a {
-    color: #8b7755;
-	text-shadow: 0.7px 0 0px #b19d7f;
-    cursor: pointer;
-    text-decoration: none;
+  color: #8b7755;
+  text-shadow: 0.7px 0 0px #b19d7f;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-#userEmail, #userName {
-	color: #fff;
+#userEmail,
+#userName {
+  color: #fff;
 }

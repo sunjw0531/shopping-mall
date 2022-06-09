@@ -27,28 +27,31 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
-    isAdmin: { // true : admin , false : basic-user
+    isAdmin: {
+      // true : admin , false : basic-user
       type: Boolean,
       required: true,
       default: false,
     },
-    loginTypeCode: { // 0 : signup user , 1 :  kakao user
+    loginTypeCode: {
+      // 0 : signup user , 1 :  kakao user
       type: Number,
       required: true,
       default: 0,
     },
-    profileImg: { // 프로필사진
+    profileImg: {
+      // 프로필사진
       type: String,
     },
   },
   {
     collection: 'users',
     timestamps: true,
-  }
+  },
 );
 
 export { UserSchema };

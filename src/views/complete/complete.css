@@ -1,41 +1,41 @@
 .content-wrap {
-	width: 70%;
-	max-width: 1344px;
-	margin: 0 auto;
+  width: 70%;
+  max-width: 1344px;
+  margin: 0 auto;
 }
 
 .buy-header {
-	margin: 2rem 0;
-	padding-bottom: 0.5rem;
-	border-bottom: 1px solid lightgray;
+  margin: 2rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid lightgray;
 }
 
 .buy-complete-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
 }
 
 .buy-complete {
-	display: flex;
-	flex-direction: column;
-	padding: 3rem 5rem;
-	font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 5rem;
+  font-size: 1.5rem;
 }
 
 .btn-order-list {
-	margin: 3rem 0 0.8rem;
-	font-size: 1.2rem;
+  margin: 3rem 0 0.8rem;
+  font-size: 1.2rem;
 }
 
 .btn-shopping-continue {
-	font-size: 1.2rem;
-	background-color: rgba(115, 86, 38, 1);
-	color: white;
+  font-size: 1.2rem;
+  background-color: rgba(115, 86, 38, 1);
+  color: white;
 }
 
 .btn-shopping-continue:hover {
-	background-color: rgba(115, 86, 38, 0.9);
-	color: white;
+  background-color: rgba(115, 86, 38, 0.9);
+  color: white;
 }
