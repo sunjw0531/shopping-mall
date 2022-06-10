@@ -38,16 +38,8 @@ function addAllEvents() {
 
 // 유저 정보 불러오기
 function getUserInfo() {
-<<<<<<< HEAD
-  // TODO: eamil -> userId
-  // const userId = sessionStorage.getItem('userId');
-  console.log(sessionStorage);
-  const userId = sessionStorage.getItem('email');
-  const userInfo = Api.get(`/api/email/${userId}`);
-=======
   const userId = sessionStorage.getItem('userId');
   const userInfo = Api.get(`/api/users/${userId}`);
->>>>>>> 2998ee07fc699e56138e66519df583ddaafd52d6
   return userInfo;
 }
 
@@ -77,66 +69,6 @@ async function insertPaymentInfo() {
 
   // TODO: userId가 같은 구매목록만 출력
   buyLocalStorage.forEach(async (buyInfo) => {
-<<<<<<< HEAD
-    const { productId, count } = buyInfo;
-
-    const productData = await getProductsInfo(productId);
-    const { name, price } = productData;
-
-    const orderProductInfo = document.createElement('div');
-    orderProductInfo.classList.add('order-product-info');
-    orderInfoWrap.append(orderProductInfo);
-
-    // 주문 상품
-    const buyingNameWrap = document.createElement('div');
-    buyingNameWrap.classList.add('buying-info-wrap');
-    orderProductInfo.append(buyingNameWrap);
-
-    const buyingNameLabel = document.createElement('h3');
-    const buyingName = document.createElement('div');
-    buyingNameLabel.classList.add('buying-label');
-    buyingName.classList.add('buying-name');
-    buyingNameLabel.textContent = '주문 상품';
-    buyingName.textContent = name;
-    buyingNameWrap.append(buyingNameLabel, buyingName);
-
-    // 주문 개수
-    const buyingCountWrap = document.createElement('div');
-    buyingCountWrap.classList.add('buying-info-wrap');
-    orderProductInfo.append(buyingCountWrap);
-
-    const buyingCountLabel = document.createElement('h3');
-    const buyingCount = document.createElement('div');
-    buyingCountLabel.classList.add('buying-label');
-    buyingCount.classList.add('buying-count');
-    buyingCountLabel.textContent = '주문 개수';
-    buyingCount.textContent = count;
-    buyingCountWrap.append(buyingCountLabel, buyingCount);
-
-    // 상품 가격
-    const countPrice = price * count;
-    const buyingPriceWrap = document.createElement('div');
-    buyingPriceWrap.classList.add('buying-info-wrap');
-    orderProductInfo.append(buyingPriceWrap);
-
-    const buyingPriceLabel = document.createElement('h3');
-    const buyingPrice = document.createElement('div');
-    buyingPriceLabel.classList.add('buying-label');
-    buyingPrice.classList.add('buying-price');
-    buyingPriceLabel.textContent = '상품 가격';
-    buyingPrice.textContent = `${countPrice.toLocaleString()}원`;
-    buyingPriceWrap.append(buyingPriceLabel, buyingPrice);
-
-    // 금액
-    totalPrice += countPrice;
-
-    // 배송비
-    const deliveryPrice = getDeliveryPrice(totalPrice);
-    deliveryPriceSpan.textContent = `${deliveryPrice.toLocaleString()}원`;
-
-    // 총 결제 금액
-    totalPriceSpan.textContent = `${totalPrice.toLocaleString()}원`;
-=======
     const { userId, productId, count } = buyInfo;
 
     if (userId === sessionStorage.getItem('userId')) {
@@ -197,7 +129,6 @@ async function insertPaymentInfo() {
       // 총 결제 금액
       totalPriceSpan.textContent = `${totalPrice.toLocaleString()}원`;
     }
->>>>>>> 2998ee07fc699e56138e66519df583ddaafd52d6
   });
 }
 
@@ -274,10 +205,6 @@ async function handlePayment() {
     orderList,
   };
   const res = await Api.post('/api/order/', orderInfo);
-<<<<<<< HEAD
-  console.log(res);
-=======
->>>>>>> 2998ee07fc699e56138e66519df583ddaafd52d6
 
   cart.forEach((cartEl, index) => {
     // 해당 유저의 장바구니에 상품이 존재할 경우

@@ -1,19 +1,10 @@
-// import { model } from 'mongoose';
-// import { CategorySchema } from '../schemas/category-schema';
-
-// const categoryModel = model('category', CategorySchema);
-
-// export { categoryModel };
-
-////////////////////////////////////////////
-
 import { model } from 'mongoose';
 import { CategorySchema } from '../schemas/category-schema';
 
 const category = model('category', CategorySchema);
 
 export class CategoryModel {
-  // Category model의 product에 항목 추가 (product router 상품 추가 쪽)
+  // Category model의 products에 항목 추가 (product router 상품 추가 쪽)
   async addProduct(category_id, newProductModel) {
     const updateCategory = await category
       .findOneAndUpdate(
