@@ -52,7 +52,7 @@ categoryRouter.get('/list', async (req, res, next) => {
 });
 
 // 카테고리 이름 반환
-categoryRouter.get('/:id', adminConfirm, async (req, res, next) => {
+categoryRouter.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
 
