@@ -114,22 +114,26 @@
           <input class="input" id="productCntInfo" type="text" placeholder="10" />
         </div>
       </div>
-
       <div class="field">
         <label class="label" for="productPrice">가격</label>
         <div class="control">
           <input class="input" id="productPrice" type="text" placeholder="10000" />
         </div>
       </div>
-
-      <button type="submit" class="btn btn-primary" id="sellSubmitBtn" value="productSell"
-        style="width: 100%; margin-bottom: 50px">
-        제품 판매하기
-      </button>
-    </form>
-  </div>
-</body>
-<!--product_sell.js 연결-->
-<script type="module" src="./product_sell.js" defer></script>
-
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="sellSubmitBtn"
+          value="productSell"
+          style="width: 100%; margin-bottom: 50px"
+        >
+          제품 판매하기
+        </button>
+      </form>
+    </div>
+  </body>
+  <!-- 카카오 로그인 스크립트 -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <!--product_sell.js 연결-->
+  <script type="module" src="./product_sell.js" defer></script>
 </html>

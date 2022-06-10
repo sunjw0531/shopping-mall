@@ -22,9 +22,10 @@ viewsRouter.use('/account/management', accountServeStatic('management'));
 viewsRouter.use('/account/withdrawal', accountServeStatic('withdrawal'));
 
 viewsRouter.use('/admin/orders', adminServeStatic('orders'));
-viewsRouter.use('/category/add', adminServeStatic('category'));
-viewsRouter.use('/product/add', adminServeStatic('product_sell'));
+viewsRouter.use('/admin/category', adminServeStatic('category'));
+viewsRouter.use('/admin/product_sell', adminServeStatic('product_sell'));
 viewsRouter.use('/admin/users', adminServeStatic('user_management'));
+viewsRouter.use('/admin/products_management', adminServeStatic('products_management'));
 
 viewsRouter.use('/', serveStatic(''));
 viewsRouter.use('/', serveStatic('uploads'));
@@ -41,12 +42,17 @@ viewsRouter.use('/account/orders', serveStatic(''));
 viewsRouter.use('/account/withdrawal', serveStatic(''));
 viewsRouter.use('/account/management', serveStatic(''));
 viewsRouter.use('/admin', serveStatic(''));
-viewsRouter.use('/category/add', serveStatic(''));
-viewsRouter.use('/product/add', serveStatic(''));
+viewsRouter.use('/admin/orders', serveStatic(''));
+viewsRouter.use('/admin/category', serveStatic(''));
 viewsRouter.use('/admin/users', serveStatic(''));
+viewsRouter.use('/admin/product_sell', serveStatic(''));
+viewsRouter.use('/admin/products_management', serveStatic(''));
 viewsRouter.use('/buy', serveStatic(''));
 viewsRouter.use('/cart', serveStatic(''));
 viewsRouter.use('/buy/complete', serveStatic(''));
+
+
+
 
 // views폴더 내의 ${resource} 폴더 내의 모든 파일을 웹에 띄우며,
 // 이 때 ${resource}.html 을 기본 파일로 설정함.

@@ -169,10 +169,34 @@
   align-items: center;
   gap: 0.5rem;
 }
-.profile-btn:hover {
+/* .profile-btn:hover {
   background-color: rgb(223, 222, 222);
   cursor: pointer;
-}
+} */
 .profile-btn {
   width: 3rem;
+}
+
+
+body {
+  margin: 0 auto;
+  height: 100vh;
+  background-image: linear-gradient(rgba(2, 0, 27, 0), rgba(1, 0, 15, 0.7)), url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/bltcdfebd766fb71a69/60ee0c915397524ead3890c9/demacia-hallvalor.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-color: black;
+  color: black;
+  scroll-behavior: auto;
+
+}
+
+.tier-box {
+  border-radius: 2%;
+  border:2px double #735626;
+}
+
+.navbar {
+  background-color: #012532;
+  border-bottom: 1px solid #8b7755;
 }

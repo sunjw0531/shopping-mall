@@ -12,3 +12,84 @@
   color: #8b7755;
   text-shadow: 0.7px 0 0px #b19d7f;
 }
+
+/* css */
+
+body {
+  background-image: linear-gradient(rgba(27, 18, 0, 0.3), rgba(15, 10, 0, 0.6)),
+    url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt2ad2cdb59464bb81/60ee10b591d9e12c4837c1e1/piltover-eclipticvaults.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-size: 100vw 100vh;
+  font-family: Rix Gothic, sans-serif;
+  color: #fff;
+  text-shadow: 0.7px 0 0px #b19d7f;
+  height: 100vh;
+}
+
+/* 모달 */
+.modal-profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal-profile {
+  z-index: 9999;
+  width: 17rem;
+  border: 1px solid rgb(139 119 85);
+  border-radius: 2px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 8px 0px;
+  background-color: rgb(1 37 50);
+  padding: 3rem 1rem 3rem 1rem;
+  position: fixed;
+  top: 4.4rem;
+  right: 2rem;
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+}
+.active {
+  display: flex !important;
+}
+.modal-profile-img {
+  width: 6rem;
+  padding-bottom: 1rem;
+}
+.modal-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+/* .profile-btn:hover {
+  background-color: rgb(223, 222, 222);
+  cursor: pointer;
+} */
+.profile-btn {
+  width: 3rem;
+}
+
+#userImg {
+  border: 5px solid #8b7755;
+  border-radius: 100%;
+  width: 80%;
+  margin-left: 1rem;
+}
+
+a {
+  color: #8b7755;
+  text-shadow: 0.7px 0 0px #b19d7f;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#userEmail,
+#userName {
+  color: #fff;
+}
+.navbar {
+  background-color: #012532;
+  border-bottom: 1px solid #8b7755;
+}

@@ -137,10 +137,10 @@
   align-items: center;
   gap: 0.5rem;
 }
-.profile-btn:hover {
+/* .profile-btn:hover {
   background-color: rgb(223, 222, 222);
   cursor: pointer;
-}
+} */
 .profile-btn {
   width: 3rem;
 }

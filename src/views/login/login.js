@@ -18,7 +18,6 @@ async function addAllElements() {}
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
   kakaoLoginButton.addEventListener('click', kakaoLogin);
-  kakaoLogoutButton.addEventListener('click', kakaoLogout);
 }
 
 // 로그인 진행
@@ -100,21 +99,5 @@ async function kakaoLogin() {
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-  }
-}
-
-//카카오로그아웃
-async function kakaoLogout() {
-  if (Kakao.Auth.getAccessToken()) {
-    Kakao.API.request({
-      url: '/v1/user/unlink',
-      success: function (res) {
-        alert(`정상적으로 로그아웃되었습니다.`);
-      },
-      fail: function (err) {
-        console.log(err);
-      },
-    });
-    Kakao.Auth.setAccessToken(undefined);
   }
 }
