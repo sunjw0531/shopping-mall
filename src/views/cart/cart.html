@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html lang="ko">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <!-- bootstrap  & bulma style css-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <!-- cunstom css-->
-  <link rel="stylesheet" href="./cart.css">
-  <script src="cart.js" type="module" defer></script>
-  <!-- icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
-  <!-- 폰트 어썸: 아이콘 -->
-  <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
-  <!-- cart.js 연결-->
-  <script src="./cart.js" defer></script>
-</head>
-</head>
-
-<body>
-  <!-- 헤더 -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cheshire Mall</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="cart.css" />
+    <script src="cart.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container mt-3">
       <div class="navbar-brand">
@@ -59,66 +64,56 @@
       <a href="#" id="logout">로그아웃</a>
     </div>
   </div>
-  <!--cart data-->
-  <section class="section">
-    <div class="container">
-
-      <div class="cart-header">
-        <div class="title">
-          <p class="is-size-2">장바구니</p>
+    <!--cart data-->
+    <div class="content-wrap">
+      <div class="content-container">
+        <div class="cart-header">
+          <span class="title">장바구니</span>
+          <span class="subtitle">> 주문결제</span>
+          <span class="subtitle">> 주문완료</span>
         </div>
-        <div class="sub-title">
-          <p class="is-size-6">> &nbsp; 주문 결제 &nbsp; > &nbsp;주문 완료</p>
-        </div>
-      </div>
-
-      <div class="tile is-ancestor">
-        <div class="tile is-8 is-parent cart-products">
-          <!-- 장바구니에 담긴 상품 모음-->
-          <div class="box cart-products-container" id="cartPROductsContainer">
+        <div class="cart-container">
+          <div class="cart-content products box">
+            <!-- 장바구니에 담긴 상품 모음-->
             <div class="cart-products-header">
-              <label class="checkbox">
-                <input type="checkbox" id="allSelectCheckbox">
-                <p class="help">전체 선택</p>
-              </label>
-              <label class="seperator">
-                <p class="help help-seperator">&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-              </label>
-              <label class="delete-part" id="partialDeleteLabel">
-                <p class="help">선택 삭제</p>
-              </label>
+              <h2 class="cart-content label" id="cart-content-title">
+                상품 정보
+              </h2>
+              <button class="btn-clear button is-danger is-light">
+                전체 삭제
+              </button>
             </div>
             <!-- 장바구니에 담긴 상품들의 html 요소(카드 형태)가 주입되는 곳-->
+            <div class="products-wrap"></div>
           </div>
-        </div>
 
-        <!--선택한 상품 총 요약-->
-        <div class="tile is-parent tile-order-summary">
-          <div class="box order-summary">
-            <div class="header">
-              <p>결제정보</p>
-            </div>
-            <div class="order-info">
-              <div class="info">
-                <p>상품수</p>
-                <p id="productsCount"></p>
+          <!--선택한 상품 총 요약-->
+          <div class="cart-content payment box">
+            <h2 class="cart-content cart-content-border label">결제 정보</h2>
+            <div class="payment-wrap">
+              <div class="order-info-wrap">
+                <div class="order-info">
+                  <h3 class="order-product-label">상품 수</h3>
+                  <span class="order-product-count">0개</span>
+                </div>
+                <div class="order-info">
+                  <h3 class="order-product-label">총 가격</h3>
+                  <span class="order-product-price">0원</span>
+                </div>
               </div>
-              <div class="info">
-                <p>상품금액</p>
-                <p id="productsTotal"></p>
+              <div class="delivery-price-wrap">
+                <span class="delivery-price-label">배송비</span>
+                <span class="delivery-price">0원</span>
               </div>
-              <div class="info">
-                <p>배송비</p>
-                <p id="deliveryFee"></p>
+              <p class="delivery-price-help">
+                *총 결제 금액이 50,000원 이상인 경우 무료로 배송됩니다.
+              </p>
+              <div class="total-price-wrap">
+                <span class="total-price-label">결제 금액</span>
+                <span class="total-price">0원</span>
               </div>
             </div>
-            <div class="total">
-              <p class="total-label">총 결제금액</p>
-              <p class="total-price" id="orderTotal"></p>
-            </div>
-            <div class="purchase">
-              <button class="button is-info" id="purchaseButton">구매하기</button>
-            </div>
+            <button class="btn-buy button is-info is-large">결제하기</button>
           </div>
         </div>
       </div>
