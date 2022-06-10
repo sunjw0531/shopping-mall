@@ -199,7 +199,7 @@ function insertCartLocalStorage() {
 }
 
 // 카운트 변화로 인한 로컬 스토리지 변경
-function changeCartLocalStorage(e, targetInputCount) {
+function changeCartLocalStorage(e, targetInputCount, index) {
   const userId = sessionStorage.getItem('userId') || 'null';
   const productId = e.target.dataset.product;
 
@@ -219,7 +219,7 @@ function changeCartLocalStorage(e, targetInputCount) {
   localStorage.setItem('cart', JSON.stringify(cart));
 
   // 합계 변경
-  const productPrice = document.querySelector('.product-amount');
+  const productPrice = document.querySelectorAll('.product-amount')[index];
   productPrice.textContent = `${String(
     (Number(targetInputCount.value) * Number(price)).toLocaleString(),
   )}원`;
@@ -230,8 +230,6 @@ function changeCartLocalStorage(e, targetInputCount) {
 
   // 총 결제 금액
   totalPrice.textContent = `${(amount + delivery).toLocaleString()}원`;
-
-  console.log(amount);
 }
 
 // 카운트 감소
@@ -244,8 +242,9 @@ function handleCountDecrease(e) {
     targetInputCount.value = String(Number(targetInputCount.value) - 1);
   }
 
+  console.log(targetInputCount);
   // 로컬 스토리지 수정
-  changeCartLocalStorage(e, targetInputCount);
+  changeCartLocalStorage(e, targetInputCount, index);
 }
 
 // 카운트 증가
@@ -259,7 +258,7 @@ function handleCountIncrease(e) {
   }
 
   // 로컬 스토리지 수정
-  changeCartLocalStorage(e, targetInputCount);
+  changeCartLocalStorage(e, targetInputCount, index);
 }
 
 // 장바구니 상품 전체 삭제
