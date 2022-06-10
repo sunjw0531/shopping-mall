@@ -1,7 +1,6 @@
 // import { get as Api } from '/api.js';
 import * as Api from '../../api.js';
 import { userTier } from '../account.js';
-userTier();
 const ordersContainer = document.querySelector('.orders-container'),
   modal = document.querySelector('.modal'),
   modalBg = document.querySelector('.modal-background'),
@@ -37,21 +36,22 @@ function showData() {
       ? '상품 배송중'
       : '배송 완료';
     for (let i in data.orderList) {
-      id = data.orderList[i]._id;
+      id = data._id;
       let price = data.orderList[i].productId.price;
       let amount = data.orderList[i].volume;
       ordersContainer.insertAdjacentHTML(
         'afterend',
         `<div class="colums order-item" id="order${id}"> 
 	<div class="column is-4" id="orderSummary">
-	<img src='${data.orderList[i].productId.image}'>
-	${data.orderList[i].productId.name}
+	<img class="order-img" src='${data.orderList[i].productId.image}'>
+  <div>	${data.orderList[i].productId.name}</div>
 	</div>
   <div class="column is-2">${date}</div>
   <div class="column is-2">${price}원 (${amount}개)</div>
   <div class="column is-2">${state}</div>
   <div class="column is-2">
-	<button class="button" id="delBtn${id}">주문 취소</button>
+	<button class="button" id="${id}">주문 취소</button>
+  <span>${id}</span>
 	</div>
  	</div>`,
       );
@@ -63,23 +63,28 @@ function showData() {
 
       // 모달이 열리면서 해당 주문 id를 전역 변수에 할당
       function openModal() {
-        id = data.orderList[i]._id;
+        id = cancelBtn.id;
         modal.classList.add('is-active');
       }
     }
   });
 }
 showData();
+userTier();
 // 결정 확인 버튼
 const delCompleteBtn = document.querySelector('#delCompleteBtn');
 delCompleteBtn.addEventListener('click', delOrder);
 // 주문 취소 (del api요청)
-function delOrder() {
-  //여기 del api 비동기로 들어가야함
+async function delOrder() {
+  //데이터 삭제 요청
+  Api.patch('/api/order/deleteFlag', id);
   //테이블 삭제
-
-  document.querySelector(`#order${id}`).remove();
+  const table = document.querySelectorAll(`#order${id}`);
+  table.forEach(function (e) {
+    e.remove();
+  });
   closeModal();
+  location.reload();
 }
 //단순 모달 닫기 기능
 function closeModal() {

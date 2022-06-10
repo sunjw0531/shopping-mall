@@ -27,7 +27,7 @@ class UserService {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 랜덤 프로필 사진을 지정한다.
-    let newProfile = Math.ceil(Math.random()*407);
+    let newProfile = Math.ceil(Math.random() * 407);
     const profileImg = `profileImg\\${newProfile}.jpg`;
 
     const newUserInfo = {
@@ -46,7 +46,7 @@ class UserService {
   async addKakaoUser(userInfo) {
     // 객체 destructuring
     const { fullName, email, loginTypeCode } = userInfo;
-    
+
     // email 중복 확인
     const user = await this.userModel.findByEmail(email);
     // email 이 없으면 회원 가입을 한다.
@@ -59,11 +59,11 @@ class UserService {
         { userId: createdNewUser._id, isAdmin: createdNewUser.isAdmin },
         secretKey,
       );
-      
+
       // 기타 필요한 정보들 반환
       const userId = createdNewUser._id;
       const isAdmin = createdNewUser.isAdmin;
-      let newProfile = Math.ceil(Math.random()*407);
+      let newProfile = Math.ceil(Math.random() * 407);
       const profileImg = `profileImg\\${newProfile}.jpg`;
       return { token, isAdmin, userId, profileImg, fullName };
     }
@@ -76,7 +76,7 @@ class UserService {
     // Admin인지 아닌지 반환
     const userId = user._id;
     const isAdmin = user.isAdmin;
-    const profileImg = user.profileImg
+    const profileImg = user.profileImg;
     return { token, isAdmin, userId, profileImg, fullName };
   }
 
@@ -172,35 +172,32 @@ class UserService {
     return user;
   }
 
-  // 유저 삭제 
-  async deleteUser( userId, password ) {
+  // 유저 삭제
+  async deleteUser(userId, password) {
     const user = await this.userModel.findById(userId);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
     const passwordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-          password,
-          passwordHash
-        );
-    
-        if (!isPasswordCorrect) {
-          throw new Error(
-            '현재 비밀번호가 일치하지 않습니다. 카카오 로그인 유저는 회원정보 변경에서 비밀번호를 설정해주세요.'
-          );
-        }
+    const isPasswordCorrect = await bcrypt.compare(password, passwordHash);
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '현재 비밀번호가 일치하지 않습니다. 카카오 로그인 유저는 회원정보 변경에서 비밀번호를 설정해주세요.',
+      );
+    }
 
     await this.userModel.delete(userId);
   }
-// 관리자 유저 삭제 기능
-async deleteAdminUser( userId ) {
-  const user = await this.userModel.findById(userId);
-  if (!user) {
-    throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
-  }
+  // 관리자 유저 삭제 기능
+  async deleteAdminUser(userId) {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
 
-  await this.userModel.delete(userId);
+    await this.userModel.delete(userId);
   }
 }
 

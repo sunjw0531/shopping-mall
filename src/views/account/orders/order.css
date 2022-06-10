@@ -10,7 +10,9 @@
   align-items: center;
   border-bottom: 1px solid #bbb;
 }
-
+.order-img {
+  width: 4rem;
+}
 .order-info {
   background-color: #eff5fb;
   color: #296fa8;

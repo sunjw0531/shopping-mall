@@ -110,6 +110,7 @@
   justify-content: center;
 }
 .modal-profile {
+  z-index: 9999;
   width: 17rem;
   border: 1px solid rgb(139 119 85);
   border-radius: 2px;
