@@ -59,6 +59,10 @@
   font-weight: bold;
 }
 
+.pagination {
+  margin: 5rem 0;
+}
+
 /* 모달 */
 .modal-profile-info {
   display: flex;

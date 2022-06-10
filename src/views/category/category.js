@@ -1,26 +1,16 @@
 import * as Api from '/api.js';
-import { nav } from '/component.js';
-//네비게이션 바 생성
-// nav();
+
 // 요소(element), input 혹은 상수
 const contentContainer = document.querySelector('.content-container');
-const paginationLinks = document.querySelectorAll('.pagination-link');
+const categoryId = getCategoryId();
 const GROUP_PAGE_COUNT = 10;
 
 // HTML 요소 생성, 이벤트
 addAllElements();
-addAllEvents();
 
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() {
-  insertCategoryContents();
-}
-
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-function addAllEvents() {
-  paginationLinks.forEach((button) => {
-    button.addEventListener('click', handleBtnPagination);
-  });
+  insertCategoryContents(1);
 }
 
 // 해당 카테고리 id
@@ -31,16 +21,34 @@ function getCategoryId() {
   return categoryId;
 }
 
-// 카테고리 HTML 요소 생성
-async function insertCategoryContents() {
-  const categoryId = getCategoryId();
-  const categoryNameData = await Api.get(`/api/category/${categoryId}`);
+// 해당 카테고리 이름
+async function getCategoryName() {
+  const categoryName = await Api.get(`/api/category/${categoryId}`);
+  return categoryName;
+}
+
+// productsData 요청
+async function getProductsData(categoryId, currentPage) {
   const productsData = await Api.get(
     '/api/product/pageList',
-    `?category=${categoryId}`,
+    `?category=${categoryId}&page=${currentPage}`,
   );
   const totalPage = productsData[0];
   const productsInfo = productsData[1];
+
+  return { totalPage, productsInfo };
+}
+
+// 카테고리 HTML 요소 생성
+async function insertCategoryContents(currentPage) {
+  const categoryName = await getCategoryName();
+  const { totalPage, productsInfo } = await getProductsData(
+    categoryId,
+    currentPage,
+  );
+
+  // container 초기화
+  contentContainer.innerHTML = '';
 
   // 카테고리 이름
   // category-container
@@ -58,7 +66,7 @@ async function insertCategoryContents() {
   // category-label-container 요소
   const categoryLabel = document.createElement('h2');
   categoryLabel.classList.add('category-label');
-  categoryLabel.textContent = categoryNameData.name;
+  categoryLabel.textContent = categoryName;
   categoryLabelContainer.append(categoryLabel);
 
   // product 출력
@@ -87,7 +95,8 @@ async function insertCategoryContents() {
       productDiv.append(productImage, productName, productPrice);
     });
 
-    insertPagination(1, totalPage);
+    // pagination 생성
+    insertPagination(currentPage, totalPage);
   } else {
     const categoryDiv = document.createElement('div');
     categoryDiv.classList.add('category-nodata');
@@ -111,7 +120,6 @@ function insertPagination(currentPage, totalPage) {
     groupFirstPage = 1;
   }
 
-  // pagination 생성
   const paginationNav = document.createElement('nav');
   paginationNav.classList.add('pagination');
   paginationNav.classList.add('is-centered');
@@ -128,10 +136,13 @@ function insertPagination(currentPage, totalPage) {
   const firstPageA = document.createElement('a');
   firstPageA.classList.add('pagination-link');
   firstPageA.setAttribute('id', 'btn-first-page');
+  firstPageA.setAttribute('data-num', 1);
+  firstPageA.onclick = handleBtnPagination;
   firstPageLi.appendChild(firstPageA);
   const firstPageIcon = document.createElement('i');
   firstPageIcon.classList.add('fa-solid');
   firstPageIcon.classList.add('fa-angles-left');
+  firstPageIcon.setAttribute('data-num', 1);
   firstPageA.appendChild(firstPageIcon);
 
   const previousPageGroupLi = document.createElement('li');
@@ -139,10 +150,12 @@ function insertPagination(currentPage, totalPage) {
   const previousPageGroupA = document.createElement('a');
   previousPageGroupA.classList.add('pagination-link');
   previousPageGroupA.setAttribute('id', 'btn-previous-page-group');
+  previousPageGroupA.onclick = handleBtnPagination;
   previousPageGroupLi.appendChild(previousPageGroupA);
   const previousPageGroupIcon = document.createElement('i');
   previousPageGroupIcon.classList.add('fa-solid');
   previousPageGroupIcon.classList.add('fa-angle-left');
+  previousPageGroupIcon.setAttribute('id', 'icon-previous-page-group');
   previousPageGroupA.appendChild(previousPageGroupIcon);
 
   for (let i = groupFirstPage; i <= groupLastPage; i++) {
@@ -152,10 +165,11 @@ function insertPagination(currentPage, totalPage) {
     const pageA = document.createElement('a');
     pageA.classList.add('pagination-link');
     pageA.classList.add('page-number');
-    if (i === currentPage) {
+    if (i === Number(currentPage)) {
       pageA.classList.add('is-current');
     }
     pageA.setAttribute('data-num', i);
+    pageA.onclick = handleBtnPagination;
     pageA.textContent = i;
     li.appendChild(pageA);
   }
@@ -165,10 +179,12 @@ function insertPagination(currentPage, totalPage) {
   const nextPageGroupA = document.createElement('a');
   nextPageGroupA.classList.add('pagination-link');
   nextPageGroupA.setAttribute('id', 'btn-next-page-group');
+  nextPageGroupA.onclick = handleBtnPagination;
   nextPageGroupLi.appendChild(nextPageGroupA);
   const nextPageGroupIcon = document.createElement('i');
   nextPageGroupIcon.classList.add('fa-solid');
   nextPageGroupIcon.classList.add('fa-angle-right');
+  nextPageGroupIcon.setAttribute('id', 'icon-next-page-group');
   nextPageGroupA.appendChild(nextPageGroupIcon);
 
   const lastPageLi = document.createElement('li');
@@ -176,14 +192,34 @@ function insertPagination(currentPage, totalPage) {
   const lastPageA = document.createElement('a');
   lastPageA.classList.add('pagination-link');
   lastPageA.setAttribute('id', 'btn-last-page');
+  lastPageA.setAttribute('data-num', totalPage);
+  lastPageA.onclick = handleBtnPagination;
   lastPageLi.appendChild(lastPageA);
   const lastPageIcon = document.createElement('i');
   lastPageIcon.classList.add('fa-solid');
   lastPageIcon.classList.add('fa-angles-right');
+  lastPageIcon.setAttribute('data-num', totalPage);
   lastPageA.appendChild(lastPageIcon);
 }
 
 // pagination 버튼 핸들러
 function handleBtnPagination(e) {
-  console.log(e);
+  const btnPage = document.querySelector('.page-number');
+  const lastPage = document.querySelector('#btn-last-page').dataset.num;
+  const id = e.target.id;
+  let pageNumber = 1;
+  if (id === 'btn-previous-page-group' || id === 'icon-previous-page-group') {
+    pageNumber = Number(btnPage.dataset.num) - GROUP_PAGE_COUNT;
+    if (pageNumber < 1) {
+      pageNumber = 1;
+    }
+  } else if (id === 'btn-next-page-group' || id === 'icon-next-page-group') {
+    pageNumber = Number(btnPage.dataset.num) + GROUP_PAGE_COUNT;
+    if (pageNumber > lastPage) {
+      pageNumber = lastPage;
+    }
+  } else {
+    pageNumber = e.target.dataset.num;
+  }
+  insertCategoryContents(pageNumber);
 }
