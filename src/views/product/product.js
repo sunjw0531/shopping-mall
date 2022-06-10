@@ -1,6 +1,6 @@
 import * as Api from '/api.js';
 import { nav } from '/component.js';
-// nav();
+nav();
 // 요소(element), input 혹은 상수
 const productContainer = document.querySelector('.product-container');
 const producImageWrap = document.querySelector('.product-image-wrap');

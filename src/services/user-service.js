@@ -65,7 +65,7 @@ class UserService {
       const isAdmin = createdNewUser.isAdmin;
       let newProfile = Math.ceil(Math.random()*407);
       const profileImg = `profileImg\\${newProfile}.jpg`;
-      return { token, isAdmin, userId, profileImg };
+      return { token, isAdmin, userId, profileImg, fullName };
     }
     // email이 존재하면 db의 정보를 통해 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
@@ -77,7 +77,7 @@ class UserService {
     const userId = user._id;
     const isAdmin = user.isAdmin;
     const profileImg = user.profileImg
-    return { token, isAdmin, userId, profileImg };
+    return { token, isAdmin, userId, profileImg, fullName };
   }
 
   // 로그인

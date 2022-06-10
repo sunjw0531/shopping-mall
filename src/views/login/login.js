@@ -86,6 +86,7 @@ async function kakaoLogin() {
             sessionStorage.setItem('isAdmin', result.isAdmin);
             sessionStorage.setItem('userId', result.userId);
             sessionStorage.setItem('loginTypeCode', 1);
+            sessionStorage.setItem('fullName', fullName);
             sessionStorage.setItem('profileImg', result.profileImg);
             console.log(sessionStorage);
             alert(`정상적으로 로그인되었습니다.`);

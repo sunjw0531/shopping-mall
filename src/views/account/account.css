@@ -1,3 +1,33 @@
+/* * {
+  /* border: 1px solid #fff; */
+/* } */
+
+body {
+  margin: 0 auto;
+  height: 100vh;
+  background-image: linear-gradient(rgba(2, 0, 27, 0), rgba(1, 0, 15, 0.7)), url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/bltcdfebd766fb71a69/60ee0c915397524ead3890c9/demacia-hallvalor.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-color: black;
+  color: black;
+  scroll-behavior: auto;
+
+}
+
+.tier-box {
+  border-radius: 2%;
+  border:2px double #735626;
+}
+
+.container {
+  width: 90vw;
+}
+
+.section .container {
+  margin: 0;
+}
+
 .account-header {
   border-bottom: 1px solid #ddd;
   display: block;
@@ -32,7 +62,6 @@
 }
 .menu-body {
   border-radius: 6px;
-  color: #7a7a7a;
   flex-grow: 1;
   font-size: 1.25em;
   padding: 1em;
@@ -83,7 +112,6 @@
 }
 .menu-body {
   border-radius: 6px;
-  color: #7a7a7a;
   flex-grow: 1;
   font-size: 1.25em;
   padding: 1em;
@@ -140,6 +168,12 @@
 }
 
 /* 모달 */
+
+.navbar {
+  background-color: #012532;
+  border-bottom: 1px solid #8b7755;
+}
+
 .modal-profile-info {
   display: flex;
   flex-direction: column;
@@ -147,12 +181,11 @@
   justify-content: center;
 }
 .modal-profile {
-  z-index: 9999;
   width: 17rem;
-  border: 1px solid rgb(225, 226, 228);
+  border: 1px solid rgb(139 119 85);
   border-radius: 2px;
   box-shadow: rgb(0 0 0 / 12%) 0px 4px 8px 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(1 37 50);
   padding: 3rem 1rem 3rem 1rem;
   position: fixed;
   top: 4.4rem;
@@ -180,4 +213,23 @@
 }
 .profile-btn {
   width: 3rem;
+}
+
+#userImg {
+  border: 5px solid #8b7755;
+  border-radius: 100%;
+  width: 80%;
+  margin-left: 1rem;
+}
+
+a {
+  color: black;
+  text-shadow: 0.7px 0 0px #444444;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#userEmail,
+#userName {
+  color: #fff;
 }
