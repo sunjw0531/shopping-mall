@@ -1,159 +1,146 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cheshire Mall</title>
-    <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    />
-    <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- 다음 주소 api -->
-    <script
-      defer
-      src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
-    </script>
-    <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="buy.css" />
-    <script src="buy.js" type="module" defer></script>
-  </head>
-  <body>
-    <!-- 헤더 -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">Cheshire Mall</span>
-          </a>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cheshire Mall</title>
+  <!-- 아이콘 -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <!-- 폰트 어썸: 아이콘 -->
+  <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+  <!-- 다음 주소 api -->
+  <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
+  </script>
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" href="buy.css" />
+  <script src="buy.js" type="module" defer></script>
+</head>
 
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-            <ul id="navbar">
-              <li><a href="/login">로그인</a></li>
-              <li><a href="/register">회원가입</a></li>
-              <li>
-                <a href="#cart" aria-current="page">
-                  <span class="icon">
-                    <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>카트</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+<body>
+  <!-- 헤더 -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container mt-3">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="/elice-rabbit.png" width="30" height="30" />
+          <span class="has-text-link">Cheshire Mall</span>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-    </nav>
 
-    <!-- 메인 컨텐츠 -->
-    <div class="content-wrap">
-      <div class="content-container">
-        <div class="buy-header">
-          <span class="subtitle">장바구니 ></span>
-          <span class="title">주문결제</span>
-          <span class="subtitle">> 주문완료</span>
+      <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+        <ul id="navbar">
+        </ul>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <!-- 모달 -->
+  <div class="modal-profile">
+    <div class="modal-profile-info">
+      <div class="modal-profile-img">
+        <img id="userImg" src="/elice-rabbit.png" alt="profile-img">
+      </div>
+      <P id="userName"></P>
+      <p id="userEmail"></p>
+    </div>
+    <div class="modal-link">
+      <a href="/account">계정 관리</a>
+      <a href="#" id="logout">로그아웃</a>
+    </div>
+  </div>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="content-wrap">
+    <div class="content-container">
+      <div class="buy-header">
+        <span class="subtitle">장바구니 ></span>
+        <span class="title">주문결제</span>
+        <span class="subtitle">> 주문완료</span>
+      </div>
+      <div class="buy-container">
+        <div class="buy-content user box">
+          <h2 class="buy-content label">배송지 정보</h2>
+          <div class="buy-form-field field">
+            <div class="buy-form-field-label">이름</div>
+            <div class="buy-form-address-wrap">
+              <input class="input-name input" type="text" placeholder="엘리스">
+            </div>
+          </div>
+          <div class="buy-form-field field">
+            <div class="buy-form-field-label">연락처</div>
+            <div class="buy-form-address-wrap">
+              <input class="input-phone input" type="text" placeholder="010-1234-5678">
+            </div>
+          </div>
+          <div class="buy-form-field field">
+            <div class="buy-form-field-label">주소</div>
+            <div class="buy-form-address-wrap">
+              <input class="input-post-code input" type="text" maxlength="5" placeholder="12345" disabled>
+              <button class="btn-daum-api button">우편번호 검색</button>
+            </div>
+          </div>
+          <div class="buy-form-field field">
+            <div class="buy-form-field-label"></div>
+            <div class="buy-form-address-wrap">
+              <input class="input-road-address input" type="text" placeholder="대전광역시 유성구 문지로 193" disabled>
+            </div>
+          </div>
+          <div class="buy-form-field field">
+            <div class="buy-form-field-label"></div>
+            <div class="buy-form-address-wrap">
+              <input class="input-jibun-address input" type="text" placeholder="KAIST 캠퍼스 진리관 T 201호">
+            </div>
+          </div>
+          <div class="buy-form-field field">
+            <div class="buy-form-field-label">요청사항</div>
+            <div class="buy-form-address-wrap select">
+              <select class="buy-form-select">
+                <option value="0">배송시 요청사항을 선택해 주세요.</option>
+                <option value="1">직접 수령하겠습니다.</option>
+                <option value="2">배송 전 연락바랍니다.</option>
+                <option value="3">부재시 경비실에 맡겨주세요.</option>
+                <option value="4">부재시 문 앞에 놓아주세요.</option>
+                <option value="5">부재시 택배함에 넣어주세요.</option>
+                <option value="6">직접 입력하기</option>
+              </select>
+            </div>
+          </div>
+          <div class="buy-form-field request-field field no-showing">
+            <div class="buy-form-field-label"></div>
+            <div class="buy-form-address-wrap">
+              <input class="input-request input" type="text" placeholder="요청사항을 입력해주세요.">
+            </div>
+          </div>
         </div>
-        <div class="buy-container">
-          <div class="buy-content user box">
-            <h2 class="buy-content label">배송지 정보</h2>
-            <div class="buy-form-field field">
-              <div class="buy-form-field-label">이름</div>
-              <div class="buy-form-address-wrap">
-                <input class="input-name input" type="text" placeholder="엘리스">
-              </div>
+        <div class="buy-content product box">
+          <h2 class="buy-content label">결제 정보</h2>
+          <div class="product-wrap">
+            <div class="order-info-wrap"></div>
+            <div class="delivery-price-wrap">
+              <span class="delivery-price-label">배송비</span>
+              <span class="delivery-price">0원</span>
             </div>
-            <div class="buy-form-field field">
-              <div class="buy-form-field-label">연락처</div>
-              <div class="buy-form-address-wrap">
-                <input class="input-phone input" type="text" placeholder="010-1234-5678">
-              </div>
-            </div>
-            <div class="buy-form-field field">
-              <div class="buy-form-field-label">주소</div>
-              <div class="buy-form-address-wrap">
-                <input class="input-post-code input" type="text" maxlength="5" placeholder="12345" disabled>
-                <button class="btn-daum-api button">우편번호 검색</button>
-              </div>
-            </div>
-            <div class="buy-form-field field">
-              <div class="buy-form-field-label"></div>
-              <div class="buy-form-address-wrap">
-                <input class="input-road-address input" type="text" placeholder="대전광역시 유성구 문지로 193" disabled>
-              </div>
-            </div>
-            <div class="buy-form-field field">
-              <div class="buy-form-field-label"></div>
-              <div class="buy-form-address-wrap">
-                <input class="input-jibun-address input" type="text" placeholder="KAIST 캠퍼스 진리관 T 201호">
-              </div>
-            </div>
-            <div class="buy-form-field field">
-              <div class="buy-form-field-label">요청사항</div>
-              <div class="buy-form-address-wrap select">
-                <select class="buy-form-select">
-                  <option value="0">배송시 요청사항을 선택해 주세요.</option>
-                  <option value="1">직접 수령하겠습니다.</option>
-                  <option value="2">배송 전 연락바랍니다.</option>
-                  <option value="3">부재시 경비실에 맡겨주세요.</option>
-                  <option value="4">부재시 문 앞에 놓아주세요.</option>
-                  <option value="5">부재시 택배함에 넣어주세요.</option>
-                  <option value="6">직접 입력하기</option>
-                </select>
-              </div>
-            </div>
-            <div class="buy-form-field request-field field no-showing">
-              <div class="buy-form-field-label"></div>
-              <div class="buy-form-address-wrap">
-                <input class="input-request input" type="text" placeholder="요청사항을 입력해주세요.">
-              </div>
+            <p class="delivery-price-help">*총 결제 금액이 50,000원 이상인 경우 무료로 배송됩니다.</p>
+            <div class="total-price-wrap">
+              <span class="total-price-label">총 결제 금액</span>
+              <span class="total-price">0원</span>
             </div>
           </div>
-          <div class="buy-content product box">
-            <h2 class="buy-content label">결제 정보</h2>
-            <div class="product-wrap">
-              <div class="order-info-wrap"></div>
-              <div class="delivery-price-wrap">
-                <span class="delivery-price-label">배송비</span>
-                <span class="delivery-price">0원</span>
-              </div>
-              <p class="delivery-price-help">*총 결제 금액이 50,000원 이상인 경우 무료로 배송됩니다.</p>
-              <div class="total-price-wrap">
-                <span class="total-price-label">총 결제 금액</span>
-                <span class="total-price">0원</span>
-              </div>
-            </div>
-            <button class="btn-payment button is-info is-large">결제하기</button>
-          </div>
+          <button class="btn-payment button is-info is-large">결제하기</button>
         </div>
       </div>
     </div>
-    
-  </body>
+  </div>
+
+</body>
+
 </html>

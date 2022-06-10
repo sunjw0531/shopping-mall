@@ -11,7 +11,8 @@ async function userInfo() {
     data.forEach((data) => {
       for (let i in data.orderList) {
         let price = data.orderList[i].productId.price;
-        total += price;
+        let amount = data.orderList[i].volume;
+        total += price * amount;
       }
     });
     return total;
@@ -22,37 +23,38 @@ async function userInfo() {
 }
 export const userTotal = await Promise.resolve(userInfo());
 export function userTier() {
-  let userTier = '';
-  let nextTier = '';
+  let userTier = '-';
+  let nextTier = '-';
   let left = 0;
-  if (userTotal < 100000) {
+  if (userTotal < 500000) {
     userTier = 'BRONZE';
     nextTier = 'SILVER';
-    left = 100000 - userTotal;
+    left = 500000 - userTotal;
     document.querySelector('.bronze').classList.add('current');
-  } else if (userTotal < 100000) {
+  } else if (userTotal < 1000000) {
     userTier = 'SILVER';
     nextTier = 'GOLD';
+    left = 1000000 - userTotal;
     document.querySelector('.silver').classList.add('current');
-  } else if (userTotal < 300000) {
+  } else if (userTotal < 1500000) {
     userTier = 'GOLD';
     nextTier = 'PLATINUM';
-    left = 300000 - userTotal;
+    left = 1500000 - userTotal;
     document.querySelector('.gold').classList.add('current');
-  } else if (userTotal < 500000) {
+  } else if (userTotal < 2000000) {
     userTier = 'PLATINUM';
     nextTier = 'DIAMOND';
-    left = 500000 - userTotal;
+    left = 2000000 - userTotal;
     document.querySelector('.platomim').classList.add('current');
-  } else if (userTotal < 700000) {
+  } else if (userTotal < 2500000) {
     userTier = 'DIAMOND';
     nextTier = 'CHALLENGER';
-    left = 700000 - userTotal;
+    left = 2500000 - userTotal;
     document.querySelector('.diamond').classList.add('current');
   } else {
     userTier = 'CHALLENGER';
-    nextTier = '없음';
-    left = '없음';
+    nextTier = '초월';
+    left = '999999999999';
     document.querySelector('.challenger').classList.add('current');
   }
   const userName = document.querySelector('#userName'),

@@ -18,6 +18,7 @@ function userModal() {
     modalProfile.classList.toggle('active');
   }
 }
+//어드민 모달
 function adminModal() {
   //유저 정보 표시
   const userName = document.querySelector('#userName'),
@@ -49,14 +50,13 @@ function nav() {
 				</butten>
 			</li>`,
     cart =
-      '<li><a href="#cart" aria-current="page"><span class="icon"><i class="fas fa-cart-shopping"></i></span><span>카트</span></a></li>';
+      '<li><a href="/cart" aria-current="page"><span class="icon"><i class="fas fa-cart-shopping"></i></span><span>카트</span></a></li>';
 
-  let nav;
   // 유저 로그인 유무
   if (sessionStorage.getItem('token')) {
     const userImg = document.querySelector('#userImg');
     userImg.src = sessionStorage.getItem('profileImg');
-    nav = `${cart} ${account}`;
+    const nav = `${cart} ${account}`;
     navbar.insertAdjacentHTML('afterend', nav);
     // 어드민인지 확인
     if (sessionStorage.getItem('isAdmin')) {
@@ -67,13 +67,38 @@ function nav() {
   } else {
     navbar.insertAdjacentHTML('afterend', `${login} ${register} ${cart}`);
   }
+  //카카오 로그아웃
+  Kakao.init('e81149e34fc805f464419e5d213d69ee'); //발급받은 키 중 javascript키를 사용해준다. console.log(Kakao.isInitialized());
+  async function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (res) {
+          alert(`정상적으로 로그아웃되었습니다.`);
+        },
+        fail: function (err) {
+          console.log(err);
+        },
+      });
+      Kakao.Auth.setAccessToken(undefined);
+    }
+  }
   // 로그아웃 구현
   const logoutElem = document.querySelector('#logout');
   if (logoutElem) {
-    logoutElem.addEventListener('click', () => {
-      sessionStorage.clear();
-      window.location.href = '/';
-    });
+    if (sessionStorage.getItem('loginTypeCode') == 1) {
+      logoutElem.addEventListener('click', () => {
+        logoutElem.href = 'javascript:void(0)';
+        kakaoLogout();
+        sessionStorage.clear();
+        window.location.href = '/';
+      });
+    } else {
+      logoutElem.addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location.href = '/';
+      });
+    }
   }
 }
 

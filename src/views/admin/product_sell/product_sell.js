@@ -1,4 +1,7 @@
 import * as Api from '../../api.js';
+import { nav } from '/component.js';
+//네비게이션 바 생성
+nav();
 
 const productName = document.querySelector('#productName'), //제품 이름
   makerName = document.querySelector('#makerName'), // 제조사

@@ -10,7 +10,8 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    password: { // Oauth 유저는 비밀번호를 추후에 설정해야해서 required 주지 않았습니다.
+    password: {
+      // Oauth 유저는 비밀번호를 추후에 설정해야해서 required 주지 않았습니다.
       type: String,
     },
     phoneNumber: {

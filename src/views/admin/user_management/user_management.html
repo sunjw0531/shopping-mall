@@ -1,138 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>회원 관리</title>
-    <!-- bootstrap  & bulma style css-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <!-- cunstom css-->
-    <link rel="stylesheet" href="./user_management.css" />
-    <!-- icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../../elice-rabbit-favicon.png"
-    />
-    <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <!--header-->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="../../elice-rabbit-favicon.png" width="30" height="30" />
-            <span class="has-text-link">Cheshire Mall</span>
-          </a>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>회원 관리</title>
+<!-- bootstrap  & bulma style css-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+<!-- cunstom css-->
+<link rel="stylesheet" href="./user_management.css" />
+<!-- icon -->
+<link rel="icon" type="image/png" sizes="16x16" href="../../elice-rabbit-favicon.png" />
+<!-- 폰트 어썸: 아이콘 -->
+<script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+</head>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
+<body>
+  <!--header-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container mt-3">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="../elice-rabbit-favicon.png" width="30" height="30" />
+          <span class="has-text-link">Cheshire Shoppint Mall</span>
+        </a>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-            <ul id="navbar">
-              <li><a href="/register">회원가입</a></li>
-              <li>
-                <a href="/cart" aria-current="page">
-                  <span class="icon">
-                    <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>카트</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <div class="container">
-      <!-- 상단 회원 관리 제목-->
-      <div class="block account-header">
-        <h1 class="subtitle is-4">회원 관리</h1>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
-      <!-- 총회원수 / 관리자수/ OAuth가입자 수 -->
-      <div class="top-container">
-        <div class="top-cnt">
-          총회원수
-          <p>0</p>
-        </div>
-        <div class="top-cnt">
-          관리자수
-          <p>0</p>
-        </div>
-        <div class="top-cnt">
-          OAuth가입자수
-          <p>0</p>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+          <ul id="navbar">
+          </ul>
         </div>
       </div>
-      <!-- 상품 목록 출력 테이블-->
-      <table id="inputData" class="table">
-        <thead>
-          <tr>
-            <td>가입날짜</td>
-            <td>이메일</td>
-            <td>가입유형</td>
-            <td>이름</td>
-            <td>권한</td>
-            <td>관리</td>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
+    </div>
+  </nav>
+  <!-- 모달 -->
+  <div class="modal-profile">
+    <div class="modal-profile-info">
+      <div class="modal-profile-img">
+        <img id="userImg" src="/elice-rabbit.png" alt="profile-img">
+      </div>
+      <P id="userName"></P>
+      <p id="userEmail"></p>
+    </div>
+    <div class="modal-link">
+      <a href="/account"></a>
+      <a href="#" id="logout"></a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 상단 회원 관리 제목-->
+    <div class="block account-header">
+      <h1 class="subtitle is-4">회원 관리</h1>
     </div>
 
-    <!-- 모달 창-->
-    <div class="modal">
-      <div class="modal-background"></div>
-      <div class="modal-content has-background-white py-5 px-5">
-        <div class="box">
-          <p class="mb-3">
-            회원 삭제 시 복구할 수 없습니다. 정말 취소하시겠습니까?
-          </p>
-          <div class="buttons">
-            <button class="button mt-5" id="delCompleteBtn" aria-label="close">
-              네
-            </button>
-            <button
-              class="button is-primary mt-5"
-              id="delCancelBtn"
-              aria-label="close"
-            >
-              아니요
-            </button>
-          </div>
+    <!-- 총회원수 / 관리자수/ OAuth가입자 수 -->
+    <div class="top-container">
+      <div class="top-cnt">
+        총회원수
+        <p>0</p>
+      </div>
+      <div class="top-cnt">
+        관리자수
+        <p>0</p>
+      </div>
+      <div class="top-cnt">
+        OAuth가입자수
+        <p>0</p>
+      </div>
+    </div>
+    <!-- 상품 목록 출력 테이블-->
+    <table id="inputData" class="table">
+      <thead>
+        <tr>
+          <td>가입날짜</td>
+          <td>이메일</td>
+          <td>가입유형</td>
+          <td>이름</td>
+          <td>권한</td>
+          <td>관리</td>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- 모달 창-->
+  <div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content has-background-white py-5 px-5">
+      <div class="box">
+        <p class="mb-3">
+          회원 삭제 시 복구할 수 없습니다. 정말 취소하시겠습니까?
+        </p>
+        <div class="buttons">
+          <button class="button mt-5" id="delCompleteBtn" aria-label="close">
+            네
+          </button>
+          <button class="button is-primary mt-5" id="delCancelBtn" aria-label="close">
+            아니요
+          </button>
         </div>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
     </div>
-  </body>
-  <!-- user_management.js 연결-->
-  <script type="module" src="./user_management.js" defer></script>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+</body>
+<!-- user_management.js 연결-->
+<script type="module" src="./user_management.js" defer></script>
+
 </html>

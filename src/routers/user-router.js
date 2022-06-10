@@ -184,7 +184,7 @@ userRouter.delete(
     try {
       const userId = req.params.userId;
       const password = req.body.password;
-      await userService.deleteUser( userId, password );
+      await userService.deleteUser(userId, password);
       res.status(200).json('정상적으로 회원탈퇴 처리 되었습니다.');
     } catch (error) {
       next(error);
@@ -199,7 +199,7 @@ userRouter.delete(
   async function (req, res, next) {
     try {
       const userId = req.params.userId;
-      await userService.deleteAdminUser( userId );
+      await userService.deleteAdminUser(userId);
       res.status(200).json('정상적으로 회원탈퇴 처리 되었습니다.');
     } catch (error) {
       next(error);

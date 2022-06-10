@@ -39,3 +39,38 @@
   background-color: rgba(115, 86, 38, 0.9);
   color: white;
 }
+.modal-profile {
+  z-index: 9999;
+  width: 17rem;
+  border: 1px solid rgb(139 119 85);
+  border-radius: 2px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 8px 0px;
+  background-color: rgb(1 37 50);
+  padding: 3rem 1rem 3rem 1rem;
+  position: fixed;
+  top: 4.4rem;
+  right: 2rem;
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+}
+.active {
+  display: flex !important;
+}
+.modal-profile-img {
+  width: 6rem;
+  padding-bottom: 1rem;
+}
+.modal-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.profile-btn:hover {
+  background-color: rgb(223, 222, 222);
+  cursor: pointer;
+}
+.profile-btn {
+  width: 3rem;
+}
