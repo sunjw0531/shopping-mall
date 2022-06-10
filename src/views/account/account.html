@@ -35,48 +35,92 @@
 
       <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
         <ul id="navbar">
-          <li><a href="#">로그아웃</a></li>
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-              <span>카트</span>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
     </div>
   </nav>
-  <!-- 계정관리 목록-->
-  <section class="section">
-    <div class="container">
-      <div class="account-header">
-        <h1 class="title">계정관리</h1>
+  <!-- 모달 -->
+  <div class="modal-profile">
+    <div class="modal-profile-info">
+      <div class="modal-profile-img">
+        <img id="userImg" src="/elice-rabbit.png" alt="profile-img">
       </div>
-      <div class="menu-container">
-        <a class="account-menu" href="/account/orders">
-          <div class="menu-body">
-            <p class="menu-title">주문조회</p>
-            <p class="menu-subtitle">주문 내역을 확인, 취소할 수 있습니다.</p>
-          </div>
-        </a>
-        <a class="account-menu" href="/account/security">
-          <div class="menu-body">
-            <p class="menu-title">회원정보 관리</p>
-            <p class="menu-subtitle">회원 정보를 확인, 수정할 수 있습니다.</p>
-          </div>
-        </a>
-        <a class="account-menu" href="/account/signout">
-          <div class="menu-body">
-            <p class="menu-title">회원 탈퇴</p>
-            <p class="menu-subtitle">회원 정보를 삭제하고 탈퇴할 수 있습니다.</p>
-          </div>
-        </a>
-      </div>
+      <P id="userName"></P>
+      <p id="userEmail"></p>
     </div>
-  </section>
+    <div class="modal-link">
+      <a href="/account">계정 관리</a>
+      <a href="#" id="logout">로그아웃</a>
+    </div>
+  </div>
+  <!-- 마이 프로필 -->
+  <div class="container my-profile">
+    <div class="profile-box">
+      <div class="profile-info">
+        <div class="profile-img">
+          <img src="/elice-rabbit.png" alt="profile-img">
+        </div>
+        <P id="userName"></P>
+        <p id="userEmail"></p>
+        <p class="current-tier-text"></p>
+      </div>
+      <div class="tier-box">
+        <div class="tier">
+          <div class="bronze">
+            <img src="/ranked-emblems/emblem_Bronze.png" alt="tier-img">
+          </div>
+          <div class="silver">
+            <img src="/ranked-emblems/emblem_Silver.png" alt="tier-img">
+          </div>
+          <div class="gold">
+            <img src="/ranked-emblems/emblem_Gold.png" alt="tier-img">
+          </div>
+          <div class="platinum">
+            <img src="/ranked-emblems/emblem_Platinum.png" alt="tier-img">
+          </div>
+          <div class="diamond">
+            <img src="/ranked-emblems/emblem_Diamond.png" alt="tier-img">
+          </div>
+          <div class="challenger">
+            <img src="/ranked-emblems/emblem_Challenger.png" alt="tier-img">
+          </div>
+        </div>
+        <div class="tier-info">
+          <p class="tier-info"></p>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- 계정관리 목록-->
+    <section class="section">
+      <div class="container">
+
+        <div class="menu-container">
+          <a class="account-menu" href="/account/orders">
+            <div class="menu-body">
+              <p class="menu-title">주문조회</p>
+              <p class="menu-subtitle">주문 내역을 확인, 취소할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/management">
+            <div class="menu-body">
+              <p class="menu-title">회원정보 관리</p>
+              <p class="menu-subtitle">회원 정보를 확인, 수정할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/withdrawal">
+            <div class="menu-body">
+              <p class="menu-title">회원 탈퇴</p>
+              <p class="menu-subtitle">회원 정보를 삭제하고 탈퇴할 수 있습니다.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- 카카오 로그인 스크립트 -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </body>
 
 </html>

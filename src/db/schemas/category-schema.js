@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 
 const CategorySchema = new Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     products: [
       {
         type: Schema.Types.ObjectId,
@@ -13,7 +13,7 @@ const CategorySchema = new Schema(
   {
     collection: 'categories',
     timestamps: true,
-  }
+  },
 );
 
 export { CategorySchema };

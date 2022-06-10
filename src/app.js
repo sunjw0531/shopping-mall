@@ -2,11 +2,11 @@ import cors from 'cors';
 import express from 'express';
 
 import {
-	viewsRouter,
-	userRouter,
-	productRouter,
-	categoryRouter,
-	orderRouter,
+  viewsRouter,
+  userRouter,
+  productRouter,
+  categoryRouter,
+  orderRouter,
 } from './routers';
 
 import { errorHandler } from './middlewares';
@@ -24,6 +24,15 @@ app.use(express.urlencoded({ extended: false }));
 
 // html, css, js 라우팅
 app.use(viewsRouter);
+
+// image 라우팅
+
+// app.use('/product/:_id',express.static('public'));
+
+
+
+
+
 
 // api 라우팅
 // 아래처럼 하면, userRouter 에서 '/login' 으로 만든 것이 실제로는 앞에 /api가 붙어서

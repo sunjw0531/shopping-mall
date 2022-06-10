@@ -11,8 +11,8 @@ const UserSchema = new Schema(
       required: true,
     },
     password: {
+      // Oauth 유저는 비밀번호를 추후에 설정해야해서 required 주지 않았습니다.
       type: String,
-      required: true,
     },
     phoneNumber: {
       type: String,
@@ -27,25 +27,31 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
-    admin: { // true : admin , false : basic-user
+    isAdmin: {
+      // true : admin , false : basic-user
       type: Boolean,
       required: true,
       default: false,
     },
-    loginTypeCode: { // 0 : signup user , 1 : kakao user
+    loginTypeCode: {
+      // 0 : signup user , 1 :  kakao user
       type: Number,
-      required: false,
+      required: true,
       default: 0,
+    },
+    profileImg: {
+      // 랜덤 프로필사진 기능 추가
+      type: String,
     },
   },
   {
     collection: 'users',
     timestamps: true,
-  }
+  },
 );
 
 export { UserSchema };

@@ -34,11 +34,9 @@ export class UserModel {
   }
   // 유저 삭제 기능 구현
   async delete(userId) {
-      await User.findOneAndDelete({ _id: userId });
-
+    await User.findOneAndDelete({ _id: userId });
   }
 }
-
 
 const userModel = new UserModel();
 

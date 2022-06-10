@@ -34,50 +34,118 @@
       </div>
       <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
         <ul id="navbar">
-          <li><a href="/account">계정관리</a></li>
-          <li><a href="#">로그아웃</a></li>
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-              <span>카트</span>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
     </div>
   </nav>
-  <!-- 주문조회 -->
-  <section class="section">
-    <div class="container">
-      <div class="order-header">
-        <h1 class="title">주문조회</h1>
+  <!-- 모달 -->
+  <div class="modal-profile">
+    <div class="modal-profile-info">
+      <div class="modal-profile-img">
+        <img id="userImg" src="/elice-rabbit.png" alt="profile-img">
       </div>
-      <div class="container orders-container">
-        <div class="colums order-info">
-          <div class="column is-2"> 날짜</div>
-          <div class="column is-6"> 주문정보</div>
-          <div class="column is-2"> 상태</div>
-          <div class="column is-2"> 신청</div>
-        </div>
-      </div>
+      <P id="userName"></P>
+      <p id="userEmail"></p>
     </div>
-  </section>
-  <div class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="box">
-        <p class="mb-3">주문 삭제 시 복구할 수 없습니다. 취소 하시겠습니까?</p>
-        <div class="buttons">
-          <button class="button mt-5" id="delCompleteBtn" aria-label="close">네</button>
-          <button class="button is-primary mt-5" id="delCencelBtn" aria-label="close">아니요</button>
-        </div>
-      </div>
+    <div class="modal-link">
+      <a href="/account">계정 관리</a>
+      <a href="#" id="logout">로그아웃</a>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
   </div>
+  <!-- 마이 프로필 -->
+  <div class="container my-profile">
+    <div class="profile-box">
+      <div class="profile-info">
+        <div class="profile-img">
+          <img src="/elice-rabbit.png" alt="profile-img">
+        </div>
+        <P class="user-name"></P>
+        <p class="user-email"></p>
+        <p class="current-tier-text"></p>
+      </div>
+      <div class="tier-box">
+        <div class="tier">
+          <div class="bronze">
+            <img src="/ranked-emblems/emblem_Bronze.png" alt="tier-img">
+          </div>
+          <div class="silver">
+            <img src="/ranked-emblems/emblem_Silver.png" alt="tier-img">
+          </div>
+          <div class="gold">
+            <img src="/ranked-emblems/emblem_Gold.png" alt="tier-img">
+          </div>
+          <div class="platinum">
+            <img src="/ranked-emblems/emblem_Platinum.png" alt="tier-img">
+          </div>
+          <div class="diamond">
+            <img src="/ranked-emblems/emblem_Diamond.png" alt="tier-img">
+          </div>
+          <div class="challenger">
+            <img src="/ranked-emblems/emblem_Challenger.png" alt="tier-img">
+          </div>
+        </div>
+        <div class="tier-info">
+          <p class="tier-info"></p>
+        </div>
+      </div>
+    </div>
+    <!-- 계정관리 목록-->
+    <section class="section">
+      <div class="container">
+
+        <div class="menu-container">
+          <a class="account-menu" href="/account/orders">
+            <div class="menu-body">
+              <p class="menu-title">주문조회</p>
+              <p class="menu-subtitle">주문 내역을 확인, 취소할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/management">
+            <div class="menu-body">
+              <p class="menu-title">회원정보 관리</p>
+              <p class="menu-subtitle">회원 정보를 확인, 수정할 수 있습니다.</p>
+            </div>
+          </a>
+          <a class="account-menu" href="/account/withdrawal">
+            <div class="menu-body">
+              <p class="menu-title">회원 탈퇴</p>
+              <p class="menu-subtitle">회원 정보를 삭제하고 탈퇴할 수 있습니다.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- 주문조회 -->
+    <section class="section">
+      <div class="container">
+
+        <div class="container orders-container">
+          <div class="colums order-info">
+            <div class="column is-4"> 주문정보</div>
+            <div class="column is-2"> 날짜</div>
+            <div class="column is-2"> 가격(수량)</div>
+            <div class="column is-2"> 상태</div>
+            <div class="column is-2"> 신청(주문번호)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="box">
+          <p class="mb-3">주문 삭제 시 복구할 수 없습니다. 취소 하시겠습니까?</p>
+          <div class="buttons">
+            <button class="button mt-5" id="delCompleteBtn" aria-label="close">네</button>
+            <button class="button is-primary mt-5" id="delCencelBtn" aria-label="close">아니요</button>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <!-- 카카오 로그인 스크립트 -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </body>
 
 </html>

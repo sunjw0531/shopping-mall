@@ -1,161 +1,149 @@
-const testList = [
-  {
-    "id":1,
-    "date":"2022-05-11",
-    "email":"1234@naver.com",
-    "signin_type":0,
-    "name":"아이유",
-    "user_type":0,
-  },
-  {
-    "id":2,
-    "date":"2022-05-12",
-    "email":"asdfasdf@naver.com",
-    "signin_type":0,
-    "name":"손흥민",
-    "user_type":0,
-  },
-  {
-    "id":3,
-    "date":"2022-05-13",
-    "email":"pek@naver.com",
-    "signin_type":0,
-    "name":"윤상진",
-    "user_type":0,
-  },
-  {
-    "id":4,
-    "date":"2022-05-13",
-    "email":"doad1010@naver.com",
-    "signin_type":1,
-    "name":"배창현",
-    "user_type":1,
-  },
-  {
-    "id":5,
-    "date":"2022-05-13",
-    "email":"pgka12@naver.com",
-    "signin_type":0,
-    "name":"박우람",
-    "user_type":0,
-  },
-  {
-    "id":6,
-    "date":"2022-05-31",
-    "email":"gkgkgkk1@gmail.com",
-    "signin_type":0,
-    "name":"이학성",
-    "user_type":0,
-  },
-  {
-    "id":7,
-    "date":"2022-05-31",
-    "email":"zxcvd4@naver.com",
-    "signin_type":0,
-    "name":"정승우",
-    "user_type":0,
-  },
-]
-
-import * as Api from "../../api"
-//user list
-const inputData = document.querySelector('#inputData');
-const userDeleteBtn = document.getElementsByClassName('user-delete-btn');
+import * as Api from '../../api.js';
+import { nav } from '/component.js';
+//네비게이션 바 생성
+nav();
 
 //top cotainer
-const element = document.getElementsByTagName('p');
+const showCnt = document.getElementsByTagName('p');
 
-//총회원수
-element[0].innerText = testList.length;
-InputUser(); //회원 목록 출력
-adminCnt(); //관리자수 카운트
-oauthCnt();//ouath가입자수 카운트
+//modal 변수 선언
+const modal = document.querySelector('.modal'),
+  modalBg = document.querySelector('.modal-background'),
+  modalbtn = document.querySelector('.modal-close'),
+  delCancelBtn = document.querySelector('#delCancelBtn'),
+  delCompleteBtn = document.querySelector('#delCompleteBtn');
 
-//json 데이터 주문 리스트에 추가
-async function InputUser() {
-  const tbody = document.createElement('tbody');
-  inputData.appendChild(tbody);
-  
-  for(let i =0; i<testList.length; i++) {
-    tbody.insertAdjacentHTML('beforeend', `
-    <tr id="user${testList[i].id}">
-      <td>${testList[i].date}</td>
-      <td>${testList[i].email}</td>
-      <td>${testList[i].signin_type == 0? `일반`:`소셜`}</td>
-      <td>${testList[i].name}</td>
+getUserInfo();
+
+// users 정보 목록 받아오기 api요청
+async function getUserInfo() {
+  try {
+    const userInfo = await Api.get('/api/userlist');
+    inputUser(userInfo); //유저 목록 데이터 생성
+    userCnt(userInfo); //총회원수, 관리자수, ouath가입자수 카운트
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+//날짜 포맷 설정 함수 (YYYY-MM-DD)
+function dateFormat(dateValue) {
+  const date = new Date(dateValue);
+  const year = date.getFullYear();
+  const month = ('0' + (1 + date.getMonth())).slice(-2);
+  const day = ('0' + date.getDate()).slice(-2);
+  return `${year}-${month}-${day}`;
+}
+
+//getUserInfo 유저 정보를 불러와 목록으로 출력
+function inputUser(item) {
+  const tbody = document.querySelector('#tbody');
+  // 해보기
+  // const tr = document.createElement('tr');
+  // tr.setAttribute('id', `user${data._id}`);
+  // const td = document.createElement('td');
+  // td.textContent = ${dateFormat(data.createdAt)}; appendChild로 붙여 넣기
+
+  //insertAdjacentHTML < createDOM PARSHING 속도가 빠름
+  item.forEach((data) => {
+    tbody.insertAdjacentHTML(
+      'afterend',
+      `
+    <tr id="user${data._id}">
+      <td>${dateFormat(data.createdAt)}</td>
+      <td>${data.email}</td>
+      <td>${data.loginTypeCode == 0 ? `일반` : `소셜`}</td>
+      <td>${data.fullName}</td>
       <td>
-        <select class="select-user-type" onchange="adminCntChange(this)">
-          <option value="0" ${testList[i].user_type == 0 ? `selected`:``}> 일반사용자</option>
-          <option value="1" ${testList[i].user_type == 1 ? `selected`:``}> 관리자 </option>
+        <select class="select-user-type">
+          <option value="0" ${data.admin ? `selected` : ``}> 일반사용자</option>
+          <option value="1" ${data.admin ? `selected` : ``}> 관리자 </option>
         </select>
       </td>
-      <td> <button class="user-delete-btn" id="btn${testList[i].id}" onclick="deleteUser(this.id)">회원정보 삭제</td>
+      <td><button class="deleteUserBtn" id="btn${data._id}">회원정보 삭제 </td>
     </tr>
-    `);
-  } //json 데이터 기반 selected 설정
-  console.log("Data Input OK!");
-}
-
-async function deleteUser(btnId){
-  const parent = document.querySelector(`#${btnId}`).parentElement.parentElement;
-  parent.remove();
-  const sel = Number(parent.childNodes[9].childNodes[1].value);
-  const oat = parent.childNodes[5].childNodes[0].nodeValue;
-  
-  if(sel == 1) {
-    element[1].innerText--;
-  }
-  if(oat == "소셜"){
-    element[2].innerText--;
-    console.log("소셜 삭제");
-  }
-  element[0].innerText--;
-}
-
-//처음 화면 시 Admin Cnt 값 표시
-async function adminCnt() {
-  let adminCnt = 0
-  let type = document.getElementsByClassName('select-user-type');
-  for (let i=0; i< testList.length; i++){
-    if(type[i].selectedIndex == 1) {
-      adminCnt++;
-    }
-  }
-  element[1].innerText = adminCnt;
+    `,
+    );
+    const deleteUserBtn = document.querySelector('.deleteUserBtn');
+    deleteUserBtn.addEventListener('click', () => openModal(data._id));
+    const changeOption = document.querySelector('.select-user-type');
+    changeOption.addEventListener('change', () =>
+      optionChange(
+        changeOption.options[changeOption.selectedIndex].value,
+        data._id,
+      ),
+    );
+  });
 }
 
 //select - option 변경시 카운트 값이 바뀌도록 함수 설정
-async function adminCntChange(sel) {
-  const selectOption = Number(sel.value);
-  if (selectOption == 1 ){
-    element[1].innerText++;
-  }else if(selectOption == 0){
-    element[1].innerText--;
+async function optionChange(admin, id) {
+  try {
+    const adminStatus = { admin };
+    await Api.patch(`/api/users`, id, adminStatus);
+    //화면내에 관리자수 카운트
+    const selectOption = Number(admin);
+    if (selectOption === 1) {
+      showCnt[1].innerText++;
+    } else if (selectOption === 0) {
+      showCnt[1].innerText--;
+    }
+  } catch (err) {
+    console.error(err);
   }
 }
 
-//ouath 사용자 수
-async function oauthCnt() {
+// 회원 삭제 버튼 클릭 시
+async function openModal(id) {
+  modal.classList.add('is-active');
+  delCompleteBtn.addEventListener('click', () => setDelete(id));
+}
+
+//modal창에서 확인 시 회원 삭제
+async function setDelete(id) {
+  console.log(id);
+  try {
+    await Api.delete('/api/admin', id);
+    // 화면상에서 삭제 부분을 구현
+    const parent = document.querySelector(`#user${id}`);
+    const selectOption = Number(parent.childNodes[9].childNodes[1].value);
+    const oauther = parent.childNodes[5].childNodes[0].nodeValue;
+    if (selectOption === 1) {
+      showCnt[1].innerText--;
+    }
+    if (oauther === '소셜') {
+      showCnt[2].innerText--;
+    }
+    showCnt[0].innerText--;
+    parent.remove();
+    closeModal();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+//총회원수, ouath, admin 수
+async function userCnt(item) {
   let oauthCnt = 0;
-  for(let i =0; i < testList.length; i++) {
-    if(testList[i].signin_type == 1) {
+  let adminCnt = 0;
+  for (let i = 0; i < item.length; i++) {
+    if (item[i].loginTypeCode == 1) {
       oauthCnt++;
     }
+    if (item[i].admin) {
+      adminCnt++;
+    }
   }
-  element[2].innerText = oauthCnt;
+  showCnt[0].innerText = item.length;
+  showCnt[1].innerText = adminCnt;
+  showCnt[2].innerText = oauthCnt;
 }
 
-// user 정보 목록 받아오기 api요청
-try { 
-  const userInfo = {email, fullName, admin, loginTypeCode};
+//modal btn event
+modalBg.addEventListener('click', closeModal);
+modalbtn.addEventListener('click', closeModal);
+delCancelBtn.addEventListener('click', closeModal);
 
-  await Api.get('/admin/users', userInfo);
-
-  alert('정상적으로 회원정보를 불러왔습니다.');
-
-}catch(err) {
-
-  console.log(err);
-  
+function closeModal() {
+  modal.classList.remove('is-active');
 }
-

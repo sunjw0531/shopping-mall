@@ -13,44 +13,70 @@ viewsRouter.use('/account', serveStatic('account'));
 viewsRouter.use('/category/:id', serveStatic('category'));
 viewsRouter.use('/product/:id', serveStatic('product'));
 viewsRouter.use('/buy', serveStatic('buy'));
+viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/buy/complete', serveStatic('complete'));
 viewsRouter.use('/admin', serveStatic('admin'));
 
 viewsRouter.use('/account/orders', accountServeStatic('orders'));
-viewsRouter.use('/account/security', accountServeStatic('security'));
-viewsRouter.use('/account/signout', accountServeStatic('signout'));
+viewsRouter.use('/account/management', accountServeStatic('management'));
+viewsRouter.use('/account/withdrawal', accountServeStatic('withdrawal'));
 
 viewsRouter.use('/admin/orders', adminServeStatic('orders'));
-viewsRouter.use('/category/add', adminServeStatic('category'));
-viewsRouter.use('/product/add', adminServeStatic('product_sell'));
+viewsRouter.use('/admin/category', adminServeStatic('category'));
+viewsRouter.use('/admin/product_sell', adminServeStatic('product_sell'));
 viewsRouter.use('/admin/users', adminServeStatic('user_management'));
+viewsRouter.use('/admin/products_management', adminServeStatic('products_management'));
+
+viewsRouter.use('/', serveStatic(''));
+viewsRouter.use('/', serveStatic('uploads'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
+viewsRouter.use('/', serveStatic('uploads'));
+
+// image load router
+viewsRouter.use('/product/:_id', serveStatic(''));
+viewsRouter.use('/category/:_id', serveStatic(''));
+viewsRouter.use('/account', serveStatic(''));
+viewsRouter.use('/account/orders', serveStatic(''));
+viewsRouter.use('/account/withdrawal', serveStatic(''));
+viewsRouter.use('/account/management', serveStatic(''));
+viewsRouter.use('/admin', serveStatic(''));
+viewsRouter.use('/admin/orders', serveStatic(''));
+viewsRouter.use('/admin/category', serveStatic(''));
+viewsRouter.use('/admin/users', serveStatic(''));
+viewsRouter.use('/admin/product_sell', serveStatic(''));
+viewsRouter.use('/admin/products_management', serveStatic(''));
+viewsRouter.use('/buy', serveStatic(''));
+viewsRouter.use('/cart', serveStatic(''));
+viewsRouter.use('/buy/complete', serveStatic(''));
+
+
+
 
 // views폴더 내의 ${resource} 폴더 내의 모든 파일을 웹에 띄우며,
 // 이 때 ${resource}.html 을 기본 파일로 설정함.
 function serveStatic(resource) {
-	const resourcePath = path.join(__dirname, `../views/${resource}`);
-	const option = { index: `${resource}.html` };
-
-	// express.static 은 express 가 기본으로 제공하는 함수임
-	return express.static(resourcePath, option);
+  const resourcePath = path.join(__dirname, `../views/${resource}`);
+  const option = { index: `${resource}.html` };
+  // express.static 은 express 가 기본으로 제공하는 함수임
+  return express.static(resourcePath, option);
 }
 
 function accountServeStatic(resource) {
-	const resourcePath = path.join(__dirname, `../views/account/${resource}`);
-	const option = { index: `${resource}.html` };
+  const resourcePath = path.join(__dirname, `../views/account/${resource}`);
+  const option = { index: `${resource}.html` };
 
-	// express.static 은 express 가 기본으로 제공하는 함수임
-	return express.static(resourcePath, option);
+  // express.static 은 express 가 기본으로 제공하는 함수임
+  return express.static(resourcePath, option);
 }
 
 function adminServeStatic(resource) {
-	const resourcePath = path.join(__dirname, `../views/admin/${resource}`);
-	const option = { index: `${resource}.html` };
+  const resourcePath = path.join(__dirname, `../views/admin/${resource}`);
+  const option = { index: `${resource}.html` };
 
-	// express.static 은 express 가 기본으로 제공하는 함수임
-	return express.static(resourcePath, option);
+  // express.static 은 express 가 기본으로 제공하는 함수임
+  return express.static(resourcePath, option);
 }
 
 export { viewsRouter };

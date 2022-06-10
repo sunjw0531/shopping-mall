@@ -1,12 +1,32 @@
+* {
+  color:#b6a07a;
+}
+
+
+.navbar {
+  background-color: #012532;
+  border-bottom: 1px solid #8b7755;
+}
+
+
 .login-form-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+  height: 93vh;
+  margin: 0 auto;
+  background-image: linear-gradient(rgba(2, 0, 27, 0.5),rgba(1, 0, 15, 0.9)), url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt96b7d18c55000dc0/60ee0bbd39cbdb45e8c47fe4/bilgewater-high-and-dry.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 120vw 120vh;
+  background-color: black;
+  scroll-behavior: auto;
 }
 
 .login-form-box {
   width: 30rem;
+  background-color: #012532;
+  border: 1px solid #8b7755;
 }
 
 .login-form-box .title {
@@ -15,4 +35,28 @@
 
 .login-form-box .button {
   font-weight: bold;
+}
+
+.label {
+  color:#b6a07a;
+}
+
+li img {
+  padding-top: 10px;
+}
+
+.button.is-info {
+  background-color: #8b7755;
+  border-color: #634d28;
+  color: #fff;
+}
+
+.button.is-info:hover {
+  background-color: #634d28;
+  
+}
+
+.breadcrumb a {
+  color:#b6a07a;
+
 }
