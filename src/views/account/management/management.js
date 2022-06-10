@@ -94,6 +94,8 @@ async function setName(e) {
     await Api.patch('/api/users', id, data);
     cencleSwitch(e);
     nameDisplay.textContent = fullName;
+    sessionStorage.removeItem('fullName');
+    sessionStorage.setItem('fullName', fullName);
     location.reload();
   } catch (err) {
     console.error(err.stack);

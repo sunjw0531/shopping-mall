@@ -14,6 +14,7 @@
   <!-- 커스텀 css, js -->
   <link rel="stylesheet" href="withdrawal.css" />
   <script src="withdrawal.js" type="module" defer></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 
 <body>
@@ -59,11 +60,11 @@
     <div class="profile-box">
       <div class="profile-info">
         <div class="profile-img">
-          <img src="/elice-rabbit.png" alt="profile-img">
+          <img id="profileImg" src="/elice-rabbit.png" alt="profile-img">
         </div>
-        <P class="user-name"></P>
-        <p class="user-email"></p>
-        <p class="current-tier-text"></p>
+        <P id="name"></P>
+        <p id="email"></p>
+        <p id="current-tier-text"></p>
       </div>
       <div class="tier-box">
         <div class="tier">
@@ -120,7 +121,7 @@
     <section class="section">
       <div class="user-form-container">
         <form class="box user-form-box" id="userForm">
-          <p class="title is-5 has-text-primary">회원 정보 삭제</p>
+          <p class="title is-5">회원 정보 삭제</p>
           <div class="field mb-5">
             <label class="label" for="passwordInput">현재 비밀번호</label>
             <div class="control">
@@ -145,8 +146,6 @@
         </form>
       </div>
     </section>
-    <!-- 카카오 로그인 스크립트 -->
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </body>
 
 </html>

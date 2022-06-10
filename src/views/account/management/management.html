@@ -16,6 +16,7 @@
   <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
   </script>
   <script src="management.js" type="module" defer></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 
 <body>
@@ -61,11 +62,11 @@
     <div class="profile-box">
       <div class="profile-info">
         <div class="profile-img">
-          <img src="/elice-rabbit.png" alt="profile-img">
+          <img id="profileImg" src="/elice-rabbit.png" alt="profile-img">
         </div>
-        <P class="user-name"></P>
-        <p class="user-email"></p>
-        <p class="current-tier-text"></p>
+        <P id="name"></P>
+        <p id="email"></p>
+        <p id="current-tier-text"></p>
       </div>
       <div class="tier-box">
         <div class="tier">
@@ -119,7 +120,7 @@
       </div>
     </section>
     <!-- 회원정보 박스 -->
-    <section class="section">
+    <section class="section info-section">
       <div class="container">
         <!-- Id 박스 -->
         <div>
@@ -209,8 +210,6 @@
         </div>
       </div>
     </section>
-    <!-- 카카오 로그인 스크립트 -->
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </body>
 
 </html>
