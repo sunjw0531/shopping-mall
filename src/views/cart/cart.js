@@ -213,7 +213,7 @@ function changeCartLocalStorage(e, targetInputCount) {
         el.count = targetInputCount.value;
         price = el.price;
       }
-      amount = (amount + Number(el.count)) * Number(el.price);
+      amount = amount + Number(el.count) * Number(el.price);
     }
   });
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -230,6 +230,8 @@ function changeCartLocalStorage(e, targetInputCount) {
 
   // 총 결제 금액
   totalPrice.textContent = `${(amount + delivery).toLocaleString()}원`;
+
+  console.log(amount);
 }
 
 // 카운트 감소
