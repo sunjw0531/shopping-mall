@@ -12,7 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password, profileImg } = userInfo;
+    const { email, fullName, password } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -21,13 +21,14 @@ class UserService {
         '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.',
       );
     }
-
     // 이메일 중복은 이제 아니므로, 회원가입을 진행함
 
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 프로필 사진, 등급 사진을 지정한다.
+    // 랜덤 프로필 사진을 지정한다.
+    let newProfile = Math.ceil(Math.random()*407);
+    const profileImg = `profileImg\\${newProfile}.jpg`;
 
     const newUserInfo = {
       fullName,
@@ -44,8 +45,8 @@ class UserService {
 
   async addKakaoUser(userInfo) {
     // 객체 destructuring
-    const { fullName, email, loginTypeCode, profileImg } = userInfo;
-
+    const { fullName, email, loginTypeCode } = userInfo;
+    
     // email 중복 확인
     const user = await this.userModel.findByEmail(email);
     // email 이 없으면 회원 가입을 한다.
@@ -58,10 +59,13 @@ class UserService {
         { userId: createdNewUser._id, isAdmin: createdNewUser.isAdmin },
         secretKey,
       );
-      // Admin인지 아닌지 반환
+      
+      // 기타 필요한 정보들 반환
       const userId = createdNewUser._id;
       const isAdmin = createdNewUser.isAdmin;
-      return { token, isAdmin, userId };
+      let newProfile = Math.ceil(Math.random()*407);
+      const profileImg = `profileImg\\${newProfile}.jpg`;
+      return { token, isAdmin, userId, profileImg };
     }
     // email이 존재하면 db의 정보를 통해 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
@@ -71,9 +75,9 @@ class UserService {
     );
     // Admin인지 아닌지 반환
     const userId = user._id;
-    console.log(userId);
     const isAdmin = user.isAdmin;
-    return { token, isAdmin, userId };
+    const profileImg = user.profileImg
+    return { token, isAdmin, userId, profileImg };
   }
 
   // 로그인
@@ -90,7 +94,6 @@ class UserService {
     }
 
     // 이제 이메일은 문제 없는 경우이므로, 비밀번호를 확인함
-
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password; // db에 저장되어 있는 암호화된 비밀번호
 
@@ -105,7 +108,6 @@ class UserService {
         '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
       );
     }
-
     // 로그인 성공 -> JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
@@ -139,10 +141,10 @@ class UserService {
     return users;
   }
 
-  // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
+  // 유저정보 수정
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
-    const { userId, currentPassword } = userInfoRequired;
+    const { userId } = userInfoRequired;
 
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findById(userId);
@@ -151,23 +153,7 @@ class UserService {
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
-
-    // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
-
-    // 비밀번호 일치 여부 확인
-    // const correctPasswordHash = user.password;
-    // const isPasswordCorrect = await bcrypt.compare(
-    //   currentPassword,
-    //   correctPasswordHash
-    // );
-
-    // if (!isPasswordCorrect) {
-    //   throw new Error(
-    //     '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
-    //   );
-    // }
-
-    // 이제 드디어 업데이트 시작
+    // 업데이트 시작
 
     // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
     const { password } = toUpdate;
@@ -185,42 +171,38 @@ class UserService {
 
     return user;
   }
-  // 유저 삭제 기능 최소화, 추후 front API 형태에 맞춰 기능 추가할 예정임.
-  async deleteUser(userId) {
-    const user = await this.userModel.findById(userId);
 
+  // 유저 삭제 
+  async deleteUser( userId, password ) {
+    const user = await this.userModel.findById(userId);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
+    const passwordHash = user.password;
+    const isPasswordCorrect = await bcrypt.compare(
+          password,
+          passwordHash
+        );
+    
+        if (!isPasswordCorrect) {
+          throw new Error(
+            '현재 비밀번호가 일치하지 않습니다. 카카오 로그인 유저는 회원정보 변경에서 비밀번호를 설정해주세요.'
+          );
+        }
+
     await this.userModel.delete(userId);
   }
+// 관리자 유저 삭제 기능
+async deleteAdminUser( userId ) {
+  const user = await this.userModel.findById(userId);
+  if (!user) {
+    throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+  }
+
+  await this.userModel.delete(userId);
+  }
 }
-
-//   async deleteUser(userId) {
-
-//     // 우선 해당 id의 유저가 db에 있는지 확인
-//     const user = await this.userModel.findById(userId);
-
-//     // db에서 찾지 못한 경우, 에러 메시지 반환
-
-//     // 비밀번호 일치 여부 확인
-//     const correctPasswordHash = user.password;
-//     const isPasswordCorrect = await bcrypt.compare(
-//       currentPassword,
-//       correctPasswordHash
-//     );
-
-//     if (!isPasswordCorrect) {
-//       throw new Error(
-//         '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
-//       );
-//     }
-
-//     // 회원탈퇴
-//     user = await this.userModel.delete(userId);
-//   }
-//
 
 const userService = new UserService(userModel);
 

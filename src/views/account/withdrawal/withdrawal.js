@@ -48,10 +48,11 @@ async function handleSubmit() {
 
   // 회원 삭제 API 요청
   try {
-    const data = await Api.delete(
-      `/api/users/${sessionStorage.getItem('userId')}`,
+    const data = { password };
+    await Api.delete(
+      '/api/users',sessionStorage.getItem('userId'), 
+      data
     );
-
     // 토큰을 세션 스토리지에 삭제
     sessionStorage.clear();
     alert(`회원정보가 안전하게 삭제되었습니다.`);

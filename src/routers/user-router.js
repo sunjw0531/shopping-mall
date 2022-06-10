@@ -50,15 +50,13 @@ userRouter.post('/kakao', async function (req, res, next) {
     const fullName = req.body.fullName;
     const email = req.body.email;
     const loginTypeCode = 1;
-    const isAdmin = req.body.isAdmin;
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.addKakaoUser({
       fullName,
       email,
       loginTypeCode,
-      isAdmin,
     });
-    // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
+    // jwt 토큰을 프론트에 보냄
     res.status(200).json(userToken);
   } catch (error) {
     next(error);
@@ -105,7 +103,6 @@ userRouter.get('/email/:email', loginRequired, async function (req, res, next) {
 });
 
 // userId를 사용해 유저 정보 가져옴
-// 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 
 userRouter.get(
   '/users/:userId',
@@ -124,23 +121,8 @@ userRouter.get(
   },
 );
 
-// 전체 유저 목록을 가져옴 (배열 형태임)
-// 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-
-// userRouter.get('/userlist', adminConfirm, async function (req, res, next) {
-// 	try {
-// 		// 전체 사용자 목록을 얻음
-// 		const users = await userService.getUsers();
-
-// 		// 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-// 		res.status(200).json(users);
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// });
-
-//admin 권한 삭제
-userRouter.get('/userlist', async function (req, res, next) {
+// 전체 사용자 목록 반환
+userRouter.get('/userlist', adminConfirm, async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
     const users = await userService.getUsers();
@@ -167,15 +149,6 @@ userRouter.patch(
       const address = req.body.address;
       const phoneNumber = req.body.phoneNumber;
       const admin = req.body.admin;
-      const profileImg = req.body.profileImg;
-
-      // // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
-      // const currentPassword = req.body.currentPassword;
-
-      // // currentPassword 없을 시, 진행 불가
-      // if (!currentPassword) {
-      // 	throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
-      // }
 
       const userInfoRequired = { userId };
 
@@ -187,7 +160,6 @@ userRouter.patch(
         ...(address && { address }),
         ...(phoneNumber && { phoneNumber }),
         ...(admin && { admin }),
-        ...(profileImg && { profileImg }),
       };
 
       // 사용자 정보를 업데이트함.
@@ -204,20 +176,30 @@ userRouter.patch(
   },
 );
 
-// 사용자 정보 삭제 기능
+// 사용자 가입 탈퇴 기능
 userRouter.delete(
   '/users/:userId',
-  // loginRequired,
+  loginRequired,
   async function (req, res, next) {
     try {
       const userId = req.params.userId;
-      // 관리자 계정이 아니라면 유저 아이디 일치하는지 검증
-      // if (!req.admin) {
-      // 	if (req.currentUserId !== userId) {
-      // 		throw new Error('삭제할 권한이 없습니다.');
-      // 	}
-      // }
-      await userService.deleteUser(userId);
+      const password = req.body.password;
+      await userService.deleteUser( userId, password );
+      res.status(200).json('정상적으로 회원탈퇴 처리 되었습니다.');
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+// 관리자 회원 탈퇴 기능
+userRouter.delete(
+  '/admin/:userId',
+  adminConfirm,
+  async function (req, res, next) {
+    try {
+      const userId = req.params.userId;
+      await userService.deleteAdminUser( userId );
       res.status(200).json('정상적으로 회원탈퇴 처리 되었습니다.');
     } catch (error) {
       next(error);

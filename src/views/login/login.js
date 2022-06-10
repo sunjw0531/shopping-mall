@@ -71,7 +71,6 @@ async function kakaoLogin() {
   try {
     Kakao.Auth.login({
       success: function (res) {
-        // console.log(res);
         Kakao.API.request({
           url: '/v2/user/me',
           success: async function (res) {
@@ -109,7 +108,6 @@ async function kakaoLogout() {
     Kakao.API.request({
       url: '/v1/user/unlink',
       success: function (res) {
-        //   console.log(res)
         alert(`정상적으로 로그아웃되었습니다.`);
       },
       fail: function (err) {
