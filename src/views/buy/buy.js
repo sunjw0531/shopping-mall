@@ -36,6 +36,7 @@ function addAllEvents() {
   btnDaumApi.addEventListener('click', handleDaumApi);
   selectList.addEventListener('change', handleSelect);
   btnPayment.addEventListener('click', handlePayment);
+  inputPhone.addEventListener('input', handleInputPhone);
 }
 
 // 유저 정보 불러오기
@@ -69,7 +70,7 @@ async function insertUserInfo() {
 async function insertPaymentInfo() {
   const buyLocalStorage = JSON.parse(localStorage.getItem('buy'));
 
-  // TODO: userId가 같은 구매목록만 출력
+  // 로그인 된 유저 id와 userId가 같은 구매목록만 출력
   buyLocalStorage.forEach(async (buyInfo) => {
     const { userId, productId, count } = buyInfo;
 
@@ -193,7 +194,6 @@ async function handlePayment() {
     return { productId: el.productId, volume: el.count };
   });
 
-  // TODO: 결제 구현
   const orderInfo = {
     receiver: inputName.value,
     phone: inputPhone.value,
@@ -229,4 +229,12 @@ async function handlePayment() {
   }
   localStorage.removeItem('buy');
   window.location.href = '/buy/complete';
+}
+
+// 연락처 입력 핸들러
+function handleInputPhone(e) {
+  const phone = e.target.value;
+  if (phone.length > 11) {
+    inputPhone.value = phone.substr(0, 11);
+  }
 }

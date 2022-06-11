@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const DB_URL =
   process.env.MONGODB_URL ||
-  'mongodb+srv://yoonsj:lC8h5lcHLJPPnsqY@cluster0.hebzm.mongodb.net/projectDB?appName=mongosh+1.4.2';
+  'mongodb+srv://baechanghyeon:1234@cluster0.hebzm.mongodb.net/projectDB?appName=mongosh+1.4.2';
 
 mongoose.connect(DB_URL);
 const db = mongoose.connection;

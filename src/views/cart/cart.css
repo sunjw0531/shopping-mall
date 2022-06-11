@@ -1,84 +1,196 @@
+.title, .subtitle {
+  color: #edd695;
+}
+
+.label {
+  color: #edd695;
+}
+
+.cart-container > .products,
+.cart-container > .payment {
+  background-color: #012532;
+  background: linear-gradient(
+    0deg,
+    rgba(1, 3, 4, 0.8141631652661064) 0%,
+    rgba(1, 37, 50, 1) 100%
+  );
+  border: 1px solid #8b7755;
+  color: #edd695;
+}
+
+.content-wrap {
+  width: 70%;
+  max-width: 1344px;
+  margin: 0 auto;
+}
+
 .cart-header {
-  border-bottom: 1px solid #dbdbdb;
+  margin: 2rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.cart-container {
   display: flex;
+}
+
+.cart-container > .products {
+  width: 65%;
+  height: 100%;
+  margin-right: 2rem;
+}
+
+.cart-container > .payment {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f5f7;
+}
+
+/* 상품 정보 */
+.cart-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid gray;
+}
+
+#cart-content-title {
+  margin-bottom: 0;
+  font-size: 1.3rem;
+}
+
+.cart-content-border {
+  border-bottom: 1px solid gray;
+  padding-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.product {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.empty-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  font-size: 1.5rem;
+}
+
+.product-img {
+  width: 5rem;
+}
+
+.product-name {
+  flex: 10rem;
+  margin-left: 1rem;
+}
+
+.calculation {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.input-count {
+  text-align: center;
+  width: 2.2rem;
+}
+
+.icon {
+  height: 100%;
+}
+
+.trash {
+  width: 2rem;
+  text-align: center;
+  margin: 0 1rem;
+}
+
+.trash:hover {
+  cursor: pointer;
+}
+
+/* 결제 정보 */
+.payment-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   margin-bottom: 2rem;
 }
 
-.cart-products {
-  height: 100%;
-}
-
-.cart-products-container {
-  width: 100%;
-}
-
-.cart-products-header {
-  border-bottom: 1px solid #555;
+.order-info-wrap {
   display: flex;
-  margin-bottom: 0.5rem;
-  padding-top: 0.75rem;
-  width: 100%;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
 }
 
-.cart-products-header label {
-  border-radius: 100%;
-  display: inline-block;
-  line-height: 0.5rem;
-}
-
-.cart-products-header input {
-  height: 0.9rem;
-  width: 0.9rem;
-}
-
-.cart-products-header .help {
-  display: inline-block;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-  margin-top: 0;
-}
-
-.cart-products-header .seperator {
-  line-height: 0.8rem;
-}
-
-.cart-products-header .delete-part {
-  cursor: pointer;
-  line-height: 1rem;
-}
-
-/* 선택한 상품 총 요약 css */
-
-.tile-order-summary {
-  height: 100%;
-  position: sticky;
-  top: 0.5rem;
-}
-
-.order-summary {
-  background-color: #f0f5f7;
-  width: 100%;
-}
-
-.order-summary .header {
-  font-size: 1.4rem;
-}
-
-.order-info,
-.order-summary .header {
-  border-bottom: 1px solid #555;
-}
-
-.total {
+.order-info {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.8rem;
+  align-items: center;
+  margin: 0.2rem 0;
 }
 
-.purchase {
-  margin-top: 3rem;
-  padding: 0.2rem 0;
+.delivery-price-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 0.5rem;
 }
+
+.delivery-price-help {
+  border-bottom: 1px solid lightgray;
+  margin-top: 0.5rem;
+  padding-bottom: 1rem;
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.total-price-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 1rem 0;
+}
+
+.total-price-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.total-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.btn-payment {
+  width: 100%;
+}
+
 
 /* 모달 */
 .modal-profile-info {
@@ -115,10 +227,13 @@
   align-items: center;
   gap: 0.5rem;
 }
-/* .profile-btn:hover {
-  background-color: rgb(223, 222, 222);
+#userImg:hover {
+  background-color: #fff;
   cursor: pointer;
-} */
+  transition: 0.1s linear;
+  filter: brightness(120%);
+  
+}
 .profile-btn {
   width: 3rem;
 }
@@ -141,12 +256,31 @@ a {
 #userName {
   color: #fff;
 }
+
 .navbar {
-  background-color: #012532;
+  background-color: #010f19; 
   border-bottom: 1px solid #8b7755;
+}
+.breadcrumb a {
+  align-items: center;
+  color: #8b7755;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75em;
+}
+
+.navbar-item {
+  padding: 0;
+}
+
+.navbar-item img {
+  max-height: 60%;
 }
 
 
+.breadcrumb {
+  background-color: #010f19;
+}
 body {
   background-image: linear-gradient(rgba(27, 18, 0, 0.3), rgba(15, 10, 0, 0.6)),
     url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt979f7abee0610fbb/60ee140d94d70a1ef3123841/zaun-bountymarkets.jpg');

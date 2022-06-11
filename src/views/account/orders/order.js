@@ -1,6 +1,7 @@
 // import { get as Api } from '/api.js';
 import * as Api from '../../api.js';
 import { userTier } from '../account.js';
+userTier();
 const ordersContainer = document.querySelector('.orders-container'),
   modal = document.querySelector('.modal'),
   modalBg = document.querySelector('.modal-background'),
@@ -11,7 +12,6 @@ modalBg.addEventListener('click', closeModal);
 modalBtn.addEventListener('click', closeModal);
 delCencelBtn.addEventListener('click', closeModal);
 
-// const data = userInfo();
 async function userInfo() {
   try {
     const data = await Api.get('/api/order/ownList');
@@ -70,7 +70,6 @@ function showData() {
   });
 }
 showData();
-userTier();
 // 결정 확인 버튼
 const delCompleteBtn = document.querySelector('#delCompleteBtn');
 delCompleteBtn.addEventListener('click', delOrder);
@@ -84,7 +83,7 @@ async function delOrder() {
     e.remove();
   });
   closeModal();
-  location.reload();
+  // location.reload();
 }
 //단순 모달 닫기 기능
 function closeModal() {

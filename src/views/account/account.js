@@ -57,12 +57,14 @@ export function userTier() {
     left = '999999999999';
     document.querySelector('.challenger').classList.add('current');
   }
-  const userName = document.querySelector('#userName'),
-    userEmail = document.querySelector('#userEmail'),
-    currentTierText = document.querySelector('.current-tier-text'),
-    tierInfo = document.querySelector('.tier-info');
-  userName.textContent = sessionStorage.getItem('fullName');
-  userEmail.textContent = sessionStorage.getItem('email');
+  const currentTierText = document.querySelector('#current-tier-text'),
+    tierInfo = document.querySelector('.tier-info'),
+    name = document.querySelector('#name'),
+    email = document.querySelector('#email'),
+    profileImg = document.querySelector('#profileImg');
+  profileImg.src = sessionStorage.getItem('profileImg');
+  name.textContent = sessionStorage.getItem('fullName');
+  email.textContent = sessionStorage.getItem('email');
   currentTierText.textContent = userTier;
   tierInfo.textContent = `다음 티어인 ${nextTier}까지 ${addCommas(
     left,

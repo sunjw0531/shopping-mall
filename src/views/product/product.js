@@ -1,6 +1,7 @@
 import * as Api from '/api.js';
 import { nav } from '/component.js';
 nav();
+
 // 요소(element), input 혹은 상수
 const productContainer = document.querySelector('.product-container');
 const producImageWrap = document.querySelector('.product-image-wrap');
@@ -13,6 +14,8 @@ const btnCountDecrease = document.querySelector('.btn-count-decrease');
 const btnCountIncrease = document.querySelector('.btn-count-increase');
 const btnCart = document.querySelector('.btn-cart');
 const btnBuy = document.querySelector('.btn-buy');
+
+const UPLOADS_DIR = 'uploads/';
 
 // HTML 요소 생성, 이벤트
 addAllElements();
@@ -47,6 +50,7 @@ async function insertProductContent() {
   if (productData) {
     // 상품 이미지
     const productImage = document.createElement('img');
+    productImage.classList.add('product-image');
     productImage.src = productData.image;
     producImageWrap.append(productImage);
 
@@ -84,14 +88,29 @@ function handleCountIncrease() {
 
 // 장바구니 로컬 스토리지 추가
 function addCartLocalStorage() {
-  const userId = sessionStorage.getItem('userId') || '629e4d9bcc90969c9a556da7';
+  const userId = sessionStorage.getItem('userId') || 'null';
   const productId = getProductId();
   const count = inputProductCount.value;
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   // userId를 전달하는 이유
   // 다른 user의 장바구니에 출력하지 않기 위해
-  let cartInfoData = { userId, productId, count };
+  const productImage = document.querySelector('.product-image');
+  const imagePath = productImage.src;
+  const image = imagePath.substr(imagePath.indexOf(UPLOADS_DIR));
+  const name = productName.textContent;
+  const price = productPrice.textContent.replace('원', '').replace(',', '');
+
+  // 장바구니 정보
+  const cartInfoData = {
+    userId,
+    productId,
+    image,
+    name,
+    price,
+    count,
+  };
+
   let isExists = false;
 
   cart.forEach((el) => {
@@ -114,16 +133,39 @@ function addCartLocalStorage() {
 // 장바구니 추가하기 버튼 핸들러
 function handleBtnCart() {
   addCartLocalStorage();
-  window.location.href = '/cart';
+
+  if (confirm('장바구니에 추가했습니다. 장바구니 페이지로 이동하시겠습니까?')) {
+    window.location.href = '/cart';
+  }
 }
 
 // 바로 구매하기 버튼 핸들러
 function handleBtnBuy() {
-  const userId = sessionStorage.getItem('userId') || '629e4d9bcc90969c9a556da7';
+  const userId = sessionStorage.getItem('userId') || 'null';
+  if (userId === 'null') {
+    window.location.href = '/login';
+    return;
+  }
   const productId = getProductId();
+  const productImage = document.querySelector('.product-image');
+  const imagePath = productImage.src;
+  const image = imagePath.substr(imagePath.indexOf(UPLOADS_DIR));
+  const name = productName.textContent;
+  const price = productPrice.textContent.replace('원', '').replace(',', '');
   const count = inputProductCount.value;
 
-  let buyInfoData = [{ userId, productId, count }];
+  // 구매 정보
+  const buyInfoData = [
+    {
+      userId,
+      productId,
+      image,
+      name,
+      price,
+      count,
+    },
+  ];
+
   localStorage.setItem('buy', JSON.stringify(buyInfoData));
 
   // 장바구니 로컬 스토리지에도 등록

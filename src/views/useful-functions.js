@@ -32,7 +32,7 @@ export const wait = (ms) => {
 export function dateFormat(dateValue) {
   const date = new Date(dateValue);
   const year = date.getFullYear();
-  const month = ('0' + (1 + date.getMonth())).slice(-2);
-  const day = ('0' + date.getDate()).slice(-2);
+  const month = String(1 + date.getMonth()).padStart(2, 0);
+  const day = String(date.getDate()).padStart(2, 0);
   return `${year}-${month}-${day}`;
 }

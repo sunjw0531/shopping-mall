@@ -1,5 +1,6 @@
 import * as Api from '../../api.js';
 import { nav } from '/component.js';
+import { dateFormat } from '../../useful-functions.js';
 //네비게이션 바 생성
 nav();
 
@@ -17,14 +18,6 @@ const upModalBg = document.querySelector('#upModalBg'),
 
 const categoryName = document.querySelector('#categoryName');
 
-function dateFormat(dateValue) {
-  const date = new Date(dateValue);
-  const year = date.getFullYear();
-  const month = ('0' + (1 + date.getMonth())).slice(-2);
-  const day = ('0' + date.getDate()).slice(-2);
-  return `${year}-${month}-${day}`;
-}
-
 getOption();
 categoryUploadBtn.addEventListener('click', setCategory);
 
@@ -37,7 +30,8 @@ async function setCategory(e) {
     await Api.post('/api/category', data);
     location.reload();
   } catch (err) {
-    console.error(err);
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다 ${err.message}`);
   }
 }
 
@@ -46,7 +40,8 @@ async function getOption() {
     const allCategory = await Api.get('/api/category/list');
     setCategoryList(allCategory);
   } catch (err) {
-    console.error(err);
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다 ${err.message}`);
   }
 }
 
@@ -64,12 +59,7 @@ function setCategoryList(item) {
     td2.textContent = data.name;
 
     const td3 = document.createElement('td');
-    const deleteBtn = document.createElement('input');
-    deleteBtn.setAttribute('id', `delBtn${data._id}`);
-    deleteBtn.setAttribute('type', 'button');
-    deleteBtn.setAttribute('class', 'btn btn-primary');
-    deleteBtn.setAttribute('value', '삭제');
-    td3.appendChild(deleteBtn);
+    td3.textContent = `${data.products.length}개`;
 
     const td4 = document.createElement('td');
     const updateBtn = document.createElement('input');
@@ -79,10 +69,19 @@ function setCategoryList(item) {
     updateBtn.setAttribute('value', '수정');
     td4.appendChild(updateBtn);
 
+    const td5 = document.createElement('td');
+    const deleteBtn = document.createElement('input');
+    deleteBtn.setAttribute('id', `delBtn${data._id}`);
+    deleteBtn.setAttribute('type', 'button');
+    deleteBtn.setAttribute('class', 'btn btn-primary');
+    deleteBtn.setAttribute('value', '삭제');
+    td5.appendChild(deleteBtn);
+
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
     tr.appendChild(td4);
+    tr.appendChild(td5);
     tbody.appendChild(tr);
 
     const delBtn = document.querySelector(`#delBtn${data._id}`);
@@ -111,10 +110,13 @@ async function setUploadCategory(name, id) {
       await Api.patch('/api/category', name, newData);
       const text = document.querySelector(`#text${id}`);
       text.textContent = newDataInput.value;
+      location.reload();
+      alert('상품 카테고리 명이 수정되었습니다.');
       modal[1].classList.remove('is-active');
     }
   } catch (err) {
-    console.error(err);
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다 ${err.message}`);
   }
 }
 function openDelModal(name, id) {
@@ -128,9 +130,11 @@ async function setDelete(name, id) {
     await Api.delete('/api', 'category', sendName);
     const parent = document.getElementById(`category${id}`);
     parent.remove();
+    location.reload();
     modal[0].classList.remove('is-active');
   } catch (err) {
-    console.error(err);
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다 ${err.message}`);
   }
 }
 

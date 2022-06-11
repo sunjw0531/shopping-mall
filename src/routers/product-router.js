@@ -85,8 +85,11 @@ productRouter.patch(
       //  상품 정보 수정하기 위해 값을 받아오기
       const { name, category, information, price, storage, date, company } =
         req.body;
+      // console.log(product_id);
+      // console.log(name, category, information, price, storage, date, company);
       const image = req.file.path;
 
+      console.log(image);
       const updateProduct = await productService.updateProduct(
         product_id,
         { name, category, information, price, storage, date, company },
