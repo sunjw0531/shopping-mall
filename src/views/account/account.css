@@ -15,6 +15,16 @@ body {
   scroll-behavior: auto;
 }
 
+
+p {
+  color: #bfab75;
+}
+
+#email, #name {
+  color: #fff !important;
+}
+
+
 .tier-box {
   border-radius: 2%;
   border: 2px double #735626;
@@ -24,7 +34,7 @@ body {
     rgba(1, 3, 4, 0.8141631652661064) 0%,
     rgba(1, 37, 50, 1) 100%
   );
-  color: #735626;
+  color: #fbff00 !important;
   padding: 1rem 3rem;
 }
 
@@ -188,12 +198,8 @@ p#name {
   width: 12rem !important;
 }
 
-/* 모달 */
-.navbar {
-  background-color: #012532;
-  border-bottom: 1px solid #8b7755;
-}
 
+/* 모달 */
 .modal-profile-info {
   display: flex;
   flex-direction: column;
@@ -228,9 +234,12 @@ p#name {
   align-items: center;
   gap: 0.5rem;
 }
-.profile-btn:hover {
-  background-color: rgb(223, 222, 222);
+#userImg:hover {
+  background-color: #fff;
   cursor: pointer;
+  transition: 0.1s linear;
+  filter: brightness(120%);
+  
 }
 .profile-btn {
   width: 3rem;
@@ -253,4 +262,44 @@ a {
 #userEmail,
 #userName {
   color: #8b7755;
+}
+
+.navbar {
+  background-color: #010f19; 
+  border-bottom: 1px solid #8b7755;
+}
+.breadcrumb a {
+  align-items: center;
+  color: #8b7755;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75em;
+}
+
+.navbar-item {
+  padding: 0;
+}
+
+.navbar-item img {
+  max-height: 60%;
+}
+
+
+
+body {
+  margin: 0 auto;
+  height: 100vh;
+  background-image: linear-gradient(rgba(2, 0, 27, 0), rgba(1, 0, 15, 0.7)), url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/bltcdfebd766fb71a69/60ee0c915397524ead3890c9/demacia-hallvalor.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-color: black;
+  color: black;
+  scroll-behavior: auto;
+
+}
+
+.tier-box {
+  border-radius: 2%;
+  border:2px double #735626;
 }

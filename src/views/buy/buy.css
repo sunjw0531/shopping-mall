@@ -1,3 +1,32 @@
+* {
+  color: #c3af8c
+}
+
+.title,
+.subtitle,
+.label {
+  color: #c3af8c
+}
+
+ .input[disabled] {
+  background-color: #ccc;
+}
+
+.input, .select select, .textarea {
+  background-color: #eee;
+}
+
+.box {
+  background-color: #012532;
+  background: linear-gradient(
+    0deg,
+    rgba(1, 3, 4, 0.8141631652661064) 0%,
+    rgba(1, 37, 50, 1) 100%
+  );
+  color: #735626;
+  border: 1px solid #8b7755;
+}
+
 .content-wrap {
   width: 70%;
   max-width: 1344px;
@@ -122,6 +151,7 @@
 .btn-payment {
   width: 100%;
 }
+
 /* 모달 */
 .modal-profile-info {
   display: flex;
@@ -157,10 +187,13 @@
   align-items: center;
   gap: 0.5rem;
 }
-/* .profile-btn:hover {
-  background-color: rgb(223, 222, 222);
+#userImg:hover {
+  background-color: #fff;
   cursor: pointer;
-} */
+  transition: 0.1s linear;
+  filter: brightness(120%);
+  
+}
 .profile-btn {
   width: 3rem;
 }
@@ -183,10 +216,28 @@ a {
 #userName {
   color: #fff;
 }
+
 .navbar {
-  background-color: #012532;
+  background-color: #010f19; 
   border-bottom: 1px solid #8b7755;
 }
+.breadcrumb a {
+  align-items: center;
+  color: #8b7755;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75em;
+}
+
+.navbar-item {
+  padding: 0;
+}
+
+.navbar-item img {
+  max-height: 60%;
+}
+
+
 
 
 body {

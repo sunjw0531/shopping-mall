@@ -137,7 +137,7 @@ userRouter.get('/userlist', adminConfirm, async function (req, res, next) {
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
   '/users/:userId',
-  loginRequired,
+  // loginRequired,
   async function (req, res, next) {
     try {
       // params로부터 id를 가져옴
@@ -148,7 +148,7 @@ userRouter.patch(
       const password = req.body.password;
       const address = req.body.address;
       const phoneNumber = req.body.phoneNumber;
-      const isAdmin = req.body.admin;
+      const isAdmin = req.body.isAdmin;
 
       const userInfoRequired = { userId };
 
