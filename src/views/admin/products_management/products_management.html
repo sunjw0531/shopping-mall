@@ -69,15 +69,14 @@
             color: #00d1b2 !important;
             font-weight: bold;
           ">
-        수정 & 삭제 카테고리
+        상품 수정 & 삭제 카테고리
       </label>
     </div>
     <div class="select-box">
       <div class="control">
         <div>
-          <strong>&nbsp;선택한 카테고리:&nbsp;</strong>
           <select id="categorySelectBox">
-            <option value="">카테고리를 선택해 주세요</option>
+            <option id="allShowList">카테고리를 선택해 주세요</option>
           </select>
         </div>
       </div>
@@ -86,8 +85,11 @@
         <table id="table" class="table">
           <thead>
             <tr>
+            <label class="label" for="allSelect">
               <td><input type="checkbox" id="allSelect" />전체선택</td>
+            </label>
               <td>상품명</td>
+              <td>카테고리명</td>
               <td>가격</td>
               <td>재고</td>
               <td>수정</td>
@@ -145,7 +147,7 @@
           </div>
           <!-- 카테고리 변경 -->
           <div class="field">
-            <label class="label" for="productCategory">카테고리</label>
+            <label class="label" for="productCategory" id="modalCategory">카테고리</label>
             <div class="control">
               <select id="setModalCategory">
                 <option value="">카테고리를 선택해주요</option>
@@ -156,8 +158,8 @@
           <div class="field">
             <label class="label" for="productImg">이미지</label>
             <div class="control">
-              <input type="image" style="width: 120px" id="getModalImg" />
-              <input type="file" id="setModalImg" src="" accept="image/*" />
+              <input type="image" style="width: 120px" id="getModalImg" src="" />
+              <input type="file" id="setModalImg" accept="image/*" />
             </div>
           </div>
           <!-- 상세정보 변경 -->
@@ -170,14 +172,14 @@
           <div class="field">
             <label class="label" for="productStorage">재고 수</label>
             <div class="control">
-              <input type="text" id="setModalStorage" placeholder="재고 수 변경" />
+              <input type="text" id="setModalStorage" placeholder="재고 수 변경" onKeyup ="this.value=this.value.replace(/[^0-9]/g, '');"/>
             </div>
           </div>
           <!-- 가격 변경 -->
           <div class="field">
             <label class="label" for="productPrice">가격</label>
             <div class="control">
-              <input type="text" id="setModalPrice" placeholder="가격 변경" />
+              <input type="text" id="setModalPrice" placeholder="가격 변경" onKeyup ="this.value=this.value.replace(/[^0-9]/g, '');"/>
             </div>
           </div>
           <!-- 제조사 변경 -->

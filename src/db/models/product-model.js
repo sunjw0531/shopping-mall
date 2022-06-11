@@ -1,10 +1,3 @@
-// import { model } from 'mongoose';
-// import { ProductSchema } from '../schemas/product-schema';
-
-// const productModel = model('products', ProductSchema);
-
-// export { productModel };
-// ///////////////////////////////////////
 import { model } from 'mongoose';
 import { ProductSchema } from '../schemas/product-schema';
 
@@ -35,13 +28,22 @@ export class ProductModel {
     return countProduct;
   }
 
-  // 상품 하나 찾기 (product_id로 상세)
+  // 상품 하나 찾기 (_id로 상세)
   async findDetailById(product_id) {
     const product = await Product.findOne({ _id: product_id }).populate(
       'category',
     );
     return product;
   }
+  
+  // 상품 하나 찾기 (product_id로 상세)
+  async findDetailByProductId(product_id) {
+    const product = await Product.findOne({ product_id: product_id }).populate(
+      'category',
+    );
+    return product;
+  }
+
   // 상품 하나 찾기 (product_id로 )
   async findOne(product_id) {
     const product = await Product.findOne({ product_id: product_id });

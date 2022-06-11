@@ -1,15 +1,16 @@
 import * as Api from '../../api.js';
 import { nav } from '/component.js';
+import { dateFormat } from '../../useful-functions.js';
 //네비게이션 바 생성
 nav();
 
 //top cotainer
-const showCnt = document.getElementsByTagName('p');
-
+const totalCnt = document.querySelector('#totalCnt'),
+  adminCnt = document.querySelector('#adminCnt'),
+  oauthCnt = document.querySelector('#oauthCnt');
 //modal 변수 선언
 const modal = document.querySelector('.modal'),
   modalBg = document.querySelector('.modal-background'),
-  modalbtn = document.querySelector('.modal-close'),
   delCancelBtn = document.querySelector('#delCancelBtn'),
   delCompleteBtn = document.querySelector('#delCompleteBtn');
 
@@ -24,15 +25,6 @@ async function getUserInfo() {
   } catch (err) {
     console.error(err);
   }
-}
-
-//날짜 포맷 설정 함수 (YYYY-MM-DD)
-function dateFormat(dateValue) {
-  const date = new Date(dateValue);
-  const year = date.getFullYear();
-  const month = ('0' + (1 + date.getMonth())).slice(-2);
-  const day = ('0' + date.getDate()).slice(-2);
-  return `${year}-${month}-${day}`;
 }
 
 //getUserInfo 유저 정보를 불러와 목록으로 출력
@@ -56,8 +48,10 @@ function inputUser(item) {
       <td>${data.fullName}</td>
       <td>
         <select class="select-user-type">
-          <option value="0" ${data.admin ? `selected` : ``}> 일반사용자</option>
-          <option value="1" ${data.admin ? `selected` : ``}> 관리자 </option>
+          <option value="0" ${
+            data.isAdmin ? `selected` : ``
+          }> 일반사용자</option>
+          <option value="1" ${data.isAdmin ? `selected` : ``}> 관리자 </option>
         </select>
       </td>
       <td><button class="deleteUserBtn" id="btn${data._id}">회원정보 삭제 </td>
@@ -77,16 +71,18 @@ function inputUser(item) {
 }
 
 //select - option 변경시 카운트 값이 바뀌도록 함수 설정
-async function optionChange(admin, id) {
+async function optionChange(admin, userId) {
   try {
-    const adminStatus = { admin };
-    await Api.patch(`/api/users`, id, adminStatus);
-    //화면내에 관리자수 카운트
-    const selectOption = Number(admin);
-    if (selectOption === 1) {
-      showCnt[1].innerText++;
-    } else if (selectOption === 0) {
-      showCnt[1].innerText--;
+    const isAdmin = (admin == 1 ? true : false);
+    console.log(typeof isAdmin);
+    const adminStatus = { isAdmin };
+    await Api.patch(`/api/users`, userId, adminStatus);
+
+    const selectOption = isAdmin;
+    if (selectOption === true) {
+      adminCnt.innerText++;
+    } else if (selectOption === false) {
+      adminCnt.innerText--;
     }
   } catch (err) {
     console.error(err);
@@ -109,12 +105,12 @@ async function setDelete(id) {
     const selectOption = Number(parent.childNodes[9].childNodes[1].value);
     const oauther = parent.childNodes[5].childNodes[0].nodeValue;
     if (selectOption === 1) {
-      showCnt[1].innerText--;
+      adminCnt.innerText--;
     }
     if (oauther === '소셜') {
-      showCnt[2].innerText--;
+      oauthCnt.innerText--;
     }
-    showCnt[0].innerText--;
+    totalCnt.innerText--;
     parent.remove();
     closeModal();
   } catch (err) {
@@ -123,25 +119,25 @@ async function setDelete(id) {
 }
 
 //총회원수, ouath, admin 수
-async function userCnt(item) {
-  let oauthCnt = 0;
-  let adminCnt = 0;
+function userCnt(item) {
+  let oauthCntp = 0;
+  let adminCntp = 0;
   for (let i = 0; i < item.length; i++) {
     if (item[i].loginTypeCode == 1) {
-      oauthCnt++;
+      oauthCntp++;
     }
-    if (item[i].admin) {
-      adminCnt++;
+    if (item[i].isAdmin) {
+      adminCntp++;
     }
   }
-  showCnt[0].innerText = item.length;
-  showCnt[1].innerText = adminCnt;
-  showCnt[2].innerText = oauthCnt;
+
+  totalCnt.innerText = item.length;
+  adminCnt.innerText = adminCntp;
+  oauthCnt.innerText = oauthCntp;
 }
 
 //modal btn event
 modalBg.addEventListener('click', closeModal);
-modalbtn.addEventListener('click', closeModal);
 delCancelBtn.addEventListener('click', closeModal);
 
 function closeModal() {

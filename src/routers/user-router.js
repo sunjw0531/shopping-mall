@@ -148,7 +148,7 @@ userRouter.patch(
       const password = req.body.password;
       const address = req.body.address;
       const phoneNumber = req.body.phoneNumber;
-      const admin = req.body.admin;
+      const isAdmin = req.body.admin;
 
       const userInfoRequired = { userId };
 
@@ -159,7 +159,7 @@ userRouter.patch(
         ...(password && { password }),
         ...(address && { address }),
         ...(phoneNumber && { phoneNumber }),
-        ...(admin && { admin }),
+        ...(isAdmin && { isAdmin }),
       };
 
       // 사용자 정보를 업데이트함.

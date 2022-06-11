@@ -65,15 +65,15 @@
     <div class="top-container">
       <div class="top-cnt">
         총회원수
-        <p>0</p>
+        <p id="totalCnt">0</p>
       </div>
       <div class="top-cnt">
         관리자수
-        <p>0</p>
+        <p id="adminCnt">0</p>
       </div>
       <div class="top-cnt">
         OAuth가입자수
-        <p>0</p>
+        <p id="oauthCnt">0</p>
       </div>
     </div>
     <!-- 상품 목록 출력 테이블-->
@@ -94,7 +94,7 @@
 
   <!-- 모달 창-->
   <div class="modal">
-    <div class="modal-background"></div>
+    <div class="modal-background" id="modalBg"></div>
     <div class="modal-content has-background-white py-5 px-5">
       <div class="box">
         <p class="mb-3">
@@ -110,6 +110,7 @@
         </div>
       </div>
     </div>
+
   <!-- 카카오 로그인 스크립트 -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <!-- user_management.js 연결-->

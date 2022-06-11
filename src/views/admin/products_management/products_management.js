@@ -7,7 +7,6 @@ const categorySelectBox = document.querySelector('#categorySelectBox');
 const classValue = document.getElementsByClassName('deleteCheck');
 const delModal = document.querySelector('#delModal'),
   delCompleteBtn = document.querySelector('#delCompleteBtn');
-
 //delmodal 창 닫기
 const delCancelBtn = document.querySelector('#delCancelBtn'),
   delBg = document.querySelector('#deleteModalBack'),
@@ -46,7 +45,6 @@ async function getSelectOption() {
 function setModalSelectBox(item) {
   item.forEach((data) => {
     const option = document.createElement('option');
-    option.setAttribute('id', data._id);
     option.setAttribute('value', data._id);
     option.textContent = data.name;
     setModalCategory.appendChild(option);
@@ -99,13 +97,24 @@ async function setItemList(e) {
       check.setAttribute('name', 'check');
 
       const td1 = document.createElement('td');
+      td1.setAttribute('id', `name${data._id}`);
+      td1.setAttribute('value', data.name);
       td1.textContent = data.name;
 
       const td2 = document.createElement('td');
-      td2.textContent = data.price;
+      td2.setAttribute('id', `category${data._id}`);
+      td2.setAttribute('value', data.category.name);
+      td2.textContent = data.category.name;
 
       const td3 = document.createElement('td');
-      td3.textContent = data.storage;
+      td3.setAttribute('id', `price${data._id}`);
+      td3.setAttribute('value', data.price);
+      td3.textContent = data.price;
+
+      const td4 = document.createElement('td');
+      td4.setAttribute('id', `storage${data._id}`);
+      td4.setAttribute('value', data.storage);
+      td4.textContent = data.storage;
 
       const updateBtn = document.createElement('input');
       updateBtn.setAttribute('type', 'button');
@@ -117,23 +126,42 @@ async function setItemList(e) {
       tr.appendChild(td1);
       tr.appendChild(td2);
       tr.appendChild(td3);
+      tr.appendChild(td4);
       tr.appendChild(updateBtn);
       tbody.appendChild(tr);
       // 수정 버튼 클릭시
       const updateBtnEvent = document.querySelector(`#updateBtn${data._id}`);
       updateBtnEvent.addEventListener('click', () =>
-        openUpdateModal(data.product_id),
+        openUpdateModal(data.product_id, data),
       );
     });
   } catch (err) {
-    console.error(err);
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다 ${err.message}`);
+  }
+}
+function setOldDataInput(data) {
+  setModalNameText.value = data.name;
+  getModalImg.src = data.image;
+  setProductInfo.value = data.information;
+  setModalStorage.value = data.storage;
+  setModalPrice.value = data.price;
+  setModalCompany.value = data.company;
+
+  const categoryLength = setModalCategory.options;
+
+  for (let i = 0; i < categoryLength.length; i++) {
+    if (setModalCategory.options[i].value == data.category.name) {
+      setModalCategory.options[i].selected = true;
+    }
   }
 }
 
 const updateForm = document.querySelector('#updateForm');
 //update modal 열기
-function openUpdateModal(id) {
+function openUpdateModal(id, data) {
   updateModal.classList.add('is-active');
+  setOldDataInput(data);
   updateForm.addEventListener('submit', (e) => {
     e.preventDefault();
     setUpdate(id);
@@ -152,29 +180,6 @@ async function setUpdate(id) {
     const date = new Date();
     const company = setModalCompany.value;
     const formData = new FormData();
-    //빈 값 에러 핸들링
-    if (name.length <= 2) {
-      alert('이름을 2자 이상으로 입력해주세요!');
-      return;
-    } else if (category == '') {
-      alert('카테고리를 선택해주세요!');
-      return;
-    } else if (image == '') {
-      alert('이미지를 선택해주세요!');
-      return;
-    } else if (information.length <= 5) {
-      alert('상세정보를  5자 이상으로 입력해주세요!');
-      return;
-    } else if (Number(storage) || storage == 0) {
-      alert('"0"이상으로 숫자만 입력해주세요!');
-      return;
-    } else if (Number(price) || price == 0) {
-      alert('"0"이상으로 숫자만 입력해주세요!');
-      return;
-    } else if (company == '') {
-      alert('회사명을 입력해주세요!');
-      return;
-    }
 
     formData.append('name', name);
     formData.append('category', category);
@@ -201,11 +206,12 @@ async function setUpdate(id) {
       .then((data) => {
         console.log(data);
       });
-
+    alert('상품이 정상 수정 되었습니다.');
     location.reload();
     updateModal.classList.remove('is-active');
   } catch (err) {
-    console.error(err);
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다 ${err.message}`);
   }
 }
 
@@ -233,19 +239,20 @@ async function setDelete() {
     let cnt = 0;
     for (let i = 0; i < classValue.length; i++) {
       if (classValue[i].checked) {
-        await Api.delete('/api/product/detail', classValue[i].value);
+        await Api.delete(`/api/product/detail`, classValue[i].value);
         cnt++;
       }
-      if (cnt === 0) {
-        alert('체크박스를 확인해주세요!');
-        return;
-      }
+    }
+    if (cnt === 0) {
+      alert('체크박스를 확인해주세요!');
+      return;
     }
 
     location.reload();
     closeDelModal();
   } catch (err) {
-    console.error(err);
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다 ${err.message}`);
   }
 }
 
@@ -266,3 +273,4 @@ updateBack.addEventListener('click', closeUpdateModal);
 function closeUpdateModal() {
   updateModal.classList.remove('is-active');
 }
+
