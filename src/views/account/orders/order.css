@@ -1,3 +1,26 @@
+html {
+  background-color: #010f19;  
+}
+
+
+p {
+  color: #bfab75;
+}
+
+#email, #name {
+  color: #fff !important;
+}
+
+.button {
+  background-color: #ccc;
+  border: 1px solid #735626;
+}
+
+#info-container {
+  border: 1px double #735626;
+  border-radius: 5px;
+}
+
 .order-header {
   border-bottom: 1px solid #735626;
   display: block;
@@ -15,7 +38,7 @@
 
 .order-info {
   background-color: #012532;
-  color: #735626;
+  color: #bfab75;
   border-radius: 6px;
 }
 .container.orders-container {
@@ -38,7 +61,7 @@ body {
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
   background-color: black;
-  color: #735626;
+  color: #bfab75;
   scroll-behavior: auto;
 }
 
@@ -49,7 +72,8 @@ body {
     rgba(1, 3, 4, 0.8141631652661064) 0%,
     rgba(1, 37, 50, 1) 100%
   );
-  color: #735626;
+  border: 2px double #735626;
+  color: #bfab75;
 }
 .tier-box {
   border-radius: 2%;
@@ -60,7 +84,7 @@ body {
     rgba(1, 3, 4, 0.8141631652661064) 0%,
     rgba(1, 37, 50, 1) 100%
   );
-  color: #735626;
+  color: #fbff00 !important;
   padding: 1rem 3rem;
 }
 
@@ -220,12 +244,8 @@ p#name {
   width: 12rem !important;
 }
 
-/* 모달 */
-.navbar {
-  background-color: #012532;
-  border-bottom: 1px solid #8b7755;
-}
 
+/* 모달 */
 .modal-profile-info {
   display: flex;
   flex-direction: column;
@@ -260,9 +280,12 @@ p#name {
   align-items: center;
   gap: 0.5rem;
 }
-.profile-btn:hover {
-  background-color: rgb(223, 222, 222);
+#userImg:hover {
+  background-color: #fff;
   cursor: pointer;
+  transition: 0.1s linear;
+  filter: brightness(120%);
+  
 }
 .profile-btn {
   width: 3rem;
@@ -277,12 +300,55 @@ p#name {
 
 a {
   color: #8b7755;
-  text-shadow: 0.7px 0 0px #444444;
+  text-shadow: 0.7px 0 0px #b19d7f;
   cursor: pointer;
   text-decoration: none;
 }
 
 #userEmail,
 #userName {
-  color: #8b7755;
+  color: #fff;
 }
+
+.navbar {
+  background-color: #010f19; 
+  border-bottom: 1px solid #8b7755;
+}
+.breadcrumb a {
+  align-items: center;
+  color: #8b7755;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75em;
+}
+
+.navbar-item {
+  padding: 0;
+}
+
+.navbar-item img {
+  max-height: 60%;
+}
+
+
+.breadcrumb {
+  background-color: #010f19;
+}
+
+body {
+  margin: 0 auto;
+  background-image: linear-gradient(rgba(2, 0, 27, 0), rgba(1, 0, 15, 0.7)), url('https://images.contentstack.io/v3/assets/blt187521ff0727be24/bltcdfebd766fb71a69/60ee0c915397524ead3890c9/demacia-hallvalor.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-color: black;
+  color: #bfab75;
+  scroll-behavior: auto;
+
+}
+
+.tier-box {
+  border-radius: 2%;
+  border:2px double #735626;
+}
+

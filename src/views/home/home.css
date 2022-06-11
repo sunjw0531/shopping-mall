@@ -6,18 +6,6 @@
   text-shadow: 0.7px 0 0px #b19d7f;
 }
 
-.navbar {
-  background-color: #012532;
-  border-bottom: 1px solid #8b7755;
-}
-.breadcrumb a {
-  align-items: center;
-  color: #8b7755;
-  display: flex;
-  justify-content: center;
-  padding: 0 0.75em;
-}
-
 .content-wrap {
   margin: 0 auto;
   background-image: linear-gradient(rgba(2, 0, 27, 0.5), rgba(1, 0, 15, 0.9)),
@@ -137,10 +125,13 @@
   align-items: center;
   gap: 0.5rem;
 }
-/* .profile-btn:hover {
-  background-color: rgb(223, 222, 222);
+#userImg:hover {
+  background-color: #fff;
   cursor: pointer;
-} */
+  transition: 0.1s linear;
+  filter: brightness(120%);
+  
+}
 .profile-btn {
   width: 3rem;
 }
@@ -163,3 +154,24 @@ a {
 #userName {
   color: #fff;
 }
+
+.navbar {
+  background-color: #010f19; 
+  border-bottom: 1px solid #8b7755;
+}
+.breadcrumb a {
+  align-items: center;
+  color: #8b7755;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75em;
+}
+
+.navbar-item {
+  padding: 0;
+}
+
+.navbar-item img {
+  max-height: 60%;
+}
+

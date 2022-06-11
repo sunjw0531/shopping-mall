@@ -1,7 +1,5 @@
-
-
 .title {
-  color: #fff;
+  color: #fff4d5;
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.125;
@@ -13,7 +11,12 @@
   height: 10rem;
   border: 1px solid #fff;
   padding-top: 2.5rem;
-  background-color: #cfc8be
+  background-color: #cfc8be;
+}
+
+.text-center:hover {
+  background-color: #ada498;
+  transition: 0.2s;
 }
 
 .card-columns {
@@ -56,10 +59,13 @@
   align-items: center;
   gap: 0.5rem;
 }
-/* .profile-btn:hover {
-  background-color: rgb(223, 222, 222);
+#userImg:hover {
+  background-color: #fff;
   cursor: pointer;
-} */
+  transition: 0.1s linear;
+  filter: brightness(120%);
+  
+}
 .profile-btn {
   width: 3rem;
 }
@@ -82,11 +88,31 @@ a {
 #userName {
   color: #fff;
 }
+
 .navbar {
-  background-color: #012532;
+  background-color: #010f19; 
   border-bottom: 1px solid #8b7755;
 }
+.breadcrumb a {
+  align-items: center;
+  color: #8b7755;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.75em;
+}
 
+.navbar-item {
+  padding: 0;
+}
+
+.navbar-item img {
+  max-height: 60%;
+}
+
+
+.breadcrumb {
+  background-color: #010f19;
+}
 
 body {
   background-image: linear-gradient(rgba(27, 18, 0, 0.3), rgba(15, 10, 0, 0.6)),
