@@ -1,123 +1,167 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chesier Mall</title>
+    <!-- bootstrap  & bulma style css-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- cunstom css-->
+    <link rel="stylesheet" href="./product_sell.css" />
+    <!-- icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../elice-rabbit-favicon.png"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>상품 판매 관리</title>
-  <!-- bootstrap  & bulma style css-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
-  <!-- cunstom css-->
-  <link rel="stylesheet" href="./product_sell.css" />
-  <!-- icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../../elice-rabbit-favicon.png" />
-  <!-- 폰트 어썸: 아이콘 -->
-  <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
-</head>
+  <body>
+    <!--header-->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container mt-3">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/lolshop.png" />
+            <span class="has-text-link"></span>
+          </a>
 
-<body>
-  <!--header-->
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="container mt-3">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="/lolshop.png"/>
-          <span class="has-text-link"></span>
-        </a>
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-          <ul id="navbar">
-          </ul>
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-      </div>
-    </div>
-  </nav>
-  <!-- 모달 -->
-  <div class="modal-profile">
-    <div class="modal-profile-info">
-      <div class="modal-profile-img">
-        <img id="userImg" src="/elice-rabbit.png" alt="profile-img">
-      </div>
-      <P id="userName"></P>
-      <p id="userEmail"></p>
-    </div>
-    <div class="modal-link">
-      <a href="/account">계정 관리</a>
-      <a href="#" id="logout">로그아웃</a>
-    </div>
-  </div>
 
-  <!-- 제품 추가 form 양식-->
-  <div class="container">
-    <form id="productSubmitForm" enctype="multipart/form-data">
-      <div style="
-            text-align: center;
-            font-weight: bold;
-          ">
-        제품을 판매해보세요
-      </div>
-      <div class="field">
-        <label class="label" for="productName">제품 이름</label>
-        <div class="control">
-          <input class="input" id="productName" type="text" placeholder="아이보리 티셔츠" />
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label" for="categorySelect">카테고리</label>
-        <div class="control">
-          <div class="select">
-            <select id="categorySelectBox">
-              <option value="">카테고리를 선택해 주세요</option>
-            </select>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <ul id="navbar"></ul>
           </div>
         </div>
       </div>
+    </nav>
+    <!-- 모달 -->
+    <div class="modal-profile">
+      <div class="modal-profile-info">
+        <div class="modal-profile-img">
+          <img id="userImg" src="/elice-rabbit.png" alt="profile-img" />
+        </div>
+        <p id="userName"></p>
+        <p id="userEmail"></p>
+      </div>
+      <div class="modal-link">
+        <a href="/account">계정 관리</a>
+        <a href="#" id="logout">로그아웃</a>
+      </div>
+    </div>
 
-      <div class="field">
-        <label class="label" for="makerName">제조사</label>
-        <div class="control">
-          <input class="input" id="makerName" type="text" placeholder="OO의료제조(주)" />
+    <!-- 제품 추가 form 양식-->
+    <div class="container">
+      <form id="productSubmitForm" enctype="multipart/form-data">
+        <div style="text-align: center; font-weight: bold">
+          제품을 판매해보세요
         </div>
-      </div>
+        <div class="field">
+          <label class="label" for="productName">상품 이름</label>
+          <div class="control">
+            <input
+              class="input"
+              id="productName"
+              type="text"
+              placeholder="상품 이름"
+            />
+          </div>
+        </div>
 
-      <div class="field">
-        <label class="label" for="shortInfo">상품 설명</label>
-        <div class="control">
-          <textarea id="productInfo" placeholder="제품에 대한 5문장 이상 설명을 적어주세요"></textarea>
+        <div class="field">
+          <label class="label" for="categorySelect">카테고리</label>
+          <div class="control">
+            <div class="select">
+              <select id="categorySelectBox">
+                <option value="">카테고리를 선택해 주세요</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label" for="productImg">제품 사진</label>
-        <div class="control">
-          <input type="image" style="width: 120px" id="getImg"/>
-          <input type="file" id="productImg" src="" accept="image/*" />
+        <div class="field">
+          <label class="label" for="makerName">제조사</label>
+          <div class="control">
+            <input
+              class="input"
+              id="makerName"
+              type="text"
+              placeholder="RiotGames"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label class="label" for="productCnt">재고 수</label>
-        <div class="control">
-          <input class="input" id="productCntInfo" type="text" placeholder="10" />
+        <div class="field">
+          <label class="label" for="shortInfo">상품 설명</label>
+          <div class="control">
+            <textarea
+              id="productInfo"
+              placeholder="상품에 대한 설명을 적어주세요"
+            ></textarea>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label" for="productPrice">가격</label>
-        <div class="control">
-          <input class="input" id="productPrice" type="text" placeholder="10000" />
+
+        <div class="field">
+          <label class="label" for="productImg">제품 사진</label>
+          <div class="control">
+            <input
+              type="image"
+              style="width: 120px"
+              id="getImg"
+              src="shopLogo.png"
+            />
+            <input type="file" id="productImg" accept="image/*" />
+          </div>
         </div>
-      </div>
+
+        <div class="field">
+          <label class="label" for="productCnt">재고 수</label>
+          <div class="control">
+            <input
+              class="input"
+              id="productCntInfo"
+              type="text"
+              placeholder="10"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="productPrice">가격</label>
+          <div class="control">
+            <input
+              class="input"
+              id="productPrice"
+              type="text"
+              placeholder="10000"
+            />
+          </div>
+        </div>
         <button
           type="submit"
           class="btn btn-primary"

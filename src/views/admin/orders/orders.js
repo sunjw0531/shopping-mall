@@ -2,7 +2,10 @@ import * as Api from '../../api.js';
 import { dateFormat } from '../../useful-functions.js';
 
 // top_cotainer
-const showCnt = document.getElementsByTagName('p');
+const totalProducts = document.querySelector('#totalProducts'),
+  productsReady = document.querySelector('#productsReady'),
+  productsGoing = document.querySelector('#productsGoing'),
+  productsSuccess = document.querySelector('#productsSuccess');
 
 //modal 변수 선언
 const modal = document.querySelector('.modal'),
@@ -92,13 +95,13 @@ async function setDelete(_id) {
   parent.remove();
   const selectOption = parent.childNodes[9].childNodes[1].value;
   if (selectOption == 0) {
-    showCnt[1].innerText--;
+    productsReady.innerText--;
   } else if (selectOption == 1) {
-    showCnt[2].innerText--;
+    productsGoing.innerText--;
   } else if (selectOption == 2) {
-    showCnt[3].innerText--;
+    productsSuccess.innerText--;
   }
-  showCnt[0].innerText--;
+  totalProducts.innerText--;
   closeModal();
 }
 
@@ -127,10 +130,10 @@ async function orderCnt(item) {
       successCnt++;
     }
   });
-  showCnt[0].innerText = item.length;
-  showCnt[1].innerText = readyCnt;
-  showCnt[2].innerText = goingCnt;
-  showCnt[3].innerText = successCnt;
+  totalProducts.innerText = item.length;
+  productsReady.innerText = readyCnt;
+  productsGoing.innerText = goingCnt;
+  productsSuccess.innerText = successCnt;
 }
 
 //modal btn event

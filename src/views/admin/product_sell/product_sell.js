@@ -95,6 +95,7 @@ async function handleSubmit(e) {
   formData.append('date', date);
   formData.append('company', company);
 
+  
   fetch('/api/product/', {
     method: 'POST',
     headers: {

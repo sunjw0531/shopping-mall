@@ -35,20 +35,9 @@ async function getSelectOption() {
   try {
     const allCategory = await Api.get('/api/category/list');
     setSelectOption(allCategory);
-    setModalSelectBox(allCategory);
   } catch (err) {
     console.error(err);
   }
-}
-
-//updateModal 변경 카테고리 set
-function setModalSelectBox(item) {
-  item.forEach((data) => {
-    const option = document.createElement('option');
-    option.setAttribute('value', data._id);
-    option.textContent = data.name;
-    setModalCategory.appendChild(option);
-  });
 }
 
 //updateModal Img 미리보기
@@ -68,11 +57,16 @@ function setModalImgSrc(input) {
 //검색 카테고리 set
 function setSelectOption(item) {
   item.forEach((data) => {
-    const option = document.createElement('option');
-    option.setAttribute('value', data._id);
-    option.textContent = data.name;
-    categorySelectBox.appendChild(option);
+    const option1 = document.createElement('option');
+    option1.setAttribute('value', data._id);
+    option1.textContent = data.name;
+    categorySelectBox.appendChild(option1);
     categorySelectBox.addEventListener('change', setItemList);
+
+    const option2 = document.createElement('option');
+    option2.setAttribute('value', data._id);
+    option2.textContent = data.name;
+    setModalCategory.appendChild(option2);
   });
 }
 
@@ -140,6 +134,7 @@ async function setItemList(e) {
     alert(`문제가 발생하였습니다 ${err.message}`);
   }
 }
+
 function setOldDataInput(data) {
   setModalNameText.value = data.name;
   getModalImg.src = data.image;
@@ -155,6 +150,8 @@ function setOldDataInput(data) {
       setModalCategory.options[i].selected = true;
     }
   }
+
+  // getModalImg.files[0] = data.files[0]
 }
 
 const updateForm = document.querySelector('#updateForm');
@@ -190,11 +187,6 @@ async function setUpdate(id) {
     formData.append('date', date);
     formData.append('company', company);
 
-    // for (var pair of formData.entries()) {
-    // 	console.log(pair[0] + ', ' + pair[1]);
-    // }
-    // /update_product/:product_id
-
     await fetch(`/api/product/update_product/${id}`, {
       method: 'PATCH',
       headers: {
@@ -207,8 +199,8 @@ async function setUpdate(id) {
         console.log(data);
       });
     alert('상품이 정상 수정 되었습니다.');
-    location.reload();
     updateModal.classList.remove('is-active');
+    location.reload();
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다 ${err.message}`);
@@ -273,4 +265,3 @@ updateBack.addEventListener('click', closeUpdateModal);
 function closeUpdateModal() {
   updateModal.classList.remove('is-active');
 }
-
