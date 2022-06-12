@@ -184,6 +184,33 @@ function getDeliveryPrice(totalPrice) {
   return totalPrice >= DELIVERY_STANDARD ? 0 : DELIVERY_PRICE;
 }
 
+// 구매 inputValidation
+function checkInputValidation(orderInfo) {
+  const { receiver, phone, address, orderRequest, totalPrice } = orderInfo;
+  const { postalCode, address1, address2 } = address;
+  let resultMessage = '';
+
+  if (receiver.length === 0) {
+    resultMessage = '이름을 입력해주세요.';
+  } else if (phone.length === 0) {
+    resultMessage = '연락처를 입력해주세요';
+  } else if (phone.replace(/[^0-9]/g, '').length !== 11) {
+    resultMessage = '연락처는 하이픈을 제외한 번호 11자리를 입력해주세요';
+  } else if (
+    postalCode.length === 0 ||
+    address1.length === 0 ||
+    address2.length === 0
+  ) {
+    resultMessage = '배송 주소를 모두 입력해 주세요.';
+  } else if (orderRequest.length === 0) {
+    resultMessage = '배송 요청사항을 선택해주세요.';
+  } else if (totalPrice === 0) {
+    resultMessage = '상품이 선택되어 있지 않습니다.';
+  }
+
+  return resultMessage;
+}
+
 // 구매하기 버튼 핸들러
 async function handlePayment() {
   const userId = sessionStorage.getItem('userId') || '629e4d9bcc90969c9a556da7';
@@ -206,29 +233,33 @@ async function handlePayment() {
     totalPrice,
     orderList,
   };
-  const res = await Api.post('/api/order/', orderInfo);
 
-  cart.forEach((cartEl, index) => {
-    // 해당 유저의 장바구니에 상품이 존재할 경우
-    if (cartEl.userId === userId) {
-      buy.forEach((buyEl) => {
-        if (cartEl.productId === buyEl.productId) {
-          if (Number(cartEl.count) > Number(buyEl.count)) {
-            cartEl.count = Number(cartEl.count) - Number(buyEl.count);
-          } else {
-            cart.splice(index, 1);
+  const message = checkInputValidation(orderInfo);
+  if (message === '') {
+    const res = await Api.post('/api/order/', orderInfo);
+    cart.forEach((cartEl, index) => {
+      // 해당 유저의 장바구니에 상품이 존재할 경우
+      if (cartEl.userId === userId) {
+        buy.forEach((buyEl) => {
+          if (cartEl.productId === buyEl.productId) {
+            if (Number(cartEl.count) > Number(buyEl.count)) {
+              cartEl.count = Number(cartEl.count) - Number(buyEl.count);
+            } else {
+              cart.splice(index, 1);
+            }
           }
-        }
-      });
+        });
+      }
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    if (localStorage.getItem('cart').length === 0) {
+      localStorage.removeItem('cart');
     }
-  });
-  localStorage.setItem('cart', JSON.stringify(cart));
-
-  if (localStorage.getItem('cart').length === 0) {
-    localStorage.removeItem('cart');
+    localStorage.removeItem('buy');
+    window.location.href = '/buy/complete';
+  } else {
+    alert(message);
   }
-  localStorage.removeItem('buy');
-  window.location.href = '/buy/complete';
 }
 
 // 연락처 입력 핸들러

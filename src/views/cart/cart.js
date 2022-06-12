@@ -97,6 +97,7 @@ function insertCartLocalStorage() {
 
     let allProductCount = 0;
     let allProductAmount = 0;
+    let listIndex = 0;
 
     userCart.forEach((cartInfo, index) => {
       const { userId: id, productId, image, name, price, count } = cartInfo;
@@ -160,10 +161,10 @@ function insertCartLocalStorage() {
         btnCountIncrease.classList.add('is-small');
         btnCountDecrease.setAttribute('data-product', productId);
         btnCountDecrease.setAttribute('data-input', 'input-count');
-        btnCountDecrease.setAttribute('data-index', index);
+        btnCountDecrease.setAttribute('data-index', listIndex);
         btnCountIncrease.setAttribute('data-product', productId);
         btnCountIncrease.setAttribute('data-input', 'input-count');
-        btnCountIncrease.setAttribute('data-index', index);
+        btnCountIncrease.setAttribute('data-index', listIndex);
         inputCount.setAttribute('type', 'number');
         inputCount.setAttribute('min', '1');
         inputCount.setAttribute('max', '10');
@@ -177,6 +178,7 @@ function insertCartLocalStorage() {
 
         allProductCount++;
         allProductAmount += Number(price) * Number(count);
+        listIndex++;
       }
     });
 
