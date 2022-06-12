@@ -139,11 +139,11 @@ productRouter.get('/pageList', async (req, res, next) => {
   }
 });
 
-// 상품 상세 보기
-productRouter.get('/detail/:product_id', async (req, res, next) => {
+// 상품 상세 보기 (_id)
+productRouter.get('/detail/:_id', async (req, res, next) => {
   try {
-    // product/detail/6
-    const product_id = req.params.product_id;
+    // product/detail/asdasdfasdf
+    const product_id = req.params._id;
     // product_id로 상품 하나 찾기
     const product = await productService.getProductDetail(product_id);
     // 상품 데이터 프론트에 전달
