@@ -5,7 +5,7 @@ function userModal() {
     userImg = document.querySelector('#userImg'),
     userEmail = document.querySelector('#userEmail');
 
-  userImg.src = sessionStorage.getItem('userImg');
+  userImg.src = sessionStorage.getItem('profileImg');
   userName.textContent = sessionStorage.getItem('fullName');
   userEmail.textContent = sessionStorage.getItem('email');
 
@@ -59,9 +59,9 @@ function nav() {
     const nav = `${cart} ${account}`;
     navbar.insertAdjacentHTML('afterend', nav);
     // 어드민인지 확인
-    if (sessionStorage.getItem('isAdmin')) {
+    if (sessionStorage.getItem('isAdmin') == 'true') {
       adminModal();
-    } else {
+    } else if (sessionStorage.getItem('isAdmin') == 'false') {
       userModal();
     }
   } else {

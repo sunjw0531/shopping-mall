@@ -49,12 +49,10 @@ userRouter.post('/kakao', async function (req, res, next) {
     }
     const fullName = req.body.fullName;
     const email = req.body.email;
-    const loginTypeCode = 1;
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.addKakaoUser({
       fullName,
-      email,
-      loginTypeCode,
+      email
     });
     // jwt 토큰을 프론트에 보냄
     res.status(200).json(userToken);
@@ -137,7 +135,7 @@ userRouter.get('/userlist', adminConfirm, async function (req, res, next) {
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
   '/users/:userId',
-  // loginRequired,
+  loginRequired,
   async function (req, res, next) {
     try {
       // params로부터 id를 가져옴

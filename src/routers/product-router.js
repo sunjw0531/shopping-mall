@@ -7,18 +7,12 @@ import { loginRequired, adminConfirm } from '../middlewares';
 import { productService } from '../services/product-service';
 
 import multer from 'multer';
-const fs = require('fs');
-// uploads 폴더 생성
-try {
-  fs.accessSync('uploads');
-} catch (error) {
-  fs.mkdirSync('uploads');
-}
+
 //multer 의 diskStorage를 정의
 const storage = multer.diskStorage({
   //경로 설정
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+    cb(null, 'src/views/uploads/');
   },
 
   //실제 저장되는 파일명 설정
@@ -39,7 +33,7 @@ productRouter.post(
     try {
       const { name, category, information, price, storage, date, company } =
         req.body;
-      const image = req.file.path;
+      const image = `uploads/${req.file.filename}`;
 
       const newProduct = await productService.addProduct(
         { name, category, information, price, storage, date, company },
@@ -145,11 +139,11 @@ productRouter.get('/pageList', async (req, res, next) => {
   }
 });
 
-// 상품 상세 보기
-productRouter.get('/detail/:product_id', async (req, res, next) => {
+// 상품 상세 보기 (_id)
+productRouter.get('/detail/:_id', async (req, res, next) => {
   try {
-    // product/detail/6
-    const product_id = req.params.product_id;
+    // product/detail/asdasdfasdf
+    const product_id = req.params._id;
     // product_id로 상품 하나 찾기
     const product = await productService.getProductDetail(product_id);
     // 상품 데이터 프론트에 전달

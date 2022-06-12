@@ -35,7 +35,7 @@ export class ProductModel {
     );
     return product;
   }
-  
+
   // 상품 하나 찾기 (product_id로 상세)
   async findDetailByProductId(product_id) {
     const product = await Product.findOne({ product_id: product_id }).populate(

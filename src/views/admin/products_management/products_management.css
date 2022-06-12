@@ -70,6 +70,7 @@ p {
 }
 
 .table {
+  text-align: center;
   background-color: #012532;
   background: linear-gradient(
     0deg,

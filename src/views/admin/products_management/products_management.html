@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>상품 수정 / 제거</title>
+  <title>Chesier Mall</title>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -73,7 +73,6 @@
     <div class="select-box">
       <div class="control">
         <div>
-          <strong>&nbsp;선택한 카테고리:&nbsp;</strong>
           <select id="categorySelectBox">
             <option value="">카테고리를 선택해 주세요</option>
           </select>
@@ -84,7 +83,9 @@
         <table id="table" class="table">
           <thead>
             <tr>
-              <td><input type="checkbox" id="allSelect" />전체선택</td>
+              <label class="label" for="allSelect">
+                <td><input type="checkbox" id="allSelect" />전체선택</td>
+              </label>
               <td>상품명</td>
               <td>가격</td>
               <td>재고</td>
@@ -124,6 +125,7 @@
 
   <!--수정 modal 창-->
   <div class="modal" id="updateModal">
+    <form id="updateForm">
     <div class="modal-background" id="updateBack"></div>
     <div class="modal-card">
       <!-- modal창 header 부분 -->
@@ -132,7 +134,6 @@
         <button class="delete" id="topCancelBtn" aria-label="close"></button>
       </header>
       <!-- modal창 body 부분 -->
-      <form id="updateForm">
         <section class="modal-card-body">
           <!--이름 변경-->
           <div class="field">
@@ -155,7 +156,7 @@
             <label class="label" for="productImg">이미지</label>
             <div class="control">
               <input type="image" style="width: 120px" id="getModalImg" />
-              <input type="file" id="setModalImg" src="" accept="image/*" />
+              <input type="file" id="setModalImg"  accept="image/*" />
             </div>
           </div>
           <!-- 상세정보 변경 -->
@@ -190,10 +191,11 @@
         <!--modal footer 부분-->
         <footer class="modal-card-foot">
           <input type="submit" class="button is-success" id="modalUpdateBtn" value="변경하기" />
-          <input type="button" id="modalCancelBtn" value="취소" />
+          <input type="button" class="button is-white"id="modalCancelBtn" value="취소" />
         </footer>
-      </form>
+      </form> 
     </div>
+
   <!-- 카카오 로그인 스크립트 -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <!--product_management.js 연결-->

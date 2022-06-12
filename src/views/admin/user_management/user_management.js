@@ -8,6 +8,7 @@ nav();
 const totalCnt = document.querySelector('#totalCnt'),
   adminCnt = document.querySelector('#adminCnt'),
   oauthCnt = document.querySelector('#oauthCnt');
+  
 //modal 변수 선언
 const modal = document.querySelector('.modal'),
   modalBg = document.querySelector('.modal-background'),

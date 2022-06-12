@@ -163,7 +163,7 @@ class ProductService {
     return totalPageCount;
   }
 
-  // 상품 상세 보기
+  // 상품 상세 보기(_id)
   async getProductDetail(product_id) {
     // const product_id = product_id;
     const product = await this.productModel.findDetailById(product_id);
