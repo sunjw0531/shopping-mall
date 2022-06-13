@@ -99,7 +99,7 @@ function insertCartLocalStorage() {
     let allProductAmount = 0;
     let listIndex = 0;
 
-    userCart.forEach((cartInfo, index) => {
+    userCart.forEach((cartInfo) => {
       const { userId: id, productId, image, name, price, count } = cartInfo;
       if (id === userId) {
         const product = document.createElement('div');
@@ -225,6 +225,9 @@ function changeCartLocalStorage(e, targetInputCount, index) {
   productPrice.textContent = `${String(
     (Number(targetInputCount.value) * Number(price)).toLocaleString(),
   )}원`;
+
+  // 상품 총 금액
+  orderProductPrice.textContent = `${amount.toLocaleString()}원`;
 
   // 배송비
   const delivery = getDeliveryPrice(amount);
